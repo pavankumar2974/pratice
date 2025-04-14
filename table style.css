@@ -1,0 +1,12 @@
+thead{
+    color: rgb(217, 234, 234);
+}
+tbody{color:rgb(23, 20, 216)}
+tr{color: rgb(15, 15, 123);}
+td{color: rgb(211, 25, 84);
+}
+th{color: aquamarine;
+}
+table{
+    border-collapse: collapse;
+}
