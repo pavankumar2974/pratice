@@ -1,0 +1,12 @@
+
+caption{
+    font-size: 1.5em; /* Larger caption text */
+    margin: 20px; /* Margin around the caption */
+    color: #73e616; /* Darker caption text color */
+}
+table{
+    background-color: #090909; /* Dark blue header background */
+    color: #ffffff; /* White header text color */
+    font-weight: bold; /* Bold header text */
+}
+{background}
