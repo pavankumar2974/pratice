@@ -1,0 +1,14 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    text-align: center;
+    padding: 25px;
+    background-color:rgba(20, 19, 19, 0.11);
+}
+
+header img 
+    width: 10px;
+
+
