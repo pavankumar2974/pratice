@@ -144,5 +144,10 @@ h1:first-child :hover{font-size: 45px;}
 h2:first-child:hover{font-size: 45px;}
 
 p::before{content: url(regif.jpeg);}
-p:hover{font-size: 25px;
-background-color: #232323;}
+p:hover{font-size: 15px;
+background-color: #eeeaea;}
+
+.row1{
+    position:sticky;
+    top: 20px;
+}
