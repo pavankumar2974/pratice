@@ -109,3 +109,114 @@ li{
   font-size: 150px;
   color: #e2cd0b;
 }
+* {
+}
+a {
+  font-size: 10px;
+  float: right;
+  color: orange;
+}
+.row1 {
+  background: #333333;
+  color: #c0bab6;
+}
+header {
+  width: 900px;
+  margin: auto;
+  overflow: auto;
+}
+div#basic {
+  width: 250px;
+  float: left;
+  margin-top: 18px;
+}
+#basic h1 {
+  margin: 0;
+  font-size: 37px;
+}
+#basic p {
+  margin: 0;
+  font-size: 11px;
+}
+nav {
+  width: 580px;
+  float: right;
+  margin: 30px;
+}
+nav ul li {
+  display: inline;
+  font-size: 12px;
+  margin-right: 15px;
+}
+.row2 {
+  width: 900px;
+  margin: auto;
+}
+.row2 img {
+  width: 900px;
+  height: 300px;
+  margin-top: 10px;
+}
+.row3 {
+  width: 900px;
+  margin: auto;
+  overflow: auto;
+}
+.chids {
+  width: 280px;
+  float: left;
+  margin-right: 25px;
+}
+figure {
+  margin-left: 0;
+}/*
+figure img {
+  width: 280px;
+  padding-left: 0;
+  border: 1px solid gray;
+  padding: 3px;
+}*/
+figure img {
+  width: 280px;
+  padding-left: 0;
+  border: 1px solid gray;
+  padding: 3px;
+  height: 180px;
+}
+.chid3 {
+  width: 290px;
+  float: right;
+}
+.row4{
+  width: 900px;
+  margin: auto;
+  overflow: auto;
+}
+.chid6{
+  width: 280px;
+  float: left;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+footer {
+  width: 1700px;
+  margin: auto;
+  background: #0e0b0b;
+  color: #c0bab6;
+  padding: 10px 0;
+  overflow: auto;
+}
+ul{
+  width: 1200px;
+  color: aliceblue;
+background-color: #0e0b0b;
+padding: opx;
+margin: 0px;
+style:inline;
+}
+li{
+  display: inline;
+  margin-right: 20px;
+  font-size: 150px;
+  color: #e2cd0b;
+}

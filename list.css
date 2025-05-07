@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 ul{background-color: yellow;}
 ol{background-color: rgb(59, 12, 230);}
 li{background-color: rgb(218, 44, 44); color: white; padding: 5px; margin: 5px; border-radius: 5px;}
 dl{background-color: rgb(44, 218, 44); color: white; padding: 5px; margin: 5px; border-radius: 5px;}
+=======
+ul{background-color: yellow;}
+ol{background-color: rgb(59, 12, 230);}
+li{background-color: rgb(218, 44, 44); color: white; padding: 5px; margin: 5px; border-radius: 5px;}
+dl{background-color: rgb(44, 218, 44); color: white; padding: 5px; margin: 5px; border-radius: 5px;}
+>>>>>>> 51ab3651f356203499abac9088c1dfd4c4738257
 dt{background-color: rgb(44, 218, 44); color: white; padding: 5px; margin: 5px; border-radius: 5px;}    
