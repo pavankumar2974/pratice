@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="myUl"></ul>
+    <script>
+      var passionPro = {
+        companyName: "Honda",
+        price: 100000,
+        millage: "60km",
+        color: "Black",
+        fuel: "Petrol",
+      };
+
+      passionPro.model = 2024; 
+
+      passionPro["speed"] = "80km per hr"; 
+
+      console.log(passionPro);
+      document.write(
+        passionPro.companyName +
+          "<br>" +
+          "price : " +
+          passionPro.price +
+          "<br>" +
+          "millage : " +
+          passionPro.millage +
+          "<br>" +
+          "color : " +
+          passionPro.fuel +
+          "<br>" +
+          "fuel : " +
+          passionPro.color +
+          "<br>" +
+          "model :" +
+          passionPro.model +
+          "<br>" +
+          "speed : " +
+          passionPro.speed
+      );
+      console.log(passionPro);
+      document.getElementById("myUl").innerHTML =
+        "companyName : " +
+        passionPro.companyName +
+        "<br>" +
+        passionPro.price +
+        "<br>" +
+        passionPro.millage +
+        "<br>" +
+        passionPro.fuel +
+        "<br>" +
+        passionPro.color;
+    </script>
+  </body>
+</html>
