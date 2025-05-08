@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample3</title>
+</head>
+<body>
+    <h1 id="myH1"></h1>
+    <ul id="myUl"></ul>
+<script>
+var student = {
+    name: "Pavan",
+    age: "20",
+    course:"BCA",
+    id:"22BCA143",
+    Year:"Final Year",
+    college:"Vijayam"
+}
+student.sem ="6th sem" ; 
+
+student["attendence"] = "94%"; 
+
+
+var results = "";
+for ( a in student) {
+    console.log(student[a]);
+        document.write(a + " : " + student[a] + "<br>");
+        results = results + a + " : " + student[a] + "<br>";
+}
+
+document.getElementById("myH1").innerHTML = results;
+
+document.getElementById("myUl").innerHTML = results;
+
+</script>
+</body>
+</html>
