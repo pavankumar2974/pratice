@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 3</title>
+</head>
+<body>
+    <script>
+var bikes = ["GT650", "Ninja", "Hero", "NS200", "KTm"];
+ bikes.push("pulsar");
+ //bikes.pop("pulsar");
+ bikes.unshift("rajdooth");
+  //  bikes.shift("rajdooth");
+  bikes.splice(3, 1, "TVS");
+  bikes.splice(4, 1);
+  //bikes.sort();
+  bikes.sort().reverse();
+var results ="";
+for (a in bikes) {
+    console.log(bikes[a]);
+    document.write(bikes[a] + "<br>");
+    results = results + bikes[a] + "<br>"
+}
+
+    </script>
+</body>
+</html>
