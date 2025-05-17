@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+    var newperson = {
+        city:"chittoor",
+        fname:"pavan",
+    };
+    function newpersonobj(fname,lname){
+        this.fname = fname;
+        this.lname = lname;
+        this.city = "chittoor";
+    }
+    var person1 = new newpersonobj("adhivik","SA");
+    
+    var student = new Object({
+        fname:"koushik",
+        city:"chittoor",
+    });
+    console.log(newperson);
+    console.log(person1);
+    console.log(student);
+        
+     
+   </script> 
+</body>
+</html>
