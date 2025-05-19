@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="registrationForm">
+      <h1>Registration Form</h1>
+
+      <form action="#">
+        <div class="formGroup">
+          <label for="name">Enter Name</label>
+          <input type="text" class="myName" id="name" name="myNames" />
+        </div>
+
+        <button type="button" class="submitBtn" onclick="registerUser()">
+          Register
+        </button>
+      </form>
+    </div>
+
+    <script>
+      function registerUser() {
+        // var fullName = document.getElementById("name").value;
+        // console.log(fullName);
+
+        // var fullName = document.getElementsByClassName("myName")[0].value;
+        // console.log(fullName);
+
+        // var fullName = document.getElementsByName("myNames")[0].value;
+        // console.log(fullName);
+
+        // var fullName = document.getElementsByTagName("input")[0].value;
+        // console.log(fullName);
+
+        // var fullName = document.querySelector("input").value;
+        // console.log(fullName);
+        var fullName = document.querySelectorAll("input")[0].value;
+        console.log(fullName);
+      }
+    </script>
+  </body>
+</html>
