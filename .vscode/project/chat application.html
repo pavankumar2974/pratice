@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var chat ={
+            sender:"pavan",
+            reciever:"uday",
+            message:"hi",
+            timestamp:"2025-05-19T12:00:00Z",
+            chatHistory: [
+                { sender: "pavan", message: "hi", timestamp: "2025-05-19T12:00:00Z" },
+                { sender: "uday", message: "hello", timestamp: "2025-05-19T12:01:00Z" }
+            ],
+            status:"sent",
+            activeusers:["pavan","uday","sai"],
+            blockedusers:["ram","shyam"],
+            groups:["friends","family"],
+            lastseen:[
+                { user: "pavan", lastSeen: "2025-05-19T12:00:00Z" },
+                { user: "uday", lastSeen: "2025-05-19T12:01:00Z" }
+            ],
+            unreadmessagescount:"2",
+            sendmessage(sender, reciever, message){
+            },
+            deletemessage(messageId){
+            },
+            searchmessage(keyword){
+            },
+        };
+        chat.sendmessage("pavan", "uday", "hi");
+        chat.deletemessage("msg123");
+        chat.searchmessage("hi");
+        console.log(chat);
+    </script>
+</body>
+</html>
