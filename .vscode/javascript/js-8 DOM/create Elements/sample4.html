@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JavaScript Table</title>
+    <style>
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #444;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Table Created with JavaScript</h2>
+
+    <div id="table-container"></div>
+
+    <script>
+        // Sample data to populate the table
+        const data = [
+            ["Name", "Age", "Occupation"],
+            ["Alice", "30", "Developer"],
+            ["Bob", "25", "Designer"],
+            ["Charlie", "35", "Manager"]
+        ];
+
+        // Function to create a table
+        function createTable(data) {
+            const table = document.createElement("table");
+
+            data.forEach((rowData, index) => {
+                const row = document.createElement("tr");
+
+                rowData.forEach(cellData => {
+                    const cell = index === 0 ? document.createElement("th") : document.createElement("td");
+                    cell.textContent = cellData;
+                    row.appendChild(cell);
+                });
+
+                table.appendChild(row);
+            });
+
+            return table;
+        }
+
+        // Insert the table into the DOM
+        const container = document.getElementById("table-container");
+        container.appendChild(createTable(data));
+    </script>
+
+</body>
+
+</html>

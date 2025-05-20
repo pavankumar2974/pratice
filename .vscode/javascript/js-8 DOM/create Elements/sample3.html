@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         var names = [12, 13, 13, 12]
+        var prop = ["telugu", "english", "hindi", "maths"]
+        var table = document.createElement("table")
+        table.setAttribute("border", "1")
+        var thead1 = document.createElement("thead")
+     var tbody1 = document.createElement("tbody")
+        var mytr1 = document.createElement("tr")
+        // thead1.appendChild(mytr)  
+        // tbody1.appendChild(mytr)  
+        // var myth=document.createElement("th")
+        // myth.innerHTML="Name"
+
+        // mytr.appendChild(myth)   
+        // var mytd=document.createElement("td") 
+        // mytd.innerHTML="name"
+        // mytr.appendChild(mytd)
+
+        prop.forEach(function (val, index) {
+
+            var myth = document.createElement("th")
+            myth.innerHTML = prop[index];
+            mytr1.appendChild(myth)
+
+
+            thead1.appendChild(mytr1)
+        }
+   )
+        names.forEach(function (val, index) {
+            var mytr = document.createElement("tr")
+            for(i=0;i<names.length;i++){
+            var mytd = document.createElement("td")
+            mytd.innerHTML = names[index];
+            mytr.appendChild(mytd)
+        }
+
+
+            tbody1.appendChild(mytr)
+
+        })
+        table.appendChild(thead1)
+        table.appendChild(tbody1)
+        document.body.appendChild(table)
+        </script>
+</body>
+</html>
