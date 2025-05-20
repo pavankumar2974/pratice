@@ -1,0 +1,78 @@
+container{
+    width:1340px;
+    overflow: scroll;
+}
+.header{
+    width: 1340px;
+    background-color: azure;
+}
+.row1{width: 1340px;
+    height: 103px;
+}
+.child1{
+    float: left;
+    padding-top: 16px;
+    padding-left: 96px;
+}
+.row1form{
+    float: left;
+    padding-top: 20px;
+}
+.header img{
+    width: 50px;
+    float: right;
+    padding-right: 115px;
+    padding-top: 8px;
+    border-radius: 8px;
+}
+.row1 h2{
+    float: left;
+}
+input[type="text"]{
+    border: radius 15px; 
+    width: 234px;
+    height: 20px;
+}
+.child2{
+    float: right;
+    padding-top: 27px;
+    padding-right: 0px;
+}
+.navsection{
+    width: 1340px;
+    height: 40px;
+}
+.row2{
+    height: 90px;
+}
+.row2 nav ul li{
+    display: inline;
+    margin-left: 100px;
+    background-color: azure;
+    border-radius: 5px;
+}
+.row3{
+    width: 1340px;;
+}
+.leftchild{
+    width: 200px;
+    height: 500px;
+    float: left;
+    overflow: scroll;
+    position: static;
+}
+.lists{
+    width: 184px;
+height: 40px;
+position: relative;
+}
+.child3{
+    float: left;
+    padding-top: 16px;
+    padding-left: 96px;
+}
+.child4{
+    float: left;
+    padding-top: 16px;
+    padding-left: 96px;
+}

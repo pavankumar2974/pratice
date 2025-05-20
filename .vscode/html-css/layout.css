@@ -1,0 +1,86 @@
+<<<<<<< HEAD
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
+header{
+    background-color: aliceblue;
+    text-align:center;
+    padding: 25px;
+}
+.navbar{
+    background-color: #180303;
+    height: 50px;
+}
+aside{
+    width: 20%;
+    float: left;
+    padding: 10px;
+}
+section{
+    width: 40%;
+    float: left;
+    padding: 10px;
+}
+article{
+    width: 20%;
+    float: left;
+    padding: 10px;
+}
+footer{
+    background-color: aliceblue;
+    text-align:center;
+    padding: 25px;
+    clear: both;
+    dispay:block:
+}
+@media screen and (max-width: 600px) {
+    aside, section, article {
+        width: 100%;
+    }
+=======
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
+header{
+    background-color: aliceblue;
+    text-align:center;
+    padding: 25px;
+}
+.navbar{
+    background-color: #180303;
+    height: 50px;
+}
+aside{
+    width: 20%;
+    float: left;
+    padding: 10px;
+}
+section{
+    width: 40%;
+    float: left;
+    padding: 10px;
+}
+article{
+    width: 20%;
+    float: left;
+    padding: 10px;
+}
+footer{
+    background-color: aliceblue;
+    text-align:center;
+    padding: 25px;
+    clear: both;
+    dispay:block:
+}
+@media screen and (max-width: 600px) {
+    aside, section, article {
+        width: 100%;
+    }
+>>>>>>> 51ab3651f356203499abac9088c1dfd4c4738257
+}

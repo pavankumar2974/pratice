@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .row {
+        background-color: black;
+        color: white;
+        border: 2px solid;
+        padding: 20px;
+        font-size: 20px;
+        vertical-align: middle;
+      }
+    .column{
+        flex: 50%;
+        padding: 20px;
+        background-color: black;
+        color: white;
+        border: 2px solid;
+        vertical-align: middle;
+        
+    }
+
+
+      #grid-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="grid-container">
+      <div class="row">
+        <img src="gt.jpeg">
+        <img src="gt.jpeg">
+        <img src="gt.jpeg">
+        <img src="gt.jpeg">
+        <img src="gt.jpeg">
+        <img src="gt.jpeg">
+    </div>
+      <div class="column">
+        <img src="gt.jpeg">
+        <img src="gt.jpeg">
+        <img src="gt.jpeg">
+        <img src="gt.jpeg">
+        <img src="gt.jpeg">
+        <img src="gt.jpeg">
+      </div>
+  </body>
+</html>
