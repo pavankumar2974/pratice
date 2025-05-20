@@ -6,12 +6,45 @@
     <title>Document</title>
 </head>
 <body>
+   <div class="registration form">
+        <h2>Registration form</h2>
+       <form action="#">
+        <div class="formgroup">
+            <label for="phone-no">Enter number</label>
+          <input type="number" class="myNumber" id="number" name="myNumbers" />
+        </div>
+
+        <button type="button" class="submitBtn" onclick="registerUser()">
+          Register
+        </button>
+      </form>
+    </div> 
+    <script>
+        function registerUser(){
+//var myNumber=document.getElementById("number").value;
+//console.log(myNumber);
+
+//var myNumber=document.getElementsByClassName("myNumber")[0].value;
+//console.log(myNumber);
+//var myNumber=document.getElementsByName("myNumbers")[0].values;
+//console.log(myNumber);
+//var myNumber=document.getElementsByTagName("input")[0].value;
+//console.log(myNumber);
+//var myNumber=document.querySelector("input").value;
+//console.log(myNumber);
+var myNumber=document.querySelectorAll("input")[0].value;
+console.log(myNumber);
+
+        }
+
+    </script>
+    
     <div class="registration form">
         <h2>Registration form</h2>
        <form action="#">
         <div class="formgroup">
-            <label for="name">Enter Name</label>
-          <input type="text" class="myName" id="name" name="myNames" />
+            <label for="name">Enter name</label>
+          <input type="text" class="myName" id="name" name="myName" />
         </div>
 
         <button type="button" class="submitBtn" onclick="registerUser()">
@@ -21,7 +54,8 @@
     </div>
     <script>
         function registerUser(){
-            
+var myName=document.getElementById("name").value;
+console.log(myName);
         }
 
     </script>
