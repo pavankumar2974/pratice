@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Form Column -->
+      <div class="column">
+        <h1>Event Registration</h1>
+        <form>
+          <label for="name">Full Name</label>
+          <input type="text" id="fullName" name="name" required />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+
+          <label>Enter Age</label>
+          <input type="number" id="age" name="age" />
+          <button onclick="registerStudent()" type="button" id="registerStud">
+            register
+          </button>
+
+          <button id="updateBtn" type="button" onclick="updateStud()">
+            Update
+          </button>
+        </form>
+      </div>
+
+      <!-- Table Column -->
+      <div class="column">
+        <h1>Registered Events</h1>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>AGE</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      var allStudents = [];
+
+      function registerStudent() {
+        var fullName = document.getElementById("fullName").value;
+        var email = document.getElementById("email").value;
+        var age = document.getElementById("age").value;
+
+        var student = {
+          fullName,
+          email,
+          age,
+        };
+
+        allStudents.push(student);
+        document.getElementById("fullName").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("age").value = "";
+        console.log(fullName, email, age);
+        displayStudentInTable();
+      }
+
+      function displayStudentInTable() {
+        document.querySelector("tbody").innerHTML = "";
+        allStudents.forEach(function (stu, index) {
+          var myTr = document.createElement("tr");
+          for (a in stu) {
+            var myTd = document.createElement("td");
+            myTd.innerHTML = stu[a];
+            myTr.appendChild(myTd);
+          }
+
+          var editTd = document.createElement("td");
+          var editBtn = document.createElement("button");
+          editBtn.innerHTML = "Edit";
+          editBtn.setAttribute("class", "edit-btn");
+          editBtn.setAttribute("onclick", "editStudent(" + index + ")");
+          editTd.appendChild(editBtn);
+          myTr.appendChild(editTd);
+
+          var delTd = document.createElement("td");
+          var delBtn = document.createElement("button");
+          delBtn.innerHTML = "Delete";
+          delBtn.setAttribute("class", "del-Student");
+          delBtn.setAttribute("onclick", "deleteStudent(" + index + ")");
+          delTd.appendChild(delBtn);
+          myTr.appendChild(delTd);
+
+          document.querySelector("tbody").appendChild(myTr);
+        });
+      }
+      displayStudentInTable();
+
+      function deleteStudent(i) {
+        allStudents.splice(i, 1);
+        displayStudentInTable();
+      }
+
+      function editStudent(i) {
+        gIndex = i;
+        document.getElementById("fullName").value = allStudents[i].fullName;
+        document.getElementById("email").value = allStudents[i].email;
+        document.getElementById("age").value = allStudents[i].age;
+
+        document.getElementById("updateBtn").style.display = "block";
+        document.getElementById("registerStud").style.display = "none";
+      }
+
+      function updateStud() {
+        var fullName = document.getElementById("fullName").value;
+        var email = document.getElementById("email").value;
+        var age = document.getElementById("age").value;
+
+        var student = {
+          fullName,
+          email,
+          age,
+        };
+
+        allStudents[gIndex] = student;
+        displayStudentInTable();
+        document.getElementById("fullName").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("age").value = "";
+
+        document.getElementById("updateBtn").style.display = "none";
+        document.getElementById("registerStud").style.display = "block";
+      }
+    </script>
+  </body>
+</html>
