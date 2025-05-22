@@ -62,18 +62,16 @@
     </style>
     <script>
 
-        let mytodo_list = [" Exercise", "solve Bug", "Meet Team"];
+        let mytodo_list = [" "];
         function createTask() {
-            lettask = document.getElementById("add-task"_).value;
-            if (task == "") {
+            let task = document.getElementById("add-task").value;
+            if (task.trim() == "") {
                 alert("please enter a task");
             } else {
-                mytodo_list.push(task);
+                mytodo_list.push(task.trim());
                 document.getElementById("add-task").value = "";
                 ReadAllTask();
-
             }
-            createTask();
         }
 
         function ReadAllTask() {
@@ -83,12 +81,11 @@
                 data += "<td>" + mytodo_list[i] + "</td>";
                 data += "<td><button class='btn btn-primary' onclick='updateTask(" + i + ")'>update</button></td>";
                 data += "<td><button class='btn btn-danger' onclick='deleteTask(" + i + ")'>delete</button></td>";
-                data += "</tr>";
-            }
-            document.getElementById("counter").innerHTML = mytodo_list.length + " Task";
+                
             document.getElementById("mytodo-task").innerHTML = data;
 
         }
+    }
         ReadAllTask();
 
         function updateTask(item) {
