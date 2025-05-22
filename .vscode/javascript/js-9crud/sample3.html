@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section class="mytodo-container">
+        <div class="mytodo-list">
+            <form action="javascript:void(0);" id="createForm">
+                <input type="text" id="add-task" placeholder="New Task">
+                <div>
+                    <input type="submit" onclick="createTask()" value="Create">
+                </div>
+            </form>
+            <form action="javascript:void(0);" id="updateForm">
+                <input type="text" id="update-task">
+                <div class="d-flex gap-2 col-3 py-4 mx-auto">
+                    <input type="submit" value="Update">
+
+                    <a onclick="closeInput()">&#10006;</a>
+
+                </div>
+            </form>
+            <p id="counter"></p>
+            <table>
+                <tr>
+                    <th>My Todo List</th>
+                </tr>
+                <tbody id="mytodo-task"></tbody>
+            </table>
+        </div>
+
+    </section>
+    <style>
+        input[type="submit"],
+        button,
+        #close {
+            cursor: pointer;
+
+        }
+
+        .mytodo-list {
+            width: 500px;
+            margin: 100px;
+
+        }
+
+        .counter {
+            margin: 10px 0;
+
+        }
+
+        #updateForm {
+            display: none;
+        }
+
+        ;
+    </style>
+    <script>
+
+        let mytodo_list = [" Exercise", "solve Bug", "Meet Team"];
+        function createTask() {
+            lettask = document.getElementById("add-task"_).value;
+            if (task == "") {
+                alert("please enter a task");
+            } else {
+                mytodo_list.push(task);
+                document.getElementById("add-task").value = "";
+                ReadAllTask();
+
+            }
+            createTask();
+        }
+
+        function ReadAllTask() {
+            let data = "";
+            for (var i = 0; i < mytodo_list.length; i++) {
+                data += "<tr>";
+                data += "<td>" + mytodo_list[i] + "</td>";
+                data += "<td><button class='btn btn-primary' onclick='updateTask(" + i + ")'>update</button></td>";
+                data += "<td><button class='btn btn-danger' onclick='deleteTask(" + i + ")'>delete</button></td>";
+                data += "</tr>";
+            }
+            document.getElementById("counter").innerHTML = mytodo_list.length + " Task";
+            document.getElementById("mytodo-task").innerHTML = data;
+
+        }
+        ReadAllTask();
+
+        function updateTask(item) {
+            document.getElementById("updateForm").style.display = "block";
+            document.getElementById("update-task").value = mytodo_list[item];
+            document.getElementById("createForm").onsubmit = function () {
+                let task = document.getElementById("update-task").value;
+                mytodo_list.splice(item, 1, task.trim());
+
+                ReadAllTask();
+                closeInput();
+            };
+
+        }
+
+        function DeleteTask(item) {
+            mytodo_list.splice(item, 1);
+            ReadAllTask();
+        }
+
+        function closeInput() {
+            document.getElementById("updateForm").style.display = "none";
+
+        }
+
+    </script>
+</body>
+
+</html>
