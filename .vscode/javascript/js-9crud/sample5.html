@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    div#container {
+    width: 600px;
+    margin: auto;
+}
+h1 {
+    text-align: center;
+}
+input#fullName {
+    width: 290px;
+}
+input#birthDate {
+    width: 600px;
+}
+input#emailAddress {
+    width: 600px;
+}
+input#insurance {
+    width: 600px;
+}
+button{
+    color: white;
+    background-color: green;
+}
+input {
+    border-color: yellowgreen;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px 0;
+    width: 100%;
+    box-sizing: border-box;
+
+  
+}
+input.email{
+    width: 600px;
+}
+table{
+    border-color: yellowgreen;
+}
+form{
+    width: 600px;
+    margin: auto;
+    background-color: rgb(224, 230, 230);
+    border: 2px solid black;
+    border-radius: 3px;
+}
+body{
+  background-color: rgb(222, 231, 231);
+  width: 600px;
+  height: 100vh;
+}
+@media screen and (max-width: 600px) {
+  form {
+    width: 100%;
+  }
+}
+
+</style>
+<body>
+    <div id="container">
+        <div class="column">
+        <h1>Wellness Center Membership</h1>
+        <h1>Registration Form</h1>
+    <form>
+        <label for="name">Full Name</label>
+        <br>
+        <input type="text" name="name" id="fullName" required />
+        <input type="text" name="name" id="fullName" required />
+        <br>
+        <br>
+        <label>Birth Date</label>
+        <br>
+        <input type="date" name="name" id="birthDate" required />
+        <br>
+         <br>
+        <label for="email">Email Address </label>
+        <br>
+        <input type="email" name="email" id="email" required/>
+        <br>
+         <br>
+        <label >Insurance</label>
+        <br>
+        <input type="text" name="name" id="insurance" required/>
+        <br>
+        <br>
+        <label> Terms of Service</label>
+        <br>
+        <input type="radio" name="name" id="termsofService" >I agree to the terms of service.
+<br>
+        <button type="submit" onclick="registerUser()" id="registerBtn">Submit Form</button>
+        <br>
+        <button type="button" onclick="updateUser()" id="update-Btn">Update</button>
+
+    </form>
+    </div>
+    
+
+    <div class="column">
+        <h3>Registered Form</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <td>Full Name</td>
+                    <td>Birth Date</td>
+                    <td>Email</td>
+                    <td>Insurance</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    </div>
+    <script>
+      var allUsers = [];
+      function registerUser() {
+        var fullName = document.getElementById("fullName").value;
+        var birthDate = document.getElementById("birthDate"). value;
+        var email = document.getElementById("email").value;
+        var insurance = document.getElementById("insurance").value;
+        
+
+        var user = {
+          fullName,
+          birthDate,
+          email,
+          insurance,
+        };
+
+        allUsers.push(user);
+        document.getElementById("fullName").value="";
+        document.getElementById("birthDate").value="";
+        document.getElementById("email").value = "";
+        document.getElementById("insurance").value = "";
+        console.log(fullName,birthDate ,email,insurance);
+
+        displayUserInTable();
+      }
+
+      function displayUserInTable() {
+        document.querySelector("tbody").innerHTML = "";
+        allUsers.forEach(function (user, index) {
+          var myTr = document.createElement("tr");
+          for (a in user) {
+            var myTd = document.createElement("td");
+            myTd.innerHTML = user[a];
+            myTr.appendChild(myTd);
+          }
+
+          var editTd = document.createElement("td");
+          var editBtn = document.createElement("button");
+          editBtn.innerHTML = "Edit";
+          editBtn.setAttribute("class", "edit-btn");
+          editBtn.setAttribute("onclick", "editUser(" + index + ")");
+          editTd.appendChild(editBtn);
+          myTr.appendChild(editTd);
+
+          var deleteTd = document.createElement("td");
+          var deleteBtn = document.createElement("button");
+          deleteBtn.setAttribute("class", "delete-btn");
+          deleteBtn.setAttribute("onclick", "deleteUser(" + index + ")");
+          deleteBtn.innerHTML = "Delete";
+          deleteTd.appendChild(deleteBtn);
+          myTr.appendChild(deleteTd);
+
+          document.querySelector("tbody").appendChild(myTr);
+        });
+      }
+      displayUserInTable();
+
+      function deleteUser(i) {
+        console.log("delete User called" + i);
+        allUsers.splice(i, 1);
+        displayUserInTable();
+      }
+
+      function editUser(i) {
+        gIndex = i;
+        document.getElementById("fullName").value = allUsers[i].fullName;
+        document.getElementById("birthDate").value = allUsers[i].birthDate;
+        document.getElementById("email").value = allUsers[i].email;
+        document.getElementById("insurance").value=allUsers[i].insurance;
+
+        document.getElementById("updateBtn").style.display = "block";
+        document.getElementById("registerBtn").style.display = "none";
+      }
+
+      function updateUser() {
+        var fullName = document.getElementById("fullName").value;
+        var birthDate = document.getElementById("birthDate").value;
+        var email = document.getElementById("email").value;
+        var insurance = document.getElementById("insurance").value;
+
+        var user = {
+          fullName,
+          birthDate,
+          email,
+          insurance,
+        };
+
+        allUsers[gIndex] = user;
+        displayUserInTable();
+        document.getElementById("fullName").value = "";
+        document.getElementById("birthDate").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("insurance").value = "";
+
+        document.getElementById("updateBtn").style.display = "none";
+        document.getElementById("registerBtn").style.display = "block";
+      }
+    </script>
+</body>
+</html>
