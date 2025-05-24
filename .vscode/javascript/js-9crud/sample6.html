@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div id="container">
+    <div class ="column">
+        <h1>Wellness Center Membership</h1>
+        <h1>registration form</h1>
+        <form>
+            <label for="fname" placeholder="First Name"></label>
+            <input type="text" id="fname" name="fname" value="">
+  <label for="Lname" placeholder="Last Name"></label>
+            <input type="text" id="Lname" name="Lname" value="">
+            <br>
+<label>Birth Date</label>
+<input type="date" name="name" id="birthDate">
+<br>
+<label for ="email">Email Address</label>
+<input type="email" name="email" id="email">
+<br>
+<label>Insurance</label>
+<input type="text" name="name" id ="insurance">
+<br>
+<label> Terms of Service</label>
+<br>
+<input type="radio" name="name" id="termsofService">I agree to the terms of service.
+  <br>
+  <button type="submit" onclick="registerUser()" id="registerBtn">submit Form</button>    
+<br>
+<button type="button" onclick="updateUser()" id="update-Btn">Update</button>
+</form>
+    </div>
+</div>
+
+<div class="column">
+    <h3>Registered Form</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>FullName</td>
+                <td>Birth Date</td>
+                <td>Email</td>
+                <td>Insurance</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<script>
+    var allusers=[];
+    function registerUser(){
+        var fullName = document.getElementById("fname").value +document.getElementById("lname").value;
+        var birthDate= document.getElementById("birthDate").value;
+        var email = document.getElementById("email").value;
+        var Insurance = document.getElementById("insurance").value;
+        var termsofService = document.getElementById("termsofService").value;
+        var user = {
+            fullName: fullName,
+            birthDate: birthDate,
+            email: email,
+            Insurance: Insurance,
+            termsofService: termsofService
+        };
+        allusers.push(user);
+        document.getElementById("fullName").value = "";
+        document.getElementById("birthDate").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("insurance").value = "";
+        console.log(fullName,birthDate,email,Insurance);
+        dispalyUserInTable();
+    }
+    function displayUserInTable(){
+        document.querySelector("tbody").innerHTML = "";
+        allusers.forEach(function(user,index){
+            var myTr = document.createElement("tr");
+            for(a in user){
+                var myTd =document.createElement("td");
+                myTd.innerHTML=user[a];
+                myTr.appendChild(myTd);
+            }
+            var editTd =document.createElement("td");
+            var editBtn = document.createElement("button");
+            editBtn.innerHTML ="Edit";
+            editBtn.setAttribute("class","edit-btn");
+            editBtn.setAttribute("onclick","edituser("+index+")");
+            editTd.appendChild(editBtn);
+            myTr.appendchild(editTd);
+
+             var deleteTd=document.createElement("td");
+             var deleteBtn=document.createElement("button");
+             deleteBtn.setAttribute("class","delete-btn");
+             deleteBtn.setAttribute("onclick","deleteuser("+index+")");
+             deleteBtn.innerHTML="delete";
+             deleteTd.appendChild(deleteBtn);
+             myTr.appendChild(deleteTd);
+             document.querySelector("tbody").appendchild(myTr);
+        
+        });
+    }
+    displayUserInTable();
+
+    function deleteUser (i) {
+        gindex =i;
+        document.getElementById("fullName").value = allusers[i].fullName;
+        document.getElementById("birthDate").value =allusers[i].birthDate;
+        document.getElementById("email").value =allusers[i].email;
+        document.getElementById("insurance").value=allusers[i].insurance;
+
+        document.getElementById("updateBtn").style.display ="block";
+        document.getElementById("registerBtn").style.display="none";
+
+    
+    }
+    function updateUser(){
+        var fullName=document.getElementById("fullName").value;
+        var birthDate=document.getElementById("birthdate").value;
+        var email = document.getElementById("email").value;
+        varinsurance=document.getElementById("Insurance").value;
+
+        var User={
+            fullName,
+            birthDate,
+            email,
+            Insurance,
+        };
+        allusers[gIndex] = user;
+        displayUserInTable();
+        document.getElementById("fullName").value="";
+
+
+    }
+</script>
+</body>
+</html>
