@@ -29,18 +29,24 @@ button{
     color: white;
     background-color: green;
 }
+label{
+    
+    float:inline-start;
+}
+
+
 input {
     border-color: yellowgreen;
     border-radius: 5px;
     padding: 5px;
-    margin: 5px 0;
+    margin: 0px 0;
     width: 100%;
     box-sizing: border-box;
 
   
 }
 input.email{
-    width: 600px;
+    width: 500px;
 }
 table{
     border-color: yellowgreen;
@@ -90,10 +96,9 @@ body{
         <br>
         <input type="text" name="name" id="insurance" required/>
         <br>
+
+      <label> <input type="radio">I agree to the terms of service.</label>
         <br>
-        <label> Terms of Service</label>
-        <br>
-        <input type="radio" name="name" id="termsofService" >I agree to the terms of service.
 <br>
         <button type="submit" onclick="registerUser()" id="registerBtn">Submit Form</button>
         <br>
