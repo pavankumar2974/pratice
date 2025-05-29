@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h2>Book Manager</h2> 
+<form id="book-form">
+    <input type="text" id="title" required>
+    <input type="text" id="author" required>
+    <input type="text" id="isbn" required>
+    <button type="submit">Save Book</button>
+</form> 
+<table></table>
+<script>
+    let books =[];
+    let editingIndex=null;
+    const form=document.getElementById("book-form");
+    const bookList=document.getElementById("book-list");
+    function showBooks(){
+        bookList.innerHTML="";
+        for(let i=0;i<books.length;i++){
+            bookList.appendChild(row);
+        }
+    }
+    form.addEventListener("submit")
+</script>
+</body>
+</html>

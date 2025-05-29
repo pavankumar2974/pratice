@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        table{
+            background-color: aqua;
+        }
+        input{
+            background-color: rgb(238, 24, 24);
+            color: aliceblue;
+        }
+    </style>
+    <form >
+        <input type="text" id="title" placeholder="title" required>
+        <input type="text"id="author" placeholder="author" required>
+        <input type="isbn"id="isbn" placeholder="isbn" required>
+        <button onclick="registerBook()" type="button" id="registermoviebok">register</button>
+        <button id="updateBtn" type="button" onclick="updateBook()">update</button>
+
+
+    </form>
+    <hr>
+    <h1>Book Manager</h1>
+    <table border="2px"solid-black>
+        <thead>
+            <tr>
+                <th>title</th>
+                <th>author</th>
+                <th>isbn</th>
+                <th>action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+<script>
+    var allBooks =[];
+
+    function registerBook(){
+        var title=document.getElementById("title").value;
+        var author=document.getElementById("author").value;
+        var isbn=document.getElementById("isbn").value;
+        
+        var Books={
+            title,
+            author,
+            isbn,
+        };
+
+        allBooks.push(Books);
+        document.getElementById("title").value ="";
+        document.getElementById("author").value="";
+        document.getElementById("isbn").value="";
+        console.log(title,author,isbn);
+        displayBooksInTable();
+    }
+
+    function displayBooksInTable(){
+        document.querySelector("tbody").innerHTML="";
+        allBooks.forEach(function(book,index){
+            var myTr=document.createElement("tr");
+            for (a in book){
+                var myTd=document.createElement("td");
+                myTd.innerHTML=book[a];
+                myTr.appendChild(myTd);
+            }
+            var editTd=document.createElement("td");
+            var editBtn=document.createElement("button");
+            editBtn.innerHTML="Edit";
+            editBtn.setAttribute("onclick", "editBooks(" + index + ")");
+            editTd.appendChild(editBtn);
+            myTr.appendChild(editTd);
+            document.querySelector("tbody").appendChild(myTr);
+
+            var delTd = document.createElement("td");
+            var delBtn =document.createElement("button");
+            delBtn.innerHTML ="Delete";
+            delBtn.setAttribute("class","del-Books");
+            delBtn.setAttribute("onclick","deleteBooks("+index+")");
+            delTd.appendChild(delBtn);
+            myTr.appendChild(delTd);
+
+            document.querySelector("tbody").apendchild(myTr);
+        });
+    
+    }
+    displayBooksInTable();
+
+    function deleteBooks(i){
+        allBooks.splice(i,1);
+        displayBooksInTable();
+    }
+
+    function editBooks(i){
+        gIndex=i;
+        document.getElementById("title").value=allBooks[i].title;
+        document.getElementById("author").value=allBooks[i].author;
+        document.getElementById("isbn").value=allBooks[i].isbn;
+
+        document.getElementById("updateBtn").style.display="block";
+        document.getElementById("registerBook").style.display="none";
+
+    }
+    function updateBook(){
+        var title=document.getElementById("title").value;
+        var author=document.getElementById("author").value;
+        var isbn=document.getElementById("isbn").value;
+
+        var Books={
+            title,
+            author,
+            isbn,
+        };
+        allBooks[gIndex]=Books;
+        displayBooksInTable();
+        document.getElementById("title").value="";
+        document.getElementById("author").value="";
+        document.getElementById("isbn").value="";
+
+        document.getElementById("updateBtn").style.display="none";
+        document.getElementById("registerBook").style.display="block";
+
+    }
+</script>
+</body>
+</html>
