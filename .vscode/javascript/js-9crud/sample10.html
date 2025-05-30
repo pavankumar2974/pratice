@@ -6,26 +6,159 @@
     <title>Document</title>
 </head>
 <body>
-<h2>Book Manager</h2> 
-<form id="book-form">
-    <input type="text" id="title" required>
-    <input type="text" id="author" required>
-    <input type="text" id="isbn" required>
-    <button type="submit">Save Book</button>
-</form> 
-<table></table>
-<script>
-    let books =[];
-    let editingIndex=null;
-    const form=document.getElementById("book-form");
-    const bookList=document.getElementById("book-list");
-    function showBooks(){
-        bookList.innerHTML="";
-        for(let i=0;i<books.length;i++){
-            bookList.appendChild(row);
+    <style>
+        form{
+            width: 400px;
+            height: 300px;
+            margin: auto;
+            background-color: rgb(239, 241, 241);
         }
+        input#Name {
+            width: 390px;
+        }
+        input#DOB{
+            width: 390px;
+        }
+        input#email{
+            width: 390px;
+        }
+        input#Insurance{
+            width: 390px;
+        }
+        button{background-color: rgb(18, 145, 177);
+        
+        }
+    </style>
+   <center><h1>Wellness Registration</h1></center>
+<form>
+    <br>
+    <input type="text" id="Name" placeholder="Name" required>
+    <br>
+    <br>
+    <input type="date" id="DOB" placeholder="DOB" required>
+    <br><br>
+    <input type="email" id="email" placeholder="Email" required>
+    <br><br>
+    <input type="text" id="Insurance" placeholder="Insurance" required>
+    <h6>Terms of Service</h6>
+    <input type="radio">Terms of Service.
+    <br>
+    <center><button type="submit" onclick="registerUser()" id="registerBtn">submitForm</button></center>
+    <br>
+   <center> <button type="button" onclick="updateUser()" id="update-Btn">update</button></center>
+</form>
+<br>
+<hr>
+<h3>Register Form</h3>
+<table >
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>DoB</td>
+            <td>email</td>
+            <td>Insurance</td>
+            <td>edit</td>
+            <td>Delete</td>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<script>
+    var alluser=[];
+    function registerUser(){
+        var Name=document.getElementById("Name").value;
+        var DOB=document.getElementById("DOB").value;
+        var email=document.getElementById("email").value;
+        var Insurance=document.getElementById("Insurance").value;
+
+        var user={
+            Name,
+            DOB,
+            email,
+            Insurance,
+        };
+
+        alluser.push(user);
+        document.getElementById("Name").value="";
+        document.getElementById("DOB").value="";
+        document.getElementById("email").value="";
+        document.getElementById("Insurance").value="";
+        console.log(Name,DOB,email,Insurance);
+
+        displayUserInTable();
     }
-    form.addEventListener("submit")
+
+    function displayUserInTable(){
+        document.querySelector("tbody").innerHTML="";
+        alluser.forEach(function(user,index){
+            var myTr=document.createElement("tr");
+            for(a in user){
+                var myTd=document.createElement("td");
+                myTd.innerHTML=user[a];
+                myTr.appendChild(myTd);
+            }
+var editTd=document.createElement("td");
+var editBtn=document.createElement("button");
+editBtn.innerHTML="Edit";
+editBtn.setAttribute("class","edit-btn");
+editBtn.setAttribute("onclick","editUser("+index+")");
+editTd.appendChild(editBtn);
+myTr.appendChild(editTd);
+
+var deleteTd=document.createElement("td");
+var deleteBtn=document.createElement("button");
+deleteBtn.setAttribute("class","delete-btn");
+deleteBtn.setAttribute("onclick","deleteUser("+index+")");
+deleteBtn.innerHTML="Delete";
+deleteTd.appendChild(deleteBtn);
+myTr.appendChild(deleteTd);
+
+document.querySelector("tbody").appendChild(myTr);
+        });
+    }
+    displayUserInTable();
+
+    function deleteUser(i){
+        console.log("delete User called"+i);
+        alluser.splice(i,1);
+        displayUserInTable();
+    }
+
+    function editUser(i){
+        gIndex=i;
+        document.getElementById("Name").value=alluser[i].Name;
+        document.getElementById("DOB").value=alluser[i].DOB;
+        document.getElementById("email").value=alluser[i].email;
+        document.getElementById("Insurance").value=alluser[i].Insurance;
+
+        document.getElementById("updateBtn").style.display="block";
+        document.getElementById("registerBtn").style.display="none";
+    }
+    function updateUser(){
+        var Name=document.getElementById("Name").value;
+        var DOB=document.getElementById("DOB").value;
+        var email=document.getElementById("email").value;
+        var Insurance=document.getElementById("Insurance").value;
+
+        var User={
+            Name,
+            DOB,
+            email,
+            Insurance,
+        };
+
+        alluser[gIndex]=User;
+        displayUserInTable();
+        document.getElementById("Name").value="";
+         document.getElementById("DOB").value="";
+          document.getElementById("email").value="";
+           document.getElementById("Insurance").value="";
+
+           document.getElementById("updateBtn").style.display="none";
+           document.getElementById("registerBtn").style.display="block";
+
+    }
+    
 </script>
 </body>
 </html>
