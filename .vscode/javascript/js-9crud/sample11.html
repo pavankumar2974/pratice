@@ -8,25 +8,32 @@
 <body>
     <style>
         table{
-            background-color: aqua;
+            background-color: rgb(238, 245, 245);
+            border: 2px;
+        
+
+        }
+        table.tr{
+            border: 2px;
         }
         input{
-            background-color: rgb(238, 24, 24);
-            color: aliceblue;
+            background-color: rgb(236, 232, 232);
+            color: rgb(4, 12, 19);
         }
     </style>
+    <h1>Book Manager</h1>
     <form >
         <input type="text" id="title" placeholder="title" required>
         <input type="text"id="author" placeholder="author" required>
-        <input type="isbn"id="isbn" placeholder="isbn" required>
-        <button onclick="registerBook()" type="button" id="registermoviebok">register</button>
+        <input type="text"id="isbn" placeholder="isbn" required>
+        <button onclick="registerBook()" type="button" id="registermoviebook">register</button>
         <button id="updateBtn" type="button" onclick="updateBook()">update</button>
 
 
     </form>
     <hr>
-    <h1>Book Manager</h1>
-    <table border="2px"solid-black>
+    <h1>Book Details</h1>
+    <table>
         <thead>
             <tr>
                 <th>title</th>
@@ -87,7 +94,7 @@
             delTd.appendChild(delBtn);
             myTr.appendChild(delTd);
 
-            document.querySelector("tbody").apendchild(myTr);
+            document.querySelector("tbody").appendchild(myTr);
         });
     
     }
@@ -105,7 +112,7 @@
         document.getElementById("isbn").value=allBooks[i].isbn;
 
         document.getElementById("updateBtn").style.display="block";
-        document.getElementById("registerBook").style.display="none";
+        document.getElementById("registermoviebook").style.display="none";
 
     }
     function updateBook(){
