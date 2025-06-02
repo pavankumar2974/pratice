@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="myDiv"></div>
+
+    <script>
+      var imageAddress = [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROcBL263bASsLf2puAuKH9V_HQb94sYM3GSQ&s",
+        "https://i.pinimg.com/236x/a0/4c/ca/a04cca8f619c561e80a4a6e6db361904.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/d/de/Red_natural_flower.jpg",
+        "https://images.unsplash.com/photo-1661772630465-7a488ae2a4f6?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGN1dGUlMjBmbG93ZXJ8ZW58MHx8MHx8fDA%3D",
+        "https://c0.wallpaperflare.com/preview/853/319/641/flower-nature-summer-plant.jpg",
+      ];
+
+      imageAddress.forEach(function (val) {
+        console.log(val);
+        var myImage = document.createElement("img");
+        myImage.setAttribute("src", val);
+        myImage.setAttribute("width", "200px");
+        document.getElementById("myDiv").appendChild(myImage);
+      });
+    </script>
+  </body>
+</html>
