@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form">
+        <div class="container">
+            <h2>Enrollment Form</h2>
+            <div class="column">
+                <label for ="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" required onkeyup="validateForm()"/>
+<label for="age">Age:</label>
+                <input type="number" id="age" name="age" required onkeyup="validateForm()"/>
+                <label for="birthDate">Birth Date:</label>
+                <input type="date" id="birthDate" name="birthDate" required onchange="validateForm()"/>
+                <label for="emailAddress">Email Address:</label>
+                <input type="email" id="emailAddress" name="emailAddress" class="email" required onkeyup="validateForm()"/>
+                <button type="button" id="submitButton" disabled onclick="submitForm()">Submit</button>
+
+            </div>
+        </div>
+    </form>
+   
+</body>
+</html>
