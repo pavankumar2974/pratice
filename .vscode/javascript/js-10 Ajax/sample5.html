@@ -15,7 +15,7 @@
         getDetailsFromServer.onreadystatechange = function () {
             if (
                 getDetailsFromServer.readyState === 4 &&
-                getDetailsFromServer.status === 200
+                getDetailsFromServer.status === 200 
             ) {
                 var getData = JSON.parse(getDetailsFromServer.response);
                 var ul = document.getElementById('userList');
