@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<button onclick="getDetails()">Get User Details</button>
+<ul id="userList"></ul>
+<script>
+    function getDetails() {
+        var getDetailsFromServer = new XMLHttpRequest();
+        getDetailsFromServer.onreadystatechange = function () {
+            if (
+                getDetailsFromServer.readyState === 4 &&
+                getDetailsFromServer.status === 200
+            ) {
+                var getData = JSON.parse(getDetailsFromServer.response);
+                var ul = document.getElementById('userList');
+                ul.innerHTML = '';
+                getData.forEach(function (user) {
+                    var li = document.createElement('li');
+                    // Using a placeholder image for each user
+                    var img = document.createElement('img');
+                    img.src = 'https://via.placeholder.com/50?text=' + encodeURIComponent(user.username);
+                    img.alt = user.username;
+                    li.appendChild(img);
+                    li.appendChild(document.createTextNode(' ' + user.name));
+                    ul.appendChild(li);
+                });
+            }
+        };
+        getDetailsFromServer.open(
+            "GET",
+            "https://jsonplaceholder.typicode.com/users"
+        );
+        getDetailsFromServer.send();
+    }
+</script>
+</body>
+</html>
