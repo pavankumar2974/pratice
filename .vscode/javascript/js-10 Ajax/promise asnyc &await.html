@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Promise it has three states fullfilled (resolved) or rejected. promises use .then()
+     .catch() for handling errors
+      async/Await. -->
+
+    <script>
+      var emplyees = [];
+
+      function getEmpDataFromServer() {
+        return new Promise(function (resolve, reject) {
+          var getEmployeeDetails = new XMLHttpRequest();
+          getEmployeeDetails.onreadystatechange = function () {
+            if (
+              getEmployeeDetails.readyState === 4 &&
+              getEmployeeDetails.status === 200
+            ) {
+              emplyees = JSON.parse(getEmployeeDetails.response);
+              resolve();
+            }
+          };
+          getEmployeeDetails.open(
+            "GET",
+            "https://jsonplaceholder.typicode.com/posts"
+          );
+          getEmployeeDetails.send();
+        });
+      }
+      function displayEmpDetails() {
+        console.log(emplyees);
+      }
+      getEmpDataFromServer();
+      // .then(function () {
+      //   displayEmpDetails();
+      // })
+      // .catch(function () {
+      //   console.log("Error");
+      // });
+      async function handleEmpData() {
+        var response = await getEmpDataFromServer();
+        displayEmpDetails();
+      }
+      handleEmpData();
+    </script>
+  </body>
+</html>
