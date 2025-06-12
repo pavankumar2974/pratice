@@ -15,20 +15,33 @@
         
     }
     form{
-        width: 700px;
-        height: 900px;
+        width: 600px;
+        height: 250px;
+    
     }
-.input{
-        width: 900px;
+    body{
+        width: 600px;
+        ;
+    }
+input{
+        width: 590px;
+    }
+    #container{
+        width: 600px;
+    }
+    #FirstName,#LastName{
+        width: 200px;
     }
 </style>
 <body>
+    <container  id="container">
     <h1><center>Your Event</center></h1>
     <br>
     <h2><center>online Registration</center></h2>
     <form>
+        <br>
         <label for="FirstName">FirstName</label>
-        <input type="text" id="FirstName" placeholder="Enter First Name" required>
+        <input type="text" id="FirstName" placeholder="Enter First Name" >
         <label for="LastName">LastName</label>
         <input type="text" id="LastName" placeholder="Enter Last Name" required>
         <br>
@@ -41,12 +54,144 @@
     <label for="physicalAddress">Physical Address</label>
     <input type="text" id="physicalAddress" placeholder="Enter Physical Address" required>
     <br>
-    <label for ="Date of Birth">Date of Birth</label>
-    <input type="date" id="Date of Birth" placeholder="Enter Date of Birth" required>
-    <br>
+    <label for ="DateofBirth">Date of Birth</label>
+    <input type="date" id="DateofBirth" placeholder="Enter Date of Birth" required>
+    <br><br>
     <button type="submit" id="registerBtn" onclick="registerUser()">Register</button>
     <button type="button" id="updateBtn" onclick="updateUser()">Update</button>
-    <hr>
+
     </form>
+    </container>
+    <div class="column">
+        <h2>Registered Form</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Email</th>
+                    <th>company</th>
+                    <th>physicalAddress</th>
+                    <th>Date of Birth</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+    </div>
+    <script>
+        var User = [];
+        function registerUser(){
+            var FirstName = document.getElementById("FirstName").value;
+            var LastName = document.getElementById("LastName").value;
+            var EmailAddress = document.getElementById("EmailAddress").value;
+            var company = document.getElementById("company").value;
+            var physicalAddress = document.getElementById("physicalAddress").value;
+            var DateofBirth = document.getElementById("DateofBirth").value;
+
+            var user = {
+                FirstName: FirstName,
+                LastName: LastName,
+                EmailAddress: EmailAddress,
+                company: company,
+                physicalAddress: physicalAddress,
+                DateofBirth: DateofBirth
+            };
+         User.push(user);
+            document.getElementById("FirstName").value="";
+            document.getElementById("LastName").value="";
+            document.getElementById("EmailAddress").value="";
+            document.getElementById("company").value="";
+            document.getElementById("physicalAddress").value="";
+            document.getElementById("DateofBirth").value="";
+            console.log(FirstName, LastName, EmailAddress, company, physicalAddress, DateofBirth);
+
+            displayUserInTable();
+        }
+ function displayUserInTable() {
+        document.querySelector("tbody").innerHTML = "";
+        User.forEach(function (user, index) {
+          var myTr = document.createElement("tr");
+          for (a in user) {
+            var myTd = document.createElement("td");
+            myTd.innerHTML = user[a];
+            myTr.appendChild(myTd);
+          }
+        ;
+        var editTd = document.createElement("td");
+          var editBtn = document.createElement("button");
+          editBtn.innerHTML = "Edit";
+          editBtn.setAttribute("class", "edit-btn");
+          editBtn.setAttribute("onclick", "editUser(" + index + ")");
+          editTd.appendChild(editBtn);
+          myTr.appendChild(editTd);
+
+ var deleteTd = document.createElement("td");
+          var deleteBtn = document.createElement("button");
+          deleteBtn.setAttribute("class", "delete-btn");
+          deleteBtn.setAttribute("onclick", "deleteUser(" + index + ")");
+          deleteBtn.innerHTML = "Delete";
+          deleteTd.appendChild(deleteBtn);
+          myTr.appendChild(deleteTd);
+
+          document.querySelector("tbody").appendChild(myTr);
+          });
+        };
+
+     displayUserInTable();
+
+      function deleteUser(i) {
+        console.log("delete User called" + i);
+        User.splice(i, 1);
+        displayUserInTable();
+      }
+function editUser(i){
+    gIndex = i;
+    document.getElementById("FirstName").value = User[i].FirstName;
+    document.getElementById("LastName").value = User[i].LastName;
+    document.getElementById("EmailAddress").value = User[i].EmailAddress;
+    document.getElementById("company").value = User[i].company;
+    document.getElementById("physicalAddress").value = User[i].physicalAddress;
+    document.getElementById("DateofBirth").value = User[i].DateofBirth;
+
+    document.getElementById("updateBtn").style.display = "block";
+        document.getElementById("registerBtn").style.display = "none";
+}
+
+function updateUser(){
+    var FirstName = document.getElementById("FirstName").value;
+    var LastName = document.getElementById("LastName").value;
+    var EmailAddress = document.getElementById("EmailAddress").value;
+    var company = document.getElementById("company").value;
+    var physicalAddress = document.getElementById("physicalAddress").value;
+    var DateofBirth = document.getElementById("DateofBirth").value;
+
+   var user = {
+    FirstName,
+    LastName,
+    EmailAddress,
+    company,
+    physicalAddress,
+    DateOfBirth,
+   };
+
+   User[gIndex] = user;
+    displayUserInTable();
+    document.getElementById("FirstName").value = "";
+    document.getElementById("LastName").value = "";
+    document.getElementById("EmailAddress").value = "";
+    document.getElementById("company").value = "";
+    document.getElementById("physicalAddress").value = "";
+    document.getElementById("DateofBirth").value = "";
+
+     document.getElementById("updateBtn").style.display = "none";
+        document.getElementById("registerBtn").style.display = "block";
+
+}
+    
+           
+    </script>
 </body>
 </html>
