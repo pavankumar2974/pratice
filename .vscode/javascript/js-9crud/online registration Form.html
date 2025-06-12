@@ -57,7 +57,7 @@ input{
     <label for ="DateofBirth">Date of Birth</label>
     <input type="date" id="DateofBirth" placeholder="Enter Date of Birth" required>
     <br><br>
-    <button type="submit" id="registerBtn" onclick="registerUser()">Register</button>
+    <button type="button" id="registerBtn" onclick="registerUser()">Register</button>
     <button type="button" id="updateBtn" onclick="updateUser()">Update</button>
 
     </form>
@@ -115,6 +115,7 @@ input{
         User.forEach(function (user, index) {
           var myTr = document.createElement("tr");
           for (a in user) {
+            
             var myTd = document.createElement("td");
             myTd.innerHTML = user[a];
             myTr.appendChild(myTd);
@@ -147,6 +148,7 @@ input{
         User.splice(i, 1);
         displayUserInTable();
       }
+      var gIndex;
 function editUser(i){
     gIndex = i;
     document.getElementById("FirstName").value = User[i].FirstName;
@@ -161,21 +163,21 @@ function editUser(i){
 }
 
 function updateUser(){
-    var FirstName = document.getElementById("FirstName").value;
-    var LastName = document.getElementById("LastName").value;
-    var EmailAddress = document.getElementById("EmailAddress").value;
-    var company = document.getElementById("company").value;
-    var physicalAddress = document.getElementById("physicalAddress").value;
-    var DateofBirth = document.getElementById("DateofBirth").value;
+       var FirstName = document.getElementById("FirstName").value;
+            var LastName = document.getElementById("LastName").value;
+            var EmailAddress = document.getElementById("EmailAddress").value;
+            var company = document.getElementById("company").value;
+            var physicalAddress = document.getElementById("physicalAddress").value;
+            var DateofBirth = document.getElementById("DateofBirth").value;
 
-   var user = {
-    FirstName,
-    LastName,
-    EmailAddress,
-    company,
-    physicalAddress,
-    DateOfBirth,
-   };
+            var user = {
+                FirstName: FirstName,
+                LastName: LastName,
+                EmailAddress: EmailAddress,
+                company: company,
+                physicalAddress: physicalAddress,
+                DateofBirth: DateofBirth
+            };
 
    User[gIndex] = user;
     displayUserInTable();
@@ -186,8 +188,8 @@ function updateUser(){
     document.getElementById("physicalAddress").value = "";
     document.getElementById("DateofBirth").value = "";
 
-     document.getElementById("updateBtn").style.display = "none";
-        document.getElementById("registerBtn").style.display = "block";
+    document.getElementById("updateBtn").style.display = "none";
+    document.getElementById("registerBtn").style.display = "block";
 
 }
     
