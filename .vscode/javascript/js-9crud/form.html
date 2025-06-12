@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    h1{
+        color: green;
+    }
+    h2{
+        background-color: aquamarine;
+
+        
+    }
+    form{
+        width: 600px;
+        height: 250px;
+    
+    }
+    body{
+        width: 600px;
+        ;
+    }
+input{
+        width: 590px;
+    }
+    #container{
+        width: 600px;
+    }
+    #FirstName,#LastName{
+        width: 200px;
+    }
+</style>
+<body>
+    
+    <h1><center>Your Event</center></h1>
+    <br>
+    <h2><center>online Registration</center></h2>
+    <form>
+        <br>
+        <label for="FirstName">FirstName</label>
+        <input type="text" id="FirstName" placeholder="Enter First Name" >
+        <label for="LastName">LastName</label>
+        <input type="text" id="LastName" placeholder="Enter Last Name" >
+        <br>
+    <label for="EmailAddress">Email Address</label>
+    <input type="email" id="EmailAddress" placeholder="Enter Email Address" >
+    <br>
+    <label for="company">company (if applicable)</label>
+    <input type="text" id="company" placeholder="Enter company name" >
+    <br>
+    <label for="physicalAddress">Physical Address</label>
+    <input type="text" id="physicalAddress" placeholder="Enter Physical Address" >
+    <br>
+    <label for ="DateofBirth">Date of Birth</label>
+    <input type="date" id="DateofBirth" placeholder="Enter Date of Birth" >
+    <br><br>
+    <button type="button" id="registerBtn" onclick="registerUser()">Register</button>
+    <button type="button" id="updateBtn" onclick="updateUser()">Update</button>
+
+    </form>
+    
+    <div class="column">
+        <h2>Registered Form</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Email</th>
+                    <th>company</th>
+                    <th>physicalAddress</th>
+                    <th>Date of Birth</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+    </div>
+    <script>
+        var User = [];
+        function registerUser(){
+            var FirstName = document.getElementById("FirstName").value;
+            var LastName = document.getElementById("LastName").value;
+            var EmailAddress = document.getElementById("EmailAddress").value;
+            var company = document.getElementById("company").value;
+            var physicalAddress = document.getElementById("physicalAddress").value;
+            var DateofBirth = document.getElementById("DateofBirth").value;
+
+            var user ={
+                FirstName,
+                LastName,
+                EmailAddress,
+                company,
+                physicalAddress,
+                DateofBirth,
+            };
+            
+            User.push(user);
+            document.getElementById("FirstName").value = "";
+            document.getElementById("LastName").value = "";
+            document.getElementById("EmailAddress").value = "";
+            document.getElementById("company").value = "";
+            document.getElementById("physicalAddress").value = "";
+            document.getElementById("DateofBirth").value = "";
+            console.log(FirstName, LastName, EmailAddress, company, physicalAddress, DateofBirth);
+
+        displayusers()
+        }
+       
+        function displayusers() {
+            var tbody = document.querySelector("tbody");
+            tbody.innerHTML = "";
+            User.forEach((user, index) => {
+                var tr = document.createElement("tr");
+
+                for (var key in user) {
+                    var td = document.createElement("td");
+                    td.innerHTML = user[key];
+                    tr.appendChild(td);
+                }
+
+                var editTd = document.createElement("td");
+                editTd.innerHTML = `<button onclick="editUser(${index})">Edit</button>`;
+                tr.appendChild(editTd);
+
+                var deleteTd = document.createElement("td");
+                deleteTd.innerHTML = `<button onclick="deleteUser(${index})">Delete</button>`;
+                tr.appendChild(deleteTd);
+
+                tbody.appendChild(tr);
+            });
+          
+        }
+
+displayusers()
+    </script>
+</body>
+</html>
