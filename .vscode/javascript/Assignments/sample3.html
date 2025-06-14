@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Records</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    input {
+      margin: 5px;
+      padding: 5px;
+    }
+    button {
+      padding: 5px 10px;
+      margin: 5px;
+    }
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Student Records</h2>
+  <form id="studentForm">
+    <input type="text" id="name" placeholder="Name" required />
+    <input type="text" id="studentId" placeholder="ID" required />
+    <input type="number" id="grade" placeholder="Grade (0-100)" required min="0" max="100" />
+    <button type="submit">Save Student</button>
+  </form>
+
+  <table id="studentTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>ID</th>
+        <th>Grade</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+    let editingIndex = null;
+
+    const form = document.getElementById("studentForm");
+    const nameInput = document.getElementById("name");
+    const idInput = document.getElementById("studentId");
+    const gradeInput = document.getElementById("grade");
+    const tableBody = document.querySelector("#studentTable tbody");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = nameInput.value.trim();
+      const id = idInput.value.trim();
+      const grade = gradeInput.value.trim();
+
+      if (!name || !id || !grade || isNaN(grade) || grade < 0 || grade > 100) {
+        alert("Please enter valid data.");
+        return;
+      }
+
+      const existingIndex = students.findIndex(student => student.id === id);
+      if (editingIndex === null && existingIndex !== -1) {
+        alert("Student ID must be unique.");
+        return;
+      }
+
+      const student = { name, id, grade };
+
+      if (editingIndex !== null) {
+        students[editingIndex] = student;
+        editingIndex = null;
+      } else {
+        students.push(student);
+      }
+
+      saveAndRender();
+      form.reset();
+    });
+
+    function renderStudents() {
+      tableBody.innerHTML = "";
+      students.forEach((student, index) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td>${student.name}</td>
+          <td>${student.id}</td>
+          <td>${student.grade}</td>
+          <td>
+            <button onclick="editStudent(${index})">Edit</button>
+            <button onclick="deleteStudent(${index})">Delete</button>
+          </td>
+        `;
+
+        tableBody.appendChild(row);
+      });
+    }
+
+    function editStudent(index) {
+      const student = students[index];
+      nameInput.value = student.name;
+      idInput.value = student.id;
+      gradeInput.value = student.grade;
+      editingIndex = index;
+    }
+
+    function deleteStudent(index) {
+      if (confirm("Are you sure you want to delete this student?")) {
+        students.splice(index, 1);
+        saveAndRender();
+      }
+    }
+
+    function saveAndRender() {
+      localStorage.setItem("students", JSON.stringify(students));
+      renderStudents();
+    }
+
+    renderStudents();
+  </script>
+
+</body>
+</html>
