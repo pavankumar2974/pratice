@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recipe Collection</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f8f9fa;
+    }
+    form {
+      margin-bottom: 20px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      max-width: 500px;
+    }
+    input, textarea, button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+    }
+    .recipe {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-left: 5px solid #28a745;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .recipe h3 {
+      margin: 0;
+    }
+    .actions {
+      margin-top: 10px;
+    }
+    .actions button {
+      margin-right: 10px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Recipe Collection</h1>
+  <form id="recipeForm">
+    <input type="hidden" id="editIndex" />
+    <input type="text" id="name" placeholder="Recipe Name" required />
+    <textarea id="ingredients" placeholder="Ingredients (comma separated)" required></textarea>
+    <textarea id="instructions" placeholder="Instructions" required></textarea>
+    <button type="submit">Save Recipe</button>
+  </form>
+
+  <div id="recipeList"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
