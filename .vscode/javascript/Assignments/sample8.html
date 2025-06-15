@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    form input {
+      margin: 5px;
+      padding: 5px;
+    }
+    table {
+      margin-top: 20px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 5px 10px;
+      margin: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Contact Management</h2>
+  <form id="contactForm">
+    <input type="hidden" id="editIndex">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="text" id="phone" placeholder="Phone Number" required pattern="[0-9]{10}">
+    <button type="submit">Save Contact</button>
+  </form>
+
+  <table id="contactTable">
+    <thead>
+      <tr>
+        <th>Name</th><th>Email</th><th>Phone</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    var contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+
+    function saveContacts() {
+      localStorage.setItem("contacts", JSON.stringify(contacts));
+    }
+
+    function renderContacts() {
+      var tableBody = document.querySelector("#contactTable tbody");
+      tableBody.innerHTML = "";
+      for (var i = 0; i < contacts.length; i++) {
+        var contact = contacts[i];
+        var row = "<tr>" +
+          "<td>" + contact.name + "</td>" +
+          "<td>" + contact.email + "</td>" +
+          "<td>" + contact.phone + "</td>" +
+          "<td>" +
+          "<button onclick='editContact(" + i + ")'>Edit</button>" +
+          "<button onclick='deleteContact(" + i + ")'>Delete</button>" +
+          "</td>" +
+          "</tr>";
+        tableBody.innerHTML += row;
+      }
+    }
+
+    function editContact(index) {
+      var contact = contacts[index];
+      document.getElementById("editIndex").value = index;
+      document.getElementById("name").value = contact.name;
+      document.getElementById("email").value = contact.email;
+      document.getElementById("phone").value = contact.phone;
+    }
+
+    function deleteContact(index) {
+      contacts.splice(index, 1);
+      saveContacts();
+      renderContacts();
+    }
+
+    document.getElementById("contactForm").onsubmit = function (e) {
+      e.preventDefault();
+      var name = document.getElementById("name").value.trim();
+      var email = document.getElementById("email").value.trim();
+      var phone = document.getElementById("phone").value.trim();
+      var index = document.getElementById("editIndex").value;
+
+      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      var phonePattern = /^[0-9]{10}$/;
+
+      if (!emailPattern.test(email)) {
+        alert("Invalid email format.");
+        return;
+      }
+      if (!phonePattern.test(phone)) {
+        alert("Phone must be 10 digits.");
+        return;
+      }
+
+      var contact = { name: name, email: email, phone: phone };
+
+      if (index === "") {
+        contacts.push(contact);
+      } else {
+        contacts[index] = contact;
+        document.getElementById("editIndex").value = "";
+      }
+
+      saveContacts();
+      renderContacts();
+      this.reset();
+    };
+
+    renderContacts();
+  </script>
+</body>
+</html>
