@@ -50,34 +50,37 @@
   </table>
 
   <script>
-    let students = JSON.parse(localStorage.getItem("students")) || [];
-    let editingIndex = null;
+    var students = JSON.parse(localStorage.getItem("students")) || [];
+    var editingIndex = null;
 
-    const form = document.getElementById("studentForm");
-    const nameInput = document.getElementById("name");
-    const idInput = document.getElementById("studentId");
-    const gradeInput = document.getElementById("grade");
-    const tableBody = document.querySelector("#studentTable tbody");
+    var form = document.getElementById("studentForm");
+    var nameInput = document.getElementById("name");
+    var idInput = document.getElementById("studentId");
+    var gradeInput = document.getElementById("grade");
+    var tableBody = document.querySelector("#studentTable tbody");
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const name = nameInput.value.trim();
-      const id = idInput.value.trim();
-      const grade = gradeInput.value.trim();
+      var name = nameInput.value.trim();
+      var id = idInput.value.trim();
+      var grade = gradeInput.value.trim();
 
       if (!name || !id || !grade || isNaN(grade) || grade < 0 || grade > 100) {
         alert("Please enter valid data.");
         return;
       }
 
-      const existingIndex = students.findIndex(student => student.id === id);
+      var existingIndex = students.findIndex(function(student) {
+        return student.id === id;
+      });
+
       if (editingIndex === null && existingIndex !== -1) {
         alert("Student ID must be unique.");
         return;
       }
 
-      const student = { name, id, grade };
+      var student = { name: name, id: id, grade: grade };
 
       if (editingIndex !== null) {
         students[editingIndex] = student;
@@ -92,8 +95,8 @@
 
     function renderStudents() {
       tableBody.innerHTML = "";
-      students.forEach((student, index) => {
-        const row = document.createElement("tr");
+      students.forEach(function(student, index) {
+        var row = document.createElement("tr");
 
         row.innerHTML = `
           <td>${student.name}</td>
@@ -110,7 +113,7 @@
     }
 
     function editStudent(index) {
-      const student = students[index];
+      var student = students[index];
       nameInput.value = student.name;
       idInput.value = student.id;
       gradeInput.value = student.grade;
