@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Collection</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    input, select {
+      margin: 5px;
+      padding: 5px;
+    }
+    button {
+      margin: 5px;
+    }
+    .movie {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Movie Collection</h1>
+  <form id="movieForm">
+    <input type="text" id="title" placeholder="Title" required />
+    <input type="text" id="genre" placeholder="Genre" required />
+    <input type="number" id="year" placeholder="Release Year" required />
+    <button type="submit">Add / Update Movie</button>
+  </form>
+
+  <div id="movieList"></div>
+
+  <script>
+    var movies = JSON.parse(localStorage.getItem('movies')) || [];
+    var editIndex = -1;
+
+    function saveToLocalStorage() {
+      localStorage.setItem('movies', JSON.stringify(movies));
+    }
+
+    function renderMovies() {
+      var list = document.getElementById('movieList');
+      list.innerHTML = '';
+      for (var i = 0; i < movies.length; i++) {
+        var movie = movies[i];
+        var div = document.createElement('div');
+        div.className = 'movie';
+        div.innerHTML = 
+          '<strong>' + movie.title + '</strong> (' + movie.year + ') - ' + movie.genre +
+          '<br><button onclick="editMovie(' + i + ')">Edit</button>' +
+          '<button onclick="deleteMovie(' + i + ')">Delete</button>';
+        list.appendChild(div);
+      }
+    }
+
+    function editMovie(index) {
+      var movie = movies[index];
+      document.getElementById('title').value = movie.title;
+      document.getElementById('genre').value = movie.genre;
+      document.getElementById('year').value = movie.year;
+      editIndex = index;
+    }
+
+    function deleteMovie(index) {
+      movies.splice(index, 1);
+      saveToLocalStorage();
+      renderMovies();
+    }
+
+    document.getElementById('movieForm').onsubmit = function(e) {
+      e.preventDefault();
+      var title = document.getElementById('title').value.trim();
+      var genre = document.getElementById('genre').value.trim();
+      var year = parseInt(document.getElementById('year').value);
+
+      if (!title || !genre || isNaN(year) || year < 1888 || year > new Date().getFullYear()) {
+        alert('Please enter valid movie details.');
+        return;
+      }
+
+      var movie = { title: title, genre: genre, year: year };
+
+      if (editIndex === -1) {
+        movies.push(movie);
+      } else {
+        movies[editIndex] = movie;
+        editIndex = -1;
+      }
+
+      saveToLocalStorage();
+      renderMovies();
+      document.getElementById('movieForm').reset();
+    };
+
+    renderMovies();
+  </script>
+</body>
+</html>
+
