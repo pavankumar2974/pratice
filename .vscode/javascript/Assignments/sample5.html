@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Management</title>
+  <style>
+    table {
+      background-color: rgb(238, 245, 245);
+      border: 2px solid black;
+      border-collapse: collapse;
+      width: 80%;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+    input {
+      background-color: rgb(236, 232, 232);
+      color: rgb(4, 12, 19);
+      margin: 5px;
+    }
+    button {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Employee Management</h1>
+  <form onsubmit="return false;">
+    <input type="text" id="Name" placeholder="Name" required>
+    <input type="text" id="department" placeholder="Department" required>
+    <input type="text" id="salary" placeholder="Salary" required>
+    <button onclick="registerEmp()" type="button" id="registerEmp">Register</button>
+    <button id="updateBtn" type="button" onclick="updateEmp()" style="display:none;">Update</button>
+  </form>
+  <hr>
+  <h1>Employee Details</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Salary</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    var allEmp = [];
+    var gIndex = -1;
+
+    function registerEmp() {
+      var Name = document.getElementById("Name").value;
+      var department = document.getElementById("department").value;
+      var salary = document.getElementById("salary").value;
+
+      var emp = { Name: Name, department: department, salary: salary };
+      allEmp.push(emp);
+
+      resetForm();
+      displayEmpInTable();
+    }
+
+    function displayEmpInTable() {
+      var tbody = document.querySelector("tbody");
+      tbody.innerHTML = "";
+
+      for (var i = 0; i < allEmp.length; i++) {
+        var emp = allEmp[i];
+        var tr = document.createElement("tr");
+
+        for (var key in emp) {
+          var td = document.createElement("td");
+          td.textContent = emp[key];
+          tr.appendChild(td);
+        }
+
+        var actionTd = document.createElement("td");
+
+        var editBtn = document.createElement("button");
+        editBtn.textContent = "Edit";
+        editBtn.onclick = (function(index) {
+          return function() {
+            editEmp(index);
+          };
+        })(i);
+        actionTd.appendChild(editBtn);
+
+        var delBtn = document.createElement("button");
+        delBtn.textContent = "Delete";
+        delBtn.onclick = (function(index) {
+          return function() {
+            deleteEmp(index);
+          };
+        })(i);
+        actionTd.appendChild(delBtn);
+
+        tr.appendChild(actionTd);
+        tbody.appendChild(tr);
+      }
+    }
+
+    function deleteEmp(index) {
+      allEmp.splice(index, 1);
+      displayEmpInTable();
+    }
+
+    function editEmp(index) {
+      gIndex = index;
+      var emp = allEmp[index];
+
+      document.getElementById("Name").value = emp.Name;
+      document.getElementById("department").value = emp.department;
+      document.getElementById("salary").value = emp.salary;
+
+      document.getElementById("updateBtn").style.display = "inline";
+      document.getElementById("registerEmp").style.display = "none";
+    }
+
+    function updateEmp() {
+      var Name = document.getElementById("Name").value;
+      var department = document.getElementById("department").value;
+      var salary = document.getElementById("salary").value;
+
+      allEmp[gIndex] = { Name: Name, department: department, salary: salary };
+
+      resetForm();
+      displayEmpInTable();
+
+      document.getElementById("updateBtn").style.display = "none";
+      document.getElementById("registerEmp").style.display = "inline";
+    }
+
+    function resetForm() {
+      document.getElementById("Name").value = "";
+      document.getElementById("department").value = "";
+      document.getElementById("salary").value = "";
+    }
+
+    displayEmpInTable();
+  </script>
+</body>
+</html>
