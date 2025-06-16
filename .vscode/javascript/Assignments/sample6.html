@@ -1,120 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Store Products</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    input {
-      margin: 5px;
-      padding: 5px;
-    }
-    button {
-      margin: 5px;
-      padding: 5px 10px;
-    }
-    .product {
-      border: 1px solid #ccc;
-      margin: 10px 0;
-      padding: 10px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
+    <style>
+        table{
+            background-color: rgb(71, 214, 227);
+            border: 2px solid #ccc;
+        }
+        table tr{
+            border: 2px solid #ccc;
+        }
+        input{
+            background-color: rgb(222, 225, 225);
+            color: rgb(4, 12, 19);
+        }
+    </style>
+    <h1>Online Store Products</h1>
+    <form >
+        <input type="text" id="Name" placeholder="Name" required>
+        <br><br>
+        <input type="number" id="Price" placeholder="Price" required>
+        <br><br>
+        <input type="number" id="stockQuantity" placeholder="Stock Quantity" required>
+        <br><br>
+        <button onclick="registerProduct()" type="button" id="registerproduct">register</button>
+        <button id="updateBtn" type="button" onclick="updateProduct()">update</button>
 
-  <h1>Online Store Product Manager</h1>
-  <form id="productForm">
-    <input type="text" id="name" placeholder="Product Name" required />
-    <input type="number" id="price" placeholder="Price" required min="0" />
-    <input type="number" id="stock" placeholder="Stock Quantity" required min="0" />
-    <button type="submit">Save Product</button>
-  </form>
 
-  <h2>Product List</h2>
-  <div id="productList"></div>
+    </form>
+    <hr>
+    <h1>Product Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock Quantity</th>
+                <th>action</th>
 
-  <script>
-    
-    var products = JSON.parse(localStorage.getItem("products")) || [];
-    var editIndex = -1;
+            </tr>
+        </thead>
+        <tbody>
 
-    
-    document.getElementById("productForm").onsubmit = function(e) {
-      e.preventDefault();
-      var name = document.getElementById("name").value.trim();
-      var price = parseFloat(document.getElementById("price").value);
-      var stock = parseInt(document.getElementById("stock").value);
+        </tbody>
+    </table>
+<script>
+    var allProducts =[];
 
-      if (name === "" || price < 0 || stock < 0) {
-        alert("Please enter valid data.");
-        return;
-      }
+    function registerProduct(){
+        var Name=document.getElementById("Name").value;
+        var Price=document.getElementById("Price").value;
+        var stockQuantity=document.getElementById("stockQuantity").value;
 
-      var product = {
-        name: name,
-        price: price,
-        stock: stock
-      };
+        var Products={
+            Name,
+            Price,
+            stockQuantity
+        };
 
-      if (editIndex === -1) {
-        products.push(product); 
-      } else {
-        products[editIndex] = product; 
-        editIndex = -1;
-      }
-
-      saveAndDisplay();
-      document.getElementById("productForm").reset();
-    };
-
-    
-    function displayProducts() {
-      var list = document.getElementById("productList");
-      list.innerHTML = "";
-      for (var i = 0; i < products.length; i++) {
-        var p = products[i];
-        var div = document.createElement("div");
-        div.className = "product";
-        div.innerHTML = `
-          <strong>${p.name}</strong><br>
-          Price: $${p.price.toFixed(2)}<br>
-          Stock: ${p.stock}<br>
-          <button onclick="editProduct(${i})">Edit</button>
-          <button onclick="deleteProduct(${i})">Delete</button>
-        `;
-        list.appendChild(div);
-      }
+        allProducts.push(Products);
+        document.getElementById("Name").value ="";
+        document.getElementById("Price").value="";
+        document.getElementById("stockQuantity").value="";
+        console.log(Name,Price,stockQuantity);
+        displayProductsInTable();
     }
 
+    function displayProductsInTable(){
+        document.querySelector("tbody").innerHTML="";
+        allProducts.forEach(function(product,index){
+            var myTr=document.createElement("tr");
+            for (a in product){
+                var myTd=document.createElement("td");
+                myTd.innerHTML=product[a];
+                myTr.appendChild(myTd);
+            }
+            var editTd=document.createElement("td");
+            var editBtn=document.createElement("button");
+            editBtn.innerHTML="Edit";
+            editBtn.setAttribute("onclick", "editProduct(" + index + ")");
+            editTd.appendChild(editBtn);
+            myTr.appendChild(editTd);
+            document.querySelector("tbody").appendChild(myTr);
+
+            var delTd = document.createElement("td");
+            var delBtn =document.createElement("button");
+            delBtn.innerHTML ="Delete";
+            delBtn.setAttribute("class","del-Products");
+            delBtn.setAttribute("onclick","deleteProduct("+index+")");
+            delTd.appendChild(delBtn);
+            myTr.appendChild(delTd);
+
+            document.querySelector("tbody").appendChild(myTr);
+        });
     
-    function editProduct(index) {
-      var p = products[index];
-      document.getElementById("name").value = p.name;
-      document.getElementById("price").value = p.price;
-      document.getElementById("stock").value = p.stock;
-      editIndex = index;
+    }
+    displayProductsInTable();
+
+    function deleteProduct(i){
+        allProducts.splice(i,1);
+        displayProductsInTable();
     }
 
-    
-    function deleteProduct(index) {
-      if (confirm("Are you sure you want to delete this product?")) {
-        products.splice(index, 1);
-        saveAndDisplay();
-      }
-    }
+    function editProduct(i){
+        gIndex=i;
+        document.getElementById("Name").value=allProducts[i].Name;
+        document.getElementById("Price").value=allProducts[i].Price;
+        document.getElementById("stockQuantity").value=allProducts[i].stockQuantity;
 
-    
-    function saveAndDisplay() {
-      localStorage.setItem("products", JSON.stringify(products));
-      displayProducts();
-    }
+        document.getElementById("updateBtn").style.display="block";
+        document.getElementById("registerproduct").style.display="none";
 
-    
-    displayProducts();
-  </script>
+    }
+    function updateProduct(){
+        var Name=document.getElementById("Name").value;
+        var Price=document.getElementById("Price").value;
+        var stockQuantity=document.getElementById("stockQuantity").value;
+
+        var Products={
+            Name,
+            Price,
+            stockQuantity
+        };
+        allProducts[gIndex]=Products;
+        displayProductsInTable();
+        document.getElementById("Name").value="";
+        document.getElementById("Price").value="";
+        document.getElementById("stockQuantity").value="";
+
+        document.getElementById("updateBtn").style.display="none";
+        document.getElementById("registerproduct").style.display="block";
+
+    }
+</script>
 </body>
+</html>
+
 </html>

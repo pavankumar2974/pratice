@@ -1,122 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Recipe Collection</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background-color: #f0f8ff;
-    }
-    form {
-      margin-bottom: 20px;
-    }
-    input, textarea {
-      display: block;
-      margin-bottom: 10px;
-      width: 300px;
-      padding: 8px;
-    }
-    button {
-      padding: 8px 12px;
-      margin-right: 10px;
-    }
-    .recipe {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 15px;
-      background-color: #fff;
-    }
-    .recipe h3 {
-      margin-top: 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
+    <style>
+        table{
+            background-color: rgb(71, 214, 227);
+            border: 2px solid #ccc;
+        }
+        table tr{
+            border: 2px solid #ccc;
+        }
+        input{
+            background-color: rgb(110, 173, 168);
+            color: rgb(4, 12, 19);
+        }
+    </style>
+    <h1>Recipe Collection</h1>
+    <form >
+        <input type="text" id="Name" placeholder="Name" required>
+        <br><br>
+        <textarea id="Ingridients" placeholder="Ingridients" required></textarea>
+        <br><br>
+        <textarea id="Recipe" placeholder="Recipe" required></textarea>
+        <br><br>
+        <button onclick="registerRecipe()" type="button" id="registerrecipe">register</button>
+        <button id="updateBtn" type="button" onclick="updateRecipe()">update</button>
 
-  <h1>Recipe Collection</h1>
-  <form id="recipeForm">
-    <input type="text" id="name" placeholder="Recipe Name" required />
-    <textarea id="ingredients" placeholder="Ingredients (comma separated)" required></textarea>
-    <textarea id="instructions" placeholder="Instructions" required></textarea>
-    <button type="submit">Save Recipe</button>
-  </form>
 
-  <div id="recipeList"></div>
+    </form>
+    <hr>
+    <h1>Recipe Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Ingridients</th>
+                <th>Recipe</th>
+                <th>action</th>
 
-  <script>
-    var recipes = JSON.parse(localStorage.getItem('recipes')) || [];
-    var editIndex = -1;
+            </tr>
+        </thead>
+        <tbody>
 
-    function displayRecipes() {
-      var list = document.getElementById('recipeList');
-      list.innerHTML = '';
+        </tbody>
+    </table>
+<script>
+    var allrecipes =[];
 
-      for (var i = 0; i < recipes.length; i++) {
-        var recipe = recipes[i];
-        var div = document.createElement('div');
-        div.className = 'recipe';
-        div.innerHTML = `
-          <h3>${recipe.name}</h3>
-          <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
-          <p><strong>Instructions:</strong> ${recipe.instructions}</p>
-          <button onclick="editRecipe(${i})">Edit</button>
-          <button onclick="deleteRecipe(${i})">Delete</button>
-        `;
-        list.appendChild(div);
-      }
+    function registerRecipe(){
+        var Name=document.getElementById("Name").value;
+        var Ingridients=document.getElementById("Ingridients").value;
+        var Recipe=document.getElementById("Recipe").value;
+
+        var Recipes={
+            Name,
+            Ingridients,
+            Recipe
+        };
+
+        allrecipes.push(Recipes);
+        document.getElementById("Name").value ="";
+        document.getElementById("Ingridients").value="";
+        document.getElementById("Recipe").value="";
+        console.log(Name,Ingridients,Recipe);
+        displayRecipesInTable();
     }
 
-    document.getElementById('recipeForm').onsubmit = function(e) {
-      e.preventDefault();
+    function displayRecipesInTable(){
+        document.querySelector("tbody").innerHTML="";
+        allrecipes.forEach(function(recipe,index){
+            var myTr=document.createElement("tr");
+            for (a in recipe){
+                var myTd=document.createElement("td");
+                myTd.innerHTML=recipe[a];
+                myTr.appendChild(myTd);
+            }
+            var editTd=document.createElement("td");
+            var editBtn=document.createElement("button");
+            editBtn.innerHTML="Edit";
+            editBtn.setAttribute("onclick", "editRecipe(" + index + ")");
+            editTd.appendChild(editBtn);
+            myTr.appendChild(editTd);
+            document.querySelector("tbody").appendChild(myTr);
 
-      var name = document.getElementById('name').value.trim();
-      var ingredients = document.getElementById('ingredients').value.trim();
-      var instructions = document.getElementById('instructions').value.trim();
+            var delTd = document.createElement("td");
+            var delBtn =document.createElement("button");
+            delBtn.innerHTML ="Delete";
+            delBtn.setAttribute("class","del-Recipes");
+            delBtn.setAttribute("onclick","deleteRecipe("+index+")");
+            delTd.appendChild(delBtn);
+            myTr.appendChild(delTd);
 
-      if (name === '' || ingredients === '' || instructions === '') {
-        alert('Please fill all fields.');
-        return;
-      }
+            document.querySelector("tbody").appendChild(myTr);
+        });
+    
+    }
+    displayRecipesInTable();
 
-      var recipe = {
-        name: name,
-        ingredients: ingredients,
-        instructions: instructions
-      };
-
-      if (editIndex === -1) {
-        recipes.push(recipe);
-      } else {
-        recipes[editIndex] = recipe;
-        editIndex = -1;
-      }
-
-      localStorage.setItem('recipes', JSON.stringify(recipes));
-      this.reset();
-      displayRecipes();
-    };
-
-    function editRecipe(index) {
-      var recipe = recipes[index];
-      document.getElementById('name').value = recipe.name;
-      document.getElementById('ingredients').value = recipe.ingredients;
-      document.getElementById('instructions').value = recipe.instructions;
-      editIndex = index;
+    function deleteRecipe(i){
+        allrecipes.splice(i,1);
+        displayRecipesInTable();
     }
 
-    function deleteRecipe(index) {
-      if (confirm('Are you sure you want to delete this recipe?')) {
-        recipes.splice(index, 1);
-        localStorage.setItem('recipes', JSON.stringify(recipes));
-        displayRecipes();
-      }
+    function editRecipe(i){
+        gIndex=i;
+        document.getElementById("Name").value=allrecipes[i].Name;
+        document.getElementById("Ingridients").value=allrecipes[i].Ingridients;
+        document.getElementById("Recipe").value=allrecipes[i].Recipe;
+
+        document.getElementById("updateBtn").style.display="block";
+        document.getElementById("registerrecipe").style.display="none";
+
     }
+    function updateRecipe(){
+        var Name=document.getElementById("Name").value;
+        var Ingridients=document.getElementById("Ingridients").value;
+        var Recipe=document.getElementById("Recipe").value;
 
-    displayRecipes();
-  </script>
+        var Recipes={
+            Name,
+            Ingridients,
+            Recipe
+        };
+        allrecipes[gIndex]=Recipes;
+        displayRecipesInTable();
+        document.getElementById("Name").value="";
+        document.getElementById("Ingridients").value="";
+        document.getElementById("Recipe").value="";
 
+        document.getElementById("updateBtn").style.display="none";
+        document.getElementById("registerrecipe").style.display="block";
+
+    }
+</script>
 </body>
+</html>
+
 </html>
