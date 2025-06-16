@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        table{
+            background-color: rgb(238, 245, 245);
+            border: 2px;
+        
+
+        }
+        table.tr{
+            border: 2px;
+        }
+        input{
+            background-color: rgb(236, 232, 232);
+            color: rgb(4, 12, 19);
+        }
+    </style>
+    <h1>Blog Platform</h1>
+    <form >
+        <input type="text" id="title" placeholder="title" required>
+        <input type="text" id="content" placeholder="content" required>
+        <input type="text" id="Author" placeholder="Author" required>
+        <button onclick="registerBlog()" type="button" id="registerblog">register</button>
+        <button id="updateBtn" type="button" onclick="updateBlog()">update</button>
+
+
+    </form>
+    <hr>
+    <h1>Blog Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>title</th>
+                <th>content</th>
+                <th>Author</th>
+                <th>action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+<script>
+    var allBlogs =[];
+
+    function registerBlog(){
+        var title=document.getElementById("title").value;
+        var content=document.getElementById("content").value;
+        var Author=document.getElementById("Author").value;
+
+        var Blogs={
+            title,
+            content,
+            Author,
+        };
+
+        allBlogs.push(Blogs);
+        document.getElementById("title").value ="";
+        document.getElementById("content").value="";
+        document.getElementById("Author").value="";
+        console.log(title,content,Author);
+        displayBlogsInTable();
+    }
+
+    function displayBlogsInTable(){
+        document.querySelector("tbody").innerHTML="";
+        allBlogs.forEach(function(blog,index){
+            var myTr=document.createElement("tr");
+            for (a in blog){
+                var myTd=document.createElement("td");
+                myTd.innerHTML=blog[a];
+                myTr.appendChild(myTd);
+            }
+            var editTd=document.createElement("td");
+            var editBtn=document.createElement("button");
+            editBtn.innerHTML="Edit";
+            editBtn.setAttribute("onclick", "editBlog(" + index + ")");
+            editTd.appendChild(editBtn);
+            myTr.appendChild(editTd);
+            document.querySelector("tbody").appendChild(myTr);
+
+            var delTd = document.createElement("td");
+            var delBtn =document.createElement("button");
+            delBtn.innerHTML ="Delete";
+            delBtn.setAttribute("class","del-Blogs");
+            delBtn.setAttribute("onclick","deleteBlog("+index+")");
+            delTd.appendChild(delBtn);
+            myTr.appendChild(delTd);
+
+            document.querySelector("tbody").appendChild(myTr);
+        });
+    
+    }
+    displayBlogsInTable();
+
+    function deleteBlog(i){
+        allBlogs.splice(i,1);
+        displayBlogsInTable();
+    }
+
+    function editBlog(i){
+        gIndex=i;
+        document.getElementById("title").value=allBlogs[i].title;
+        document.getElementById("content").value=allBlogs[i].content;
+        document.getElementById("Author").value=allBlogs[i].Author;
+
+        document.getElementById("updateBtn").style.display="block";
+        document.getElementById("registerblog").style.display="none";
+
+    }
+    function updateBlog(){
+        var title=document.getElementById("title").value;
+        var content=document.getElementById("content").value;
+        var Author=document.getElementById("Author").value;
+
+        var Blogs={
+            title,
+            content,
+            Author
+        };
+        allBlogs[gIndex]=Blogs;
+        displayBlogsInTable();
+        document.getElementById("title").value="";
+        document.getElementById("content").value="";
+        document.getElementById("Author").value="";
+
+        document.getElementById("updateBtn").style.display="none";
+        document.getElementById("registerblog").style.display="block";
+
+    }
+</script>
+</body>
+</html>
