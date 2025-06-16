@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        table{
+            background-color: rgb(238, 245, 245);
+            border: 2px;
+        
+
+        }
+        table.tr{
+            border: 2px;
+        }
+        input{
+            background-color: rgb(236, 232, 232);
+            color: rgb(4, 12, 19);
+        }
+    </style>
+    <h1>Event Management</h1>
+    <form >
+        <input type="text" id="title" placeholder="title" required>
+        <input type="date" id="Date" placeholder="Date" required>
+        <input type="text" id="Location" placeholder="Location" required>
+        <button onclick="registerEvent()" type="button" id="registerevent">register</button>
+        <button id="updateBtn" type="button" onclick="updateEvent()">update</button>
+
+
+    </form>
+    <hr>
+    <h1>Event Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>title</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+<script>
+    var allEvents =[];
+
+    function registerEvent(){
+        var title=document.getElementById("title").value;
+        var Date=document.getElementById("Date").value;
+        var Location=document.getElementById("Location").value;
+
+        var Events={
+            title,
+            Date,
+            Location,
+        };
+
+        allEvents.push(Events);
+        document.getElementById("title").value ="";
+        document.getElementById("Date").value="";
+        document.getElementById("Location").value="";
+        console.log(title,Date,Location);
+        displayEventsInTable();
+    }
+
+    function displayEventsInTable(){
+        document.querySelector("tbody").innerHTML="";
+        allEvents.forEach(function(event,index){
+            var myTr=document.createElement("tr");
+            for (a in event){
+                var myTd=document.createElement("td");
+                myTd.innerHTML=event[a];
+                myTr.appendChild(myTd);
+            }
+            var editTd=document.createElement("td");
+            var editBtn=document.createElement("button");
+            editBtn.innerHTML="Edit";
+            editBtn.setAttribute("onclick", "editEvents(" + index + ")");
+            editTd.appendChild(editBtn);
+            myTr.appendChild(editTd);
+            document.querySelector("tbody").appendChild(myTr);
+
+            var delTd = document.createElement("td");
+            var delBtn =document.createElement("button");
+            delBtn.innerHTML ="Delete";
+            delBtn.setAttribute("class","del-Events");
+            delBtn.setAttribute("onclick","deleteEvents("+index+")");
+            delTd.appendChild(delBtn);
+            myTr.appendChild(delTd);
+
+            document.querySelector("tbody").appendChild(myTr);
+        });
+    
+    }
+    displayEventsInTable();
+
+    function deleteEvents(i){
+        allEvents.splice(i,1);
+        displayEventsInTable();
+    }
+
+    function editEvents(i){
+        gIndex=i;
+        document.getElementById("title").value=allEvents[i].title;
+        document.getElementById("Date").value=allEvents[i].Date;
+        document.getElementById("Location").value=allEvents[i].Location;
+
+        document.getElementById("updateBtn").style.display="block";
+        document.getElementById("registerevent").style.display="none";
+
+    }
+    function updateEvent(){
+        var title=document.getElementById("title").value;
+        var Date=document.getElementById("Date").value;
+        var Location=document.getElementById("Location").value;
+
+        var Events={
+            title,
+            Date,
+            Location
+        };
+        allEvents[gIndex]=Events;
+        displayEventsInTable();
+        document.getElementById("title").value="";
+        document.getElementById("Date").value="";
+        document.getElementById("Location").value="";
+
+        document.getElementById("updateBtn").style.display="none";
+        document.getElementById("registerevent").style.display="block";
+
+    }
+</script>
+</body>
+</html>
