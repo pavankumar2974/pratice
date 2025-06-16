@@ -1,139 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Student Records</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    form {
-      margin-bottom: 20px;
-    }
-    input {
-      margin: 5px;
-      padding: 5px;
-    }
-    button {
-      padding: 5px 10px;
-      margin: 5px;
-    }
-    table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-      padding: 8px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
+    <style>
+        table{
+            background-color: rgb(71, 214, 227);
+            border: 2px solid #ccc;
+        }
+        table tr{
+            border: 2px solid #ccc;
+        }
+        input{
+            background-color: rgb(222, 225, 225);
+            color: rgb(4, 12, 19);
+        }
+    </style>
+    <h1>Student Management</h1>
+    <form >
+        <input type="text" id="Name" placeholder="Name" required>
+        <br><br>
+        <input type="number" id="ID" placeholder="ID" required>
+        <br><br>
+        <input type="text" id="GRADE" placeholder="GRADE" required>
+        <br><br>
+        <button onclick="registerStudent()" type="button" id="registerstudent">register</button>
+        <button id="updateBtn" type="button" onclick="updateStudent()">update</button>
 
-  <h2>Student Records</h2>
-  <form id="studentForm">
-    <input type="text" id="name" placeholder="Name" required />
-    <input type="text" id="studentId" placeholder="ID" required />
-    <input type="number" id="grade" placeholder="Grade (0-100)" required min="0" max="100" />
-    <button type="submit">Save Student</button>
-  </form>
+    </form>
 
-  <table id="studentTable">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>ID</th>
-        <th>Grade</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+    <hr>
+    <h1>Student Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>ID</th>
+                <th>GRADE</th>
+                <th>action</th>
 
-  <script>
-    var students = JSON.parse(localStorage.getItem("students")) || [];
-    var editingIndex = null;
+            </tr>
+        </thead>
+        <tbody>
 
-    var form = document.getElementById("studentForm");
-    var nameInput = document.getElementById("name");
-    var idInput = document.getElementById("studentId");
-    var gradeInput = document.getElementById("grade");
-    var tableBody = document.querySelector("#studentTable tbody");
+        </tbody>
+    </table>
+<script>
+    var allSTUDENTS =[];
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
+    function registerStudent(){
+        var Name=document.getElementById("Name").value;
+        var ID=document.getElementById("ID").value;
+        var GRADE=document.getElementById("GRADE").value;
 
-      var name = nameInput.value.trim();
-      var id = idInput.value.trim();
-      var grade = gradeInput.value.trim();
+        var Student={
+            Name,
+            ID,
+            GRADE
+        };
 
-      if (!name || !id || !grade || isNaN(grade) || grade < 0 || grade > 100) {
-        alert("Please enter valid data.");
-        return;
-      }
-
-      var existingIndex = students.findIndex(function(student) {
-        return student.id === id;
-      });
-
-      if (editingIndex === null && existingIndex !== -1) {
-        alert("Student ID must be unique.");
-        return;
-      }
-
-      var student = { name: name, id: id, grade: grade };
-
-      if (editingIndex !== null) {
-        students[editingIndex] = student;
-        editingIndex = null;
-      } else {
-        students.push(student);
-      }
-
-      saveAndRender();
-      form.reset();
-    });
-
-    function renderStudents() {
-      tableBody.innerHTML = "";
-      students.forEach(function(student, index) {
-        var row = document.createElement("tr");
-
-        row.innerHTML = `
-          <td>${student.name}</td>
-          <td>${student.id}</td>
-          <td>${student.grade}</td>
-          <td>
-            <button onclick="editStudent(${index})">Edit</button>
-            <button onclick="deleteStudent(${index})">Delete</button>
-          </td>
-        `;
-
-        tableBody.appendChild(row);
-      });
+        allSTUDENTS.push(Student);
+        document.getElementById("Name").value ="";
+        document.getElementById("ID").value="";
+        document.getElementById("GRADE").value="";
+        console.log(Name,ID,GRADE);
+        displayStudentsInTable();
     }
 
-    function editStudent(index) {
-      var student = students[index];
-      nameInput.value = student.name;
-      idInput.value = student.id;
-      gradeInput.value = student.grade;
-      editingIndex = index;
+    function displayStudentsInTable(){
+        document.querySelector("tbody").innerHTML="";
+        allSTUDENTS.forEach(function(student,index){
+            var myTr=document.createElement("tr");
+            for (a in student) {                  
+                var myTd=document.createElement("td");
+                myTd.innerHTML=student[a];
+                myTr.appendChild(myTd);
+            }
+            var editTd=document.createElement("td");
+            var editBtn=document.createElement("button");
+            editBtn.innerHTML="Edit";
+            editBtn.setAttribute("onclick", "editStudent(" + index + ")");
+            editTd.appendChild(editBtn);
+            myTr.appendChild(editTd);
+            document.querySelector("tbody").appendChild(myTr);
+
+            var delTd = document.createElement("td");
+            var delBtn =document.createElement("button");
+            delBtn.innerHTML ="Delete";
+            delBtn.setAttribute("class","del-Students");
+            delBtn.setAttribute("onclick","deleteStudent("+index+")");
+            delTd.appendChild(delBtn);
+            myTr.appendChild(delTd);
+
+            document.querySelector("tbody").appendChild(myTr);
+        });
+    
+    }
+    displayStudentsInTable();
+
+    function deleteStudent(i){
+        allSTUDENTS.splice(i,1);
+        displayStudentsInTable();
     }
 
-    function deleteStudent(index) {
-      if (confirm("Are you sure you want to delete this student?")) {
-        students.splice(index, 1);
-        saveAndRender();
-      }
+    function editStudent(i){
+        gIndex=i;
+        document.getElementById("Name").value=allSTUDENTS[i].Name;
+        document.getElementById("ID").value=allSTUDENTS[i].ID;
+        document.getElementById("GRADE").value=allSTUDENTS[i].GRADE;
+
+        document.getElementById("updateBtn").style.display="block";
+        document.getElementById("registerstudent").style.display="none";
+
     }
+    function updateStudent(){
+        var Name=document.getElementById("Name").value;
+        var ID=document.getElementById("ID").value;
+        var GRADE=document.getElementById("GRADE").value;
 
-    function saveAndRender() {
-      localStorage.setItem("students", JSON.stringify(students));
-      renderStudents();
+        var Student={
+            Name,
+            ID,
+            GRADE
+        };
+        allSTUDENTS[gIndex]=Student;
+        displayStudentsInTable();
+        document.getElementById("Name").value="";
+        document.getElementById("ID").value="";
+        document.getElementById("GRADE").value="";
+
+        document.getElementById("updateBtn").style.display="none";
+        document.getElementById("registerstudent").style.display="block";
+
     }
-
-    renderStudents();
-  </script>
-
+</script>
 </body>
 </html>
+
