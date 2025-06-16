@@ -1,105 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Movie Collection</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    form {
-      margin-bottom: 20px;
-    }
-    input, select {
-      margin: 5px;
-      padding: 5px;
-    }
-    button {
-      margin: 5px;
-    }
-    .movie {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin: 5px 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-  <h1>Movie Collection</h1>
-  <form id="movieForm">
-    <input type="text" id="title" placeholder="Title" required />
-    <input type="text" id="genre" placeholder="Genre" required />
-    <input type="number" id="year" placeholder="Release Year" required />
-    <button type="submit">Add / Update Movie</button>
-  </form>
+    <style>
+        table{
+            background-color: rgb(218, 74, 213);
+            border: 2px solid #ccc;
+        }
+        table tr{
+            border: 2px solid #ccc;
+        }
+        input{
+            background-color: rgb(110, 173, 168);
+            color: rgb(4, 12, 19);
+        }
+    </style>
+    <h1>Movie Collection</h1>
+    <form >
+        <input type="text" id="title" placeholder="title" required>
+        <br><br>
+        <input type="text" id="genere" placeholder="genere" required>
+        <br><br>
+        <input type="number" id="releaseYear" placeholder="releaseYear" required>
+        <br><br>
+        <button onclick="registerMovie()" type="button" id="registermovie">register</button>
+        <button id="updateBtn" type="button" onclick="updateMovie()">update</button>
 
-  <div id="movieList"></div>
 
-  <script>
-    var movies = JSON.parse(localStorage.getItem('movies')) || [];
-    var editIndex = -1;
+    </form>
+    <hr>
+    <h1>Movie Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>title</th>
+                <th>genere</th>
+                <th>releaseYear</th>
+                <th>action</th>
 
-    function saveToLocalStorage() {
-      localStorage.setItem('movies', JSON.stringify(movies));
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+<script>
+    var allMovies =[];
+
+    function registerMovie(){
+        var title=document.getElementById("title").value;
+        var genere=document.getElementById("genere").value;
+        var releaseYear=document.getElementById("releaseYear").value;
+
+        var Movies={
+            title,
+            genere,
+            releaseYear
+        };
+
+        allMovies.push(Movies);
+        document.getElementById("title").value ="";
+        document.getElementById("genere").value="";
+        document.getElementById("releaseYear").value="";
+        console.log(title,genere,releaseYear);
+        displayMoviesInTable();
     }
 
-    function renderMovies() {
-      var list = document.getElementById('movieList');
-      list.innerHTML = '';
-      for (var i = 0; i < movies.length; i++) {
-        var movie = movies[i];
-        var div = document.createElement('div');
-        div.className = 'movie';
-        div.innerHTML = 
-          '<strong>' + movie.title + '</strong> (' + movie.year + ') - ' + movie.genre +
-          '<br><button onclick="editMovie(' + i + ')">Edit</button>' +
-          '<button onclick="deleteMovie(' + i + ')">Delete</button>';
-        list.appendChild(div);
-      }
+    function displayMoviesInTable(){
+        document.querySelector("tbody").innerHTML="";
+        allMovies.forEach(function(movie,index){
+            var myTr=document.createElement("tr");
+            for (a in movie){
+                var myTd=document.createElement("td");
+                myTd.innerHTML=movie[a];
+                myTr.appendChild(myTd);
+            }
+            var editTd=document.createElement("td");
+            var editBtn=document.createElement("button");
+            editBtn.innerHTML="Edit";
+            editBtn.setAttribute("onclick", "editMovie(" + index + ")");
+            editTd.appendChild(editBtn);
+            myTr.appendChild(editTd);
+            document.querySelector("tbody").appendChild(myTr);
+
+            var delTd = document.createElement("td");
+            var delBtn =document.createElement("button");
+            delBtn.innerHTML ="Delete";
+            delBtn.setAttribute("class","del-Movies");
+            delBtn.setAttribute("onclick","deleteMovie("+index+")");
+            delTd.appendChild(delBtn);
+            myTr.appendChild(delTd);
+
+            document.querySelector("tbody").appendChild(myTr);
+        });
+    
+    }
+    displayMoviesInTable();
+
+    function deleteMovie(i){
+        allMovies.splice(i,1);
+        displayMoviesInTable();
     }
 
-    function editMovie(index) {
-      var movie = movies[index];
-      document.getElementById('title').value = movie.title;
-      document.getElementById('genre').value = movie.genre;
-      document.getElementById('year').value = movie.year;
-      editIndex = index;
+    function editMovie(i){
+        gIndex=i;
+        document.getElementById("title").value=allMovies[i].title;
+        document.getElementById("genere").value=allMovies[i].genere;
+        document.getElementById("releaseYear").value=allMovies[i].releaseYear;
+
+        document.getElementById("updateBtn").style.display="block";
+        document.getElementById("registermovie").style.display="none";
+
     }
+    function updateMovie(){
+        var title=document.getElementById("title").value;
+        var genere=document.getElementById("genere").value;
+        var releaseYear=document.getElementById("releaseYear").value;
 
-    function deleteMovie(index) {
-      movies.splice(index, 1);
-      saveToLocalStorage();
-      renderMovies();
+       
+        var Movies={
+            title,
+            genere,
+            releaseYear
+        };
+        allMovies[gIndex]=Movies;
+        displayMoviesInTable();
+        document.getElementById("title").value="";
+        document.getElementById("genere").value="";
+        document.getElementById("releaseYear").value="";
+
+        document.getElementById("updateBtn").style.display="none";
+        document.getElementById("registermovie").style.display="block";
+
     }
-
-    document.getElementById('movieForm').onsubmit = function(e) {
-      e.preventDefault();
-      var title = document.getElementById('title').value.trim();
-      var genre = document.getElementById('genre').value.trim();
-      var year = parseInt(document.getElementById('year').value);
-
-      if (!title || !genre || isNaN(year) || year < 1888 || year > new Date().getFullYear()) {
-        alert('Please enter valid movie details.');
-        return;
-      }
-
-      var movie = { title: title, genre: genre, year: year };
-
-      if (editIndex === -1) {
-        movies.push(movie);
-      } else {
-        movies[editIndex] = movie;
-        editIndex = -1;
-      }
-
-      saveToLocalStorage();
-      renderMovies();
-      document.getElementById('movieForm').reset();
-    };
-
-    renderMovies();
-  </script>
+</script>
 </body>
 </html>
 
