@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table {
+        background-color: rgb(248, 235, 235);
+        color: rgb(17, 1, 1);
+        border: 2px solid #190101;
+    }
+
+    form {
+        background-color: beige;
+        width: 300px;
+    }
+
+    h1 {
+        background-color: rgb(221, 9, 9);
+        width: 290px;
+    }
+
+    th {
+        border: 2px solid #100101;
+    }
+
+    tr {
+        border: 2px solid #100101;
+    }
+
+    td {
+        border: 2px solid #170303;
+    }
+</style>
+
+<body>
+    <h1>
+        <center>Movie Registration</center>
+    </h1>
+    <form id="movieForm">
+        <br>
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Enter Movie Name"   required  onkeyup="validateForm()"/>
+        <br><br>
+        <label for="rating">Rating</label>
+        <input type="number" id="rating" placeholder="Enter Movie Rating" required onkeyup="validateForm()" />
+        <br><br>
+        <label for="genre">Genre</label>
+        <input type="text" id="genre" placeholder="Enter Movie Genre" required  onkeyup="validateForm()"/>
+        <br><br>
+        <label  for ="status">Status</label>
+        <select id="status"placeholder="Status" required onkeyup="validateForm()" >
+            <option value="Watched">Watched</option>
+            <option value="Not Watched">Not Watched</option>
+            <option value="Interested">Interested</option>
+        </select>
+        <br><br>
+        <button type="button" disabled onclick="RegisterMovie()">Register</button>
+        <br>
+    </form>
+    <br><br>
+
+    <hr>
+    <h1>Registered Movies</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rating</th>
+                <th>Genre</th>
+                <th>Status</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        
+  var allMovies=[];
+  function displayMovies(){
+    let tableBody = document.getElementById("MovieTableBody");
+    tableBody.innerHTML="";
+    allMovies.forEach((movie,index)=>{
+        let row=tableBody.insertRow()
+        Object.values(movie).forEach((val)=>{
+            let cell=row.insertCell()
+            cell.textContent=val
+        })
+        let actionCell=row.insertCell()
+        actionCell.innerHTML= <button onclick="editMovie(${index})">Edit</button>
+    })
+
+  }
+function validateForm(){
+    var fields=["name", "rating", "genre", "status"];
+
+    var isValid = fields.every((field) => document.getElementById(field).value.trim() !== "");
+    document.querySelector("button").disabled =!isValid
+}
+   
+function RegisterMovie(){
+    let movie ={
+        name: document.getElementById("name").value,
+        rating: document.getElementById("rating").value,
+        genre: document.getElementById("genre").value,
+        status: document.getElementById("status").value
+    };
+    allMovies.push(movie);
+      localStorage.setItem("allMovies",JSON.stringify(allMovies))
+      displayMovies();
+      document.getElementById("movieForm").reset();
+      document.querySelector("button").disabled = true;
+    }
+
+    function editMovie(index){
+        let movie = allMovies[index];
+        name:document.getElementById("name").value=movie.name;
+        rating:document.getElementById("rating").value=movie.rating;
+        genre:document.getElementById("genre").value=movie.genre;
+        status:document.getElementById("status").value=movie.status;
+
+        allMovies.splice(index,1);
+        localStorage.setItem("allMovies", JSON.stringify(allMovies));
+        displayMovies();
+    }
+
+    function deleteMovie(index){
+        allMovies.splice(index,1);
+        localStorage.setItem("allMovies", JSON.stringify(allMovies));
+        displayMovies();
+    }
+    displayMovies()
+
+    </script>
+</body>
+
+</html>
