@@ -1,165 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <style>
-    table{
+    table {
         background-color: rgb(248, 235, 235);
         color: rgb(17, 1, 1);
         border: 2px solid #190101;
     }
-    form{
+
+    form {
         background-color: beige;
-        width:300px;
+        width: 300px;
     }
-    h1{
+
+    h1 {
         background-color: rgb(221, 9, 9);
-        width:290px;
+        width: 290px;
     }
-    th{
+
+    th {
         border: 2px solid #100101;
     }
-    tr{border: 2px solid #100101;}
-    td{
+
+    tr {
+        border: 2px solid #100101;
+    }
+
+    td {
         border: 2px solid #170303;
     }
 </style>
+
 <body>
- <h1><center>Movie Registration</center></h1>  
- <form>
-    <br>
-    <label for="name">Name</label>
-    <input type="text" id ="name" placeholder="Enter Movie Name" />
+    <h1>
+        <center>Movie Registration</center>
+    </h1>
+    <form>
+        <br>
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Enter Movie Name"   required />
+        <br><br>
+        <label for="rating">Rating</label>
+        <input type="number" id="rating" placeholder="Enter Movie Rating" required />
+        <br><br>
+        <label for="genre">Genre</label>
+        <input type="text" id="genre" placeholder="Enter Movie Genre" required  />
+        <br><br>
+        <label  for ="status">Status</label>
+        <select id="status" required >
+            <option value="Watched">Watched</option>
+            <option value="Not Watched">Not Watched</option>
+        </select>
+        <br><br>
+        <button type="button" id="registerMovie" onclick="RegisterMovie()">Register</button>
+        <button id="updateBtn" type="button" onclick="updateMovie()">Update</button>
+        <br>
+    </form>
     <br><br>
-    <label for="rating">Rating</label>
-    <input type="number" id="rating" placeholder="Enter Movie Rating"/>
-    <br><br>
-    <label for="genre">Genre</label>
-    <input type="text" id ="genre" placeholder="Enter Movie Genre"/>
-    <br><br>
-    <select   id ="status">
-        <option value="Watched">Watched</option>
-        <option value="Not Watched">Not Watched</option>
-    </select>
-    <br><br>
-    <button type="button" id="registerMovie" onclick="RegisterMovie()">Register</button>
-    <button id="updateBtn" type="button" onclick="updateMovie()">Update</button>
-<br>
- </form>
- <br><br>
- 
- <hr>
- <h1>Registered Movies</h1>
- <table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Rating</th>
-            <th>Genre</th>
-            <th>Status</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
- </table>
- <script>
-     var allMovies = [];
 
-     function RegisterMovie(){
-        var name = document.getElementById("name").value;
-        var rating = document.getElementById("rating").value;
-        var genre = document.getElementById("genre").value;
-        var status = document.getElementById("status").value;
+    <hr>
+    <h1>Registered Movies</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rating</th>
+                <th>Genre</th>
+                <th>Status</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        var allMovies = [];
 
-        var Movie ={
-            name,
-            rating,
-            genre,
-            status
-        };
-      allMovies.push(Movie);
-      document.getElementById("name").value ="";
-        document.getElementById("rating").value ="";
-        document.getElementById("genre").value ="";
-        document.getElementById("status").value =""; 
-        console.log(name,rating,genre,status); 
+        function RegisterMovie() {
+            var name = document.getElementById("name").value;
+            var rating = document.getElementById("rating").value;
+            var genre = document.getElementById("genre").value;
+            var status = document.getElementById("status").value;
+
+            var Movie = {
+                name,
+                rating,
+                genre,
+                status
+            };
+            allMovies.push(Movie);
+            document.getElementById("name").value = "";
+            document.getElementById("rating").value = "";
+            document.getElementById("genre").value = "";
+            document.getElementById("status").value = "";
+            console.log(name, rating, genre, status);
+            displayMoviesInTable();
+        }
+
+        function displayMoviesInTable() {
+            document.querySelector("tbody").innerHTML = "";
+            allMovies.forEach(function (mov, index) {
+                var myTr = document.createElement("tr");
+                for (a in mov) {
+                    var myTd = document.createElement("td");
+                    myTd.innerHTML = mov[a];
+                    myTr.appendChild(myTd);
+                }
+
+                var editTd = document.createElement("td");
+                var editBtn = document.createElement("button");
+                editBtn.innerHTML = "Edit";
+                editBtn.setAttribute("class", "edit-btn");
+                editBtn.setAttribute("onclick", "editMovie(" + index + ")");
+                editTd.appendChild(editBtn);
+                myTr.appendChild(editTd);
+
+                var delTd = document.createElement("td");
+                var delBtn = document.createElement("button");
+                delBtn.innerHTML = "delete";
+                delBtn.setAttribute("class", "del-Movies");
+                delBtn.setAttribute("onclick", "deleteMovie(" + index + ")");
+                delTd.appendChild(delBtn);
+                myTr.appendChild(delTd);
+                document.querySelector("tbody").appendChild(myTr);
+            });
+        }
         displayMoviesInTable();
-     }
 
-     function displayMoviesInTable(){
-        document.querySelector("tbody").innerHTML="";
-        allMovies.forEach(function(mov,index){
-            var myTr = document.createElement("tr");
-            for (a in mov){
-                var myTd = document.createElement("td");
-                myTd.innerHTML =mov[a];
-                myTr.appendChild(myTd);
-            }
+        function deleteMovie(i) {
+            allMovies.splice(i, 1);
+            displayMoviesInTable();
+        }
 
-      var editTd = document.createElement("td");
-      var editBtn = document.createElement("button");
-      editBtn.innerHTML = "Edit";
-      editBtn.setAttribute("class", "edit-btn");
-      editBtn.setAttribute("onclick","editMovie("+index+")");
-        editTd.appendChild(editBtn);
-        myTr.appendChild(editTd);
-         
-         var delTd = document.createElement("td");
-         var delBtn = document.createElement("button");
-         delBtn.innerHTML = "delete";
-         delBtn.setAttribute("class","del-Movies");
-         delBtn.setAttribute("onclick","deleteMovie("+index+")");
-         delTd.appendChild(delBtn);
-         myTr.appendChild(delTd);
-         document.querySelector("tbody").appendChild(myTr);
-        });
-     }
-     displayMoviesInTable();
-    
-     function deleteMovie(i){
-        allMovies.splice(i,1);
-        displayMoviesInTable();
-     }
+        function editMovie(i) {
+            gindex = i;
+            document.getElementById("name").value = allMovies[i].name;
+            document.getElementById("rating").value = allMovies[i].rating;
+            document.getElementById("genre").value = allMovies[i].genre;
+            document.getElementById("status").value = allMovies[i].status;
 
-     function editMovie(i){
-        gindex=i;
-        document.getElementById("name").value = allMovies[i].name;
-        document.getElementById("rating").value = allMovies[i].rating;
-        document.getElementById("genre").value = allMovies[i].genre;
-        document.getElementById("status").value = allMovies[i].status;
+            document.getElementById("registerMovie").style.display = "none";
+            document.getElementById("updateBtn").style.display = "block";
+        }
 
-        document.getElementById("registerMovie").style.display = "none";
-        document.getElementById("updateBtn").style.display = "block";
-     }
+        function updateMovie() {
+            var name = document.getElementById("name").value;
+            var rating = document.getElementById("rating").value;
+            var genre = document.getElementById("genre").value;
+            var status = document.getElementById("status").value;
 
-     function updateMovie(){
-        var name = document.getElementById("name").value;
-        var rating = document.getElementById("rating").value;
-        var genre = document.getElementById("genre").value;
-        var status = document.getElementById("status").value;
+            var movie = {
+                name,
+                rating,
+                genre,
+                status
+            };
 
-        var movie ={
-            name,
-            rating,
-            genre,
-            status
-        };
+            allMovies[gindex] = movie;
+            displayMoviesInTable();
+            document.getElementById("name").value = "";
+            document.getElementById("rating").value = "";
+            document.getElementById("genre").value = "";
+            document.getElementById("status").value = "";
 
-        allMovies[gindex]=movie;
-        displayMoviesInTable();
-        document.getElementById("name").value ="";
-        document.getElementById("rating").value ="";
-        document.getElementById("genre").value ="";
-        document.getElementById("status").value ="";
+            document.getElementById("updateBtn").style.display = "none";
+            document.getElementById("registerMovie").style.display = "block";
 
-        document.getElementById("updateBtn").style.display = "none";
-        document.getElementById("registerMovie").style.display = "block";
-
-     }
- </script>
+        }
+    </script>
 </body>
+
 </html>
