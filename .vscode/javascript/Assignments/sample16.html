@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: auto;
+      padding: 20px;
+    }
+    .container {
+      display: flex;
+      gap: 20px;
+    }
+    .column {
+      flex: 1;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, select {
+      width: 95%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:disabled {
+      background-color: gray;
+      cursor: not-allowed;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+  </style>
+</head>
+<body>
+  <h2>Employee Registration System</h2>
+  <div class="container">
+    <div class="column">
+      <h3>Registration Form</h3>
+      <form id="employeeForm">
+        <label for="empId">Employee ID:</label>
+        <input type="text" id="empId" required onkeyup="validateForm()" />
+
+        <label for="empName">Name:</label>
+        <input type="text" id="empName" required onkeyup="validateForm()" />
+
+        <label for="department">Department:</label>
+        <input type="text" id="department" required onkeyup="validateForm()" />
+
+        <label for="designation">Designation:</label>
+        <input type="text" id="designation" required onkeyup="validateForm()" />
+
+        <label for="gender">Gender:</label>
+        <select id="gender" required onchange="validateForm()">
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+
+        <label for="joiningDate">Joining Date:</label>
+        <input type="date" id="joiningDate" required onchange="validateForm()" />
+
+        <button type="button" disabled onclick="addEmployee()">Submit</button>
+      </form>
+    </div>
+
+    <div class="column">
+      <h3>Registered Employees</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Dept</th>
+            <th>Designation</th>
+            <th>Gender</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="employeeTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    let employees = JSON.parse(localStorage.getItem("employees")) || [];
+
+    function displayEmployees() {
+      let tableBody = document.getElementById("employeeTableBody");
+      tableBody.innerHTML = "";
+      employees.forEach((emp, index) => {
+        let row = tableBody.insertRow();
+        Object.values(emp).forEach((val) => {
+          let cell = row.insertCell();
+          cell.textContent = val;
+        });
+        let actionCell = row.insertCell();
+        actionCell.innerHTML = `
+          <button onclick="editEmployee(${index})">EDIT</button>
+          <button onclick="deleteEmployee(${index})">DELETE</button>`;
+      });
+    }
+
+    function validateForm() {
+      const fields = ["empId", "empName", "department", "designation", "gender", "joiningDate"];
+      const isValid = fields.every(id => document.getElementById(id).value.trim() !== "");
+      document.querySelector("button").disabled = !isValid;
+    }
+
+    function addEmployee() {
+      const employee = {
+        id: document.getElementById("empId").value,
+        name: document.getElementById("empName").value,
+        dept: document.getElementById("department").value,
+        designation: document.getElementById("designation").value,
+        gender: document.getElementById("gender").value,
+        date: document.getElementById("joiningDate").value,
+      };
+      employees.push(employee);
+      localStorage.setItem("employees", JSON.stringify(employees));
+      displayEmployees();
+      document.getElementById("employeeForm").reset();
+      document.querySelector("button").disabled = true;
+    }
+
+    function editEmployee(index) {
+      const emp = employees[index];
+      document.getElementById("empId").value = emp.id;
+      document.getElementById("empName").value = emp.name;
+      document.getElementById("department").value = emp.dept;
+      document.getElementById("designation").value = emp.designation;
+      document.getElementById("gender").value = emp.gender;
+      document.getElementById("joiningDate").value = emp.date;
+      employees.splice(index, 1);
+      localStorage.setItem("employees", JSON.stringify(employees));
+      displayEmployees();
+      validateForm();
+    }
+
+    function deleteEmployee(index) {
+      employees.splice(index, 1);
+      localStorage.setItem("employees", JSON.stringify(employees));
+      displayEmployees();
+    }
+
+    displayEmployees();
+  </script>
+</body>
+</html>
