@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <script>
+    //scope
+    var a = 250;
+    var b = 5;
+    var result;
+    function addNum(){
+        result = a * b;
+        console.log(result);
+    }
+    addNum();
+     function addNumTwo(){
+        result=a+b;
+        console.log(result);
+     }
+     addNumTwo();
+     var c=50;
+     var res;   // c & res is gobal scope
+
+     function Num(){  //d is functional scope
+        var d=50;
+        res=c + d;
+        console.log(res);
+     }
+Num();
+
+function Marks(){
+    let social = 40,
+    Telugu=50,
+    Total=social+Telugu;
+    console.log(Total);
+}
+Marks();
+
+//=, ==, ===
+//= It will assign a value to a varible Assignment opreator
+//== It will compare a value and it will ignore the data types
+//=== It will compare both value and type
+  </script>  
+</body>
+</html>
