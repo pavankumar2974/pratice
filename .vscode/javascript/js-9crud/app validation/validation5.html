@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Registration System</title>
+</head>
+<style>
+    h1{
+        background-color: black;
+        color: azure;
+    }
+form{
+    width: 380px;
+    height: 200px;
+    background-color: rgb(131, 241, 232);
+    color: rgb(23, 26, 26);
+}
+input{
+    width:290px;
+    
+}
+tbody{
+    border: 2px;
+}
+button{
+    background-color: rgb(47, 15, 161);
+    color: aliceblue;
+}
+</style>
+<body>
+  <h1>Movie Registration System</h1>
+  <hr>
+  <form id="enrollmentForm">
+    <br>
+    <label for="EMPId">EmpId</label>
+    <input type="text" id="EMPId" placeholder="Enter EmpId" required onkeyup="validateForm()"/>
+    <br><br>
+
+    <label for="EMPName">EmpName</label>
+    <input type="text" id="EMPName" placeholder="Enter EmpName" required onkeyup="validateForm()"/>
+    <br><br>
+
+    <label for="Role">Role</label>
+    <input type="text" id="Role" placeholder="Enter Role" required onkeyup="validateForm()"/>
+    <br><br>
+
+    <label for="Salary">Salary</label>
+    <input type="number" id="Salary" placeholder="Enter Salary" required onkeyup="validateForm()"/>
+    <br><br>
+
+    <button type="button" disabled onclick="addEmployee()">Submit</button>
+  </form>
+
+  <br><br>
+  <hr>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>EMPId</th>
+        <th>EMPName</th>
+        <th>Role</th>
+        <th>Salary</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="employeeTableBody"></tbody>
+  </table>
+
+  <script>
+    var allEmployees = JSON.parse(localStorage.getItem("allEmployees")) || [];
+
+    function displayEmployees() {
+      let tableBody = document.getElementById("employeeTableBody");
+      tableBody.innerHTML = "";
+      allEmployees.forEach((Emp, index) => {
+        let row = tableBody.insertRow();
+        Object.values(Emp).forEach((val) => {
+          let cell = row.insertCell();
+          cell.textContent = val;
+        });
+        let actionCell = row.insertCell();
+        actionCell.innerHTML = `
+          <button onclick="editEmployee(${index})">EDIT</button>
+          <button onclick="deleteEmployee(${index})">DELETE</button>
+        `;
+      });
+    }
+
+    function validateForm() {
+      var fields = ["EMPId", "EMPName", "Role", "Salary"];
+      var isValid = fields.every(field =>
+        document.getElementById(field).value.trim() !== ""
+      );
+      document.querySelector("button").disabled = !isValid;
+    }
+
+    function addEmployee() {
+      let Employee = {
+        EMPId: document.getElementById("EMPId").value,
+        EMPName: document.getElementById("EMPName").value,
+        Role: document.getElementById("Role").value,
+        Salary: document.getElementById("Salary").value,
+      };
+      allEmployees.push(Employee);
+      localStorage.setItem("allEmployees", JSON.stringify(allEmployees));
+      displayEmployees();
+      document.getElementById("enrollmentForm").reset();
+      document.querySelector("button").disabled = true;
+    }
+
+    function editEmployee(index) {
+      let Employee = allEmployees[index];
+      document.getElementById("EMPId").value = Employee.EMPId;
+      document.getElementById("EMPName").value = Employee.EMPName;
+      document.getElementById("Role").value = Employee.Role;
+      document.getElementById("Salary").value = Employee.Salary;
+
+      allEmployees.splice(index, 1);
+      localStorage.setItem("allEmployees", JSON.stringify(allEmployees));
+      displayEmployees();
+      validateForm();
+    }
+
+    function deleteEmployee(index) {
+      allEmployees.splice(index, 1);
+      localStorage.setItem("allEmployees", JSON.stringify(allEmployees));
+      displayEmployees();
+    }
+
+    displayEmployees();
+  </script>
+</body>
+</html>
