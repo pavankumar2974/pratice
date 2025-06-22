@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Platform</title>
+    <style>
+        h1 {
+            background-color: rgb(235, 31, 16);
+            width: 300px;
+        }
+
+        form {
+            background-color: rgb(4, 241, 190);
+            width: 300px;
+            height: auto;
+            padding: 10px;
+        }
+
+        #submitBtn {
+            background-color: green;
+            color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog Platform</h1>
+    <hr>
+    <form id="EnrollmentForm">
+        <label for="Title">Title</label>
+        <input type="text" id="Title" placeholder="Enter Title" required onkeyup="validateForm()" />
+        <br><br>
+        <label for="Author">Author</label>
+        <input type="text" id="Author" placeholder="Enter Author Name" required onkeyup="validateForm()" />
+        <br><br>
+        <label for="ReleaseDate">Release Date</label>
+        <input type="date" id="ReleaseDate" required onkeyup="validateForm()" />
+        <br><br>
+        <button type="button" id="submitBtn" disabled onclick="addBlog()">Submit</button>
+    </form>
+    <hr>
+    <table border="2px">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Release Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="BlogTablebody"></tbody>
+    </table>
+
+    <script>
+        var allBlogs = JSON.parse(localStorage.getItem("allBlogs")) || [];
+
+        function displayBlogs() {
+            var tableBody = document.getElementById("BlogTablebody");
+            tableBody.innerHTML = "";
+            allBlogs.forEach((Blg, index) => {
+                var row = tableBody.insertRow();
+                Object.values(Blg).forEach((val) => {
+                    var cell = row.insertCell();
+                    cell.textContent = val;
+                });
+                var actionCell = row.insertCell();
+                actionCell.innerHTML = `
+                    <button onclick="editBlog(${index})">EDIT</button>
+                    <button onclick="deleteBlog(${index})">DELETE</button>
+                `;
+            });
+        }
+
+        function validateForm() {
+            var fields = ["Title", "Author", "ReleaseDate"];
+            var isValid = fields.every(field => document.getElementById(field).value.trim() !== "");
+            document.getElementById("submitBtn").disabled = !isValid;
+        }
+
+        function addBlog() {
+            var Blog = {
+                Title: document.getElementById("Title").value,
+                Author: document.getElementById("Author").value,
+                ReleaseDate: document.getElementById("ReleaseDate").value
+            };
+            allBlogs.push(Blog);
+            localStorage.setItem("allBlogs", JSON.stringify(allBlogs));
+            displayBlogs();
+            document.getElementById("EnrollmentForm").reset();
+            document.getElementById("submitBtn").disabled = true;
+        }
+
+        function editBlog(index) {
+            var Blog = allBlogs[index];
+            document.getElementById("Title").value = Blog.Title;
+            document.getElementById("Author").value = Blog.Author;
+            document.getElementById("ReleaseDate").value = Blog.ReleaseDate;
+
+            allBlogs.splice(index, 1);
+            localStorage.setItem("allBlogs", JSON.stringify(allBlogs));
+            displayBlogs();
+           
+        }
+
+        function deleteBlog(index) {
+            allBlogs.splice(index, 1);
+            localStorage.setItem("allBlogs", JSON.stringify(allBlogs));
+            displayBlogs();
+        }
+
+        displayBlogs();
+    </script>
+</body>
+</html>
