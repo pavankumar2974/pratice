@@ -8,7 +8,8 @@ header {
     background-color:rgba(20, 19, 19, 0.11);
 }
 
-header img 
+header img {
     width: 10px;
+}
 
 
