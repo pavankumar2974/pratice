@@ -1,96 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-  <h1><center>Student Enrollment system</center></h1>  
-  <br><br>
-  <h2>Enrollment Form</h2>
-  <form id="enrollmentForm">
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" required onkeyup="validateForm()"/>
+    <h1>
+        <center>Student Enrollment system</center>
+    </h1>
     <br><br>
-    <label for="age">Age</label>
-    <input type="number" id="age" min="1" required onkeyup="validateForm()"/>
-    <br><br>
-    <label for="gender">Gender</label>
-    <select id="gender" required onchange="validateForm()">
-        <option value="">select Gender </option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
-    </select>
-<br><br>
-<label for="coursesEnrolled">courses Enrolled</label>
-<input type="text" id="coursesEnrolled" required onkeyup="validateForm()"/>
-<br><br>
-<label for="enrollmentDate">Enrollment Date</label>
-<input type="date" id="enrollmentDate" required onchange="validateForm()"/>
-<br>
-<button type="button" disabled onclick="addstudent()">submit</button>
-    
-  </form>
-  <h3>Enrolled Students</h3>
-  <table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>courses</th>
-            <th>Date</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody id="studentTableBody"></tbody>
-  </table>
-  <script>
-       var allStudents=JSON.parse(localStorage.getItem("allStudents")) || [] 
-       function displayStudents(){
-        let tableBody=document.getElementById("studentTableBody");
-        tableBody.innerHTML="";
-        allStudents.forEach((std,index)=>{
-            let row=tableBody.insertRow()
-            Object.values(std).forEach((val)=>{
-                let cell = row.insertCell();
-                cell.textContent = val;
-            });
-            let actionCell = row.insertCell();
-            actionCell.innerHTML = `<button onclick="editStudent(${index})">EDIT</button> <button onclick="deleteStudent(${index})">DELETE</button>`;
-        })
-       }
+    <h2>Enrollment Form</h2>
+    <form id="enrollmentForm">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required onkeyup="validateForm()" />
+        <br><br>
+        <label for="age">Age</label>
+        <input type="number" id="age" min="1" required onkeyup="validateForm()" />
+        <br><br>
+        <label for="gender">Gender</label>
+        <select id="gender" required onchange="validateForm()">
+            <option value="">select Gender </option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+        <br><br>
+        <label for="coursesEnrolled">courses Enrolled</label>
+        <input type="text" id="coursesEnrolled" required onkeyup="validateForm()" />
+        <br><br>
+        <label for="enrollmentDate">Enrollment Date</label>
+        <input type="date" id="enrollmentDate" required onchange="validateForm()" />
+        <br>
+        <button type="button" disabled onclick="addstudent()">submit</button>
 
-       function validateForm(){
-        var fields=["name","age","gender","coursesEnrolled","enrollmentDate"]
-     var isValed=fields.every(
-        (field)=>document.getElementById(field).value.trim() !=="");
-document.querySelector("button").disabled=!isValed
-     
-    }
-
-    function addStudent(){
-        let student = {
-            name: document.getElementById("name").value,
-            age: document.getElementById("age").value,
-            gender: document.getElementById("gender").value,
-            coursesEnrolled: document.getElementById("coursesEnrolled").value,
-            enrollmentDate: document.getElementById("enrollmentDate").value
-        };
-         allStudents.push(student);
-          localStorage.setItem("allStudents",JSON.stringify(allStudents))
-          displayStudents();
-          document.getElementById("enrollmentForm").reset();
-          document.querySelector("button").disabled=true
-    }
-        function deleteStudent(index){
-          allStudents.splice(index,1)
-          localStorage.setItem("allStudents",JSON.stringify(allStudents))
-          displayStudents()
+    </form>
+    <h3>Enrolled Students</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>courses</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="studentTableBody"></tbody>
+    </table>
+    <script>
+        var allStudents = JSON.parse(localStorage.getItem("allStudents")) || []
+        function displayStudents() {
+            let tableBody = document.getElementById("studentTableBody");
+            tableBody.innerHTML = "";
+            allStudents.forEach((std, index) => {
+                let row = tableBody.insertRow()
+                Object.values(std).forEach((val) => {
+                    let cell = row.insertCell();
+                    cell.textContent = val;
+                });
+                let actionCell = row.insertCell();
+                actionCell.innerHTML = `<button onclick="editStudent(${index})">EDIT</button> <button onclick="deleteStudent(${index})">DELETE</button>`;
+            })
         }
-         displayStudents()
-  </script>
+
+        function validateForm() {
+            var fields = ["name", "age", "gender", "coursesEnrolled", "enrollmentDate"]
+            var isValed = fields.every(
+                (field) => document.getElementById(field).value.trim() !== "");
+            document.querySelector("button").disabled = !isValed
+
+        }
+
+        function addStudent() {
+            let student = {
+                name: document.getElementById("name").value,
+                age: document.getElementById("age").value,
+                gender: document.getElementById("gender").value,
+                coursesEnrolled: document.getElementById("coursesEnrolled").value,
+                enrollmentDate: document.getElementById("enrollmentDate").value
+            };
+            allStudents.push(student);
+            localStorage.setItem("allStudents", JSON.stringify(allStudents))
+            displayStudents();
+            document.getElementById("enrollmentForm").reset();
+            document.querySelector("button").disabled = true
+        }
+        function deleteStudent(index) {
+            allStudents.splice(index, 1)
+            localStorage.setItem("allStudents", JSON.stringify(allStudents))
+            displayStudents()
+        }
+        displayStudents()
+    </script>
 </body>
 </html>
