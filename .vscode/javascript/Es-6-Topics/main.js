@@ -14,3 +14,10 @@ console.log(a && disName("pavan")); //shows value
  let name2="kumar";
  console.log(name1 + "" + name2, `${name1}`+`${name2}`);
  
+
+ //Ternary Opreator?
+
+ function checkEveNum(val){
+    return val % 2 === 0 ? "Even" : "odd";
+ }
+ console.log(checkEveNum(999), checkEveNum(334));
