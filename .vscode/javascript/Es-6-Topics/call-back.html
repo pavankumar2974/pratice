@@ -7,16 +7,25 @@
 </head>
 <body>
     <script>
-        function greet(name, callback) {
-  console.log("Hello " + name);
+    //    function greet(name, callback) {
+  //console.log("Hello " + name);
+  //callback();
+//}
+
+//function sayThanks() {
+  //console.log("Thanks for visiting!");
+//}
+
+//greet("Pavan", sayThanks);
+
+function greet(name, callback){
+  console.log("hello" + name);
   callback();
 }
-
-function sayThanks() {
-  console.log("Thanks for visiting!");
+function sayThanks(){
+  console.log("Thanks for visting");
 }
-
-greet("Pavan", sayThanks);
+greet("pavan",sayThanks);
     </script>
 </body>
 </html>
