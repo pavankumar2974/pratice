@@ -34,7 +34,7 @@ footer{
     text-align:center;
     padding: 25px;
     clear: both;
-    dispay:block;
+    display:block;
 }
 @media screen and (max-width: 600px) {
     aside, section, article {
