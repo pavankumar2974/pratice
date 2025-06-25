@@ -1,0 +1,15 @@
+header{
+    background-color: aliceblue;
+    color: black;
+}
+.container{
+    border: 5px solid;
+   display: flex;
+   align-items: start;
+}
+ .flex-item {
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+ }
+ .flex-item1{color: red;}
