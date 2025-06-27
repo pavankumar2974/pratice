@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        table{
+            background-color: rgb(71, 214, 227);
+            border: 2px solid #ccc;
+        }
+        table tr{
+            border: 2px solid #ccc;
+        }
+        input{
+            background-color: rgb(222, 225, 225);
+            color: rgb(4, 12, 19);
+        }
+    </style>
+    <h1>Employee Management</h1><br>
+    <form >
+        <input type="text" id="Name" placeholder="Name" required>
+        <br><br>
+        <input type="number" id="Salary" placeholder="Salary" required>
+        <br><br>
+        <input type="text" id="Department" placeholder="Department" required>
+        <br><br>
+        <button onclick="registerEmployee()" type="button" id="registeremployee">register</button>
+        <button id="updateBtn" type="button" onclick="updateEmployee()">update</button>
+
+
+    </form>
+  
+    <hr>
+    <h1>Employee Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Salary</th>
+                <th>Department</th>
+                <th>action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+<script>
+    var allEmployees =[];
+
+    function registerEmployee(){
+        var Name=document.getElementById("Name").value;
+        var Salary=document.getElementById("Salary").value;
+        var Department=document.getElementById("Department").value;
+
+        var Employee={
+            Name,
+            Salary,
+            Department
+        };
+
+        allEmployees.push(Employee);
+        document.getElementById("Name").value ="";
+        document.getElementById("Salary").value="";
+        document.getElementById("Department").value="";
+        console.log(Name,Salary,Department);
+        displayEmployeesInTable();
+    }
+
+    function displayEmployeesInTable(){
+        document.querySelector("tbody").innerHTML="";
+        allEmployees.forEach(function(employee,index){
+            var myTr=document.createElement("tr");
+            for (a in employee){
+                var myTd=document.createElement("td");
+                myTd.innerHTML=employee[a];
+                myTr.appendChild(myTd);
+            }
+            var editTd=document.createElement("td");
+            var editBtn=document.createElement("button");
+            editBtn.innerHTML="Edit";
+            editBtn.setAttribute("onclick", "editEmployee(" + index + ")");
+            editTd.appendChild(editBtn);
+            myTr.appendChild(editTd);
+            document.querySelector("tbody").appendChild(myTr);
+
+            var delTd = document.createElement("td");
+            var delBtn =document.createElement("button");
+            delBtn.innerHTML ="Delete";
+            delBtn.setAttribute("class","del-Employees");
+            delBtn.setAttribute("onclick","deleteEmployee("+index+")");
+            delTd.appendChild(delBtn);
+            myTr.appendChild(delTd);
+
+            document.querySelector("tbody").appendChild(myTr);
+        });
+    
+    }
+    displayEmployeesInTable();
+
+    function deleteEmployee(i){
+        allEmployees.splice(i,1);
+        displayEmployeesInTable();
+    }
+
+    function editEmployee(i){
+        gIndex=i;
+        document.getElementById("Name").value=allEmployees[i].Name;
+        document.getElementById("Salary").value=allEmployees[i].Salary;
+        document.getElementById("Department").value=allEmployees[i].Department;
+
+        document.getElementById("updateBtn").style.display="block";
+        document.getElementById("registeremployee").style.display="none";
+
+    }
+    function updateEmployee(){
+        var Name=document.getElementById("Name").value;
+        var Salary=document.getElementById("Salary").value;
+        var Department=document.getElementById("Department").value;
+
+        var Employee={
+            Name,
+            Salary,
+            Department
+        };
+        allEmployees[gIndex]=Employee;
+        displayEmployeesInTable();
+        document.getElementById("Name").value="";
+        document.getElementById("Salary").value="";
+        document.getElementById("Department").value="";
+
+        document.getElementById("updateBtn").style.display="none";
+        document.getElementById("registeremployee").style.display="block";
+
+    }
+</script>
+</body>
+</html>
