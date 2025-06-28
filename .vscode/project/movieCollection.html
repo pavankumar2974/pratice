@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        table{
+            background-color: rgb(218, 74, 213);
+            border: 2px solid #ccc;
+        }
+        table tr{
+            border: 2px solid #ccc;
+        }
+        input{
+            background-color: rgb(110, 173, 168);
+            color: rgb(4, 12, 19);
+        }
+    </style>
+    <h1>Movie Collection</h1>
+    <form >
+        <input type="text" id="title" placeholder="title" required>
+        <br><br>
+        <input type="text" id="genere" placeholder="genere" required>
+        <br><br>
+        <input type="number" id="releaseYear" placeholder="releaseYear" required>
+        <br><br>
+        <button onclick="registerMovie()" type="button" id="registermovie">register</button>
+        <button id="updateBtn" type="button" onclick="updateMovie()">update</button>
+
+
+    </form>
+    <hr>
+    <h1>Movie Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>title</th>
+                <th>genere</th>
+                <th>releaseYear</th>
+                <th>action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+<script>
+    var allMovies =[];
+
+    function registerMovie(){
+        var title=document.getElementById("title").value;
+        var genere=document.getElementById("genere").value;
+        var releaseYear=document.getElementById("releaseYear").value;
+
+        var Movies={
+            title,
+            genere,
+            releaseYear
+        };
+
+        allMovies.push(Movies);
+        document.getElementById("title").value ="";
+        document.getElementById("genere").value="";
+        document.getElementById("releaseYear").value="";
+        console.log(title,genere,releaseYear);
+        displayMoviesInTable();
+    }
+
+    function displayMoviesInTable(){
+        document.querySelector("tbody").innerHTML="";
+        allMovies.forEach(function(movie,index){
+            var myTr=document.createElement("tr");
+            for (a in movie){
+                var myTd=document.createElement("td");
+                myTd.innerHTML=movie[a];
+                myTr.appendChild(myTd);
+            }
+            var editTd=document.createElement("td");
+            var editBtn=document.createElement("button");
+            editBtn.innerHTML="Edit";
+            editBtn.setAttribute("onclick", "editMovie(" + index + ")");
+            editTd.appendChild(editBtn);
+            myTr.appendChild(editTd);
+            document.querySelector("tbody").appendChild(myTr);
+
+            var delTd = document.createElement("td");
+            var delBtn =document.createElement("button");
+            delBtn.innerHTML ="Delete";
+            delBtn.setAttribute("class","del-Movies");
+            delBtn.setAttribute("onclick","deleteMovie("+index+")");
+            delTd.appendChild(delBtn);
+            myTr.appendChild(delTd);
+
+            document.querySelector("tbody").appendChild(myTr);
+        });
+    
+    }
+    displayMoviesInTable();
+
+    function deleteMovie(i){
+        allMovies.splice(i,1);
+        displayMoviesInTable();
+    }
+
+    function editMovie(i){
+        gIndex=i;
+        document.getElementById("title").value=allMovies[i].title;
+        document.getElementById("genere").value=allMovies[i].genere;
+        document.getElementById("releaseYear").value=allMovies[i].releaseYear;
+
+        document.getElementById("updateBtn").style.display="block";
+        document.getElementById("registermovie").style.display="none";
+
+    }
+    function updateMovie(){
+        var title=document.getElementById("title").value;
+        var genere=document.getElementById("genere").value;
+        var releaseYear=document.getElementById("releaseYear").value;
+
+       
+        var Movies={
+            title,
+            genere,
+            releaseYear
+        };
+        allMovies[gIndex]=Movies;
+        displayMoviesInTable();
+        document.getElementById("title").value="";
+        document.getElementById("genere").value="";
+        document.getElementById("releaseYear").value="";
+
+        document.getElementById("updateBtn").style.display="none";
+        document.getElementById("registermovie").style.display="block";
+
+    }
+</script>
+</body>
+</html>
+
