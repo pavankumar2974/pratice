@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        table{
+            background-color: rgb(71, 214, 227);
+            border: 2px solid #ccc;
+        }
+        table tr{
+            border: 2px solid #ccc;
+        }
+        input{
+            background-color: rgb(222, 225, 225);
+            color: rgb(4, 12, 19);
+        }
+    </style>
+    <h1>Online Store Products</h1>
+    <form >
+        <input type="text" id="Name" placeholder="Name" required>
+        <br><br>
+        <input type="number" id="Price" placeholder="Price" required>
+        <br><br>
+        <input type="number" id="stockQuantity" placeholder="Stock Quantity" required>
+        <br><br>
+        <button onclick="registerProduct()" type="button" id="registerproduct">register</button>
+        <button id="updateBtn" type="button" onclick="updateProduct()">update</button>
+
+
+    </form>
+    <hr>
+    <h1>Product Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock Quantity</th>
+                <th>action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+<script>
+    var allProducts =[];
+
+    function registerProduct(){
+        var Name=document.getElementById("Name").value;
+        var Price=document.getElementById("Price").value;
+        var stockQuantity=document.getElementById("stockQuantity").value;
+
+        var Products={
+            Name,
+            Price,
+            stockQuantity
+        };
+
+        allProducts.push(Products);
+        document.getElementById("Name").value ="";
+        document.getElementById("Price").value="";
+        document.getElementById("stockQuantity").value="";
+        console.log(Name,Price,stockQuantity);
+        displayProductsInTable();
+    }
+
+    function displayProductsInTable(){
+        document.querySelector("tbody").innerHTML="";
+        allProducts.forEach(function(product,index){
+            var myTr=document.createElement("tr");
+            for (a in product){
+                var myTd=document.createElement("td");
+                myTd.innerHTML=product[a];
+                myTr.appendChild(myTd);
+            }
+            var editTd=document.createElement("td");
+            var editBtn=document.createElement("button");
+            editBtn.innerHTML="Edit";
+            editBtn.setAttribute("onclick", "editProduct(" + index + ")");
+            editTd.appendChild(editBtn);
+            myTr.appendChild(editTd);
+            document.querySelector("tbody").appendChild(myTr);
+
+            var delTd = document.createElement("td");
+            var delBtn =document.createElement("button");
+            delBtn.innerHTML ="Delete";
+            delBtn.setAttribute("class","del-Products");
+            delBtn.setAttribute("onclick","deleteProduct("+index+")");
+            delTd.appendChild(delBtn);
+            myTr.appendChild(delTd);
+
+            document.querySelector("tbody").appendChild(myTr);
+        });
+    
+    }
+    displayProductsInTable();
+
+    function deleteProduct(i){
+        allProducts.splice(i,1);
+        displayProductsInTable();
+    }
+
+    function editProduct(i){
+        gIndex=i;
+        document.getElementById("Name").value=allProducts[i].Name;
+        document.getElementById("Price").value=allProducts[i].Price;
+        document.getElementById("stockQuantity").value=allProducts[i].stockQuantity;
+
+        document.getElementById("updateBtn").style.display="block";
+        document.getElementById("registerproduct").style.display="none";
+
+    }
+    function updateProduct(){
+        var Name=document.getElementById("Name").value;
+        var Price=document.getElementById("Price").value;
+        var stockQuantity=document.getElementById("stockQuantity").value;
+
+        var Products={
+            Name,
+            Price,
+            stockQuantity
+        };
+        allProducts[gIndex]=Products;
+        displayProductsInTable();
+        document.getElementById("Name").value="";
+        document.getElementById("Price").value="";
+        document.getElementById("stockQuantity").value="";
+
+        document.getElementById("updateBtn").style.display="none";
+        document.getElementById("registerproduct").style.display="block";
+
+    }
+</script>
+</body>
+</html>
