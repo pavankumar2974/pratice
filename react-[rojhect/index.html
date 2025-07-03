@@ -7,7 +7,20 @@
     <title>Vite App</title>
   </head>
   <body>
+    <ul id="Myul"></ul>
     <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <h1> Collection of objects is called Array.</h1>
+    <script type="module" src="/src/main.js">
+var bikes = ["pulsar", "yamaha","honda","hero","harley davidson","susuki","ducati","Ktm"];
+console.log(bikes);
+var ul = document.getElementById("Myul");
+bikes.forEach(function(bike) {
+  var li = document.createElement("li");
+  li.textContent = bike;
+  ul.appendChild(li);
+});
+    </script>
+
+
   </body>
 </html>
