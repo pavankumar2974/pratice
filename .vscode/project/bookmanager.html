@@ -10,8 +10,6 @@
         table{
             background-color: rgb(238, 245, 245);
             border: 2px;
-        
-
         }
         table.tr{
             border: 2px;
@@ -29,8 +27,6 @@
         <input type="text"id="isbn" placeholder="isbn" required>
         <button onclick="registerBook()" type="button" id="registermoviebook">register</button>
         <button id="updateBtn" type="button" onclick="updateBook()">update</button>
-
-
     </form>
     <hr>
     <h1>Book Details</h1>
@@ -50,7 +46,7 @@
     </table>
 <script>
     var allBooks =[];
-
+    
     function registerBook(){
         var title=document.getElementById("title").value;
         var author=document.getElementById("author").value;
