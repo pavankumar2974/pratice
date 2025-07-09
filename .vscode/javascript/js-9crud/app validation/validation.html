@@ -1,86 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+
 <body>
-    <style>
-        form{
-            background-color: #6b656518;
-        }
-      body {
-        font-family: Arial, sans-serif;
-        margin: auto;
-        padding: 20px;
-      }
+  <style>
+    form {
+      background-color: #6b656518;
+    }
 
-      .container {
-        display: flex;
-        gap: 20px;
-      }
+    body {
+      font-family: Arial, sans-serif;
+      margin: auto;
+      padding: 20px;
+    }
 
-      .column {
-        flex: 1;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.192);
-      }
+    .container {
+      display: flex;
+      gap: 20px;
+    }
 
-      label {
-        display: block;
-        margin: 10px 0 5px;
-      }
+    .column {
+      flex: 1;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.192);
+    }
 
-      input,
-      select {
-        width: 95%;
-        padding: 8px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
 
-      button {
-        background-color: #28a745;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        width: 100%;
-      }
+    input,
+    select {
+      width: 95%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
 
-      button:disabled {
-        background-color: gray;
-        cursor: not-allowed;
-      }
+    button {
+      background-color: #28a745;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-      }
+    button:disabled {
+      background-color: gray;
+      cursor: not-allowed;
+    }
 
-      th,
-      td {
-        border: 1px solid #6b6565;
-        padding: 8px;
-        text-align: left;
-      }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
 
-      th {
-        background-color: #726d6d18;
-      }
-      h3{
-        background-color: aquamarine;
-      }
-      .container{
-        background-color: rgb(211, 241, 248);
-      }
-    </style>
+    th,
+    td {
+      border: 1px solid #6b6565;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #726d6d18;
+    }
+
+    h3 {
+      background-color: aquamarine;
+    }
+
+    .container {
+      background-color: rgb(211, 241, 248);
+    }
+  </style>
   </head>
 
   <body>
@@ -96,13 +101,7 @@
           <input type="text" id="name" required onkeyup="validateForm()" />
 
           <label for="age">Age:</label>
-          <input
-            type="number"
-            id="age"
-            min="1"
-            required
-            onkeyup="validateForm()"
-          />
+          <input type="number" id="age" min="1" required onkeyup="validateForm()" />
 
           <label for="gender">Gender:</label>
           <select id="gender" required onchange="validateForm()">
@@ -113,20 +112,10 @@
           </select>
 
           <label for="coursesEnrolled">Courses Enrolled:</label>
-          <input
-            type="text"
-            id="coursesEnrolled"
-            required
-            onkeyup="validateForm()"
-          />
+          <input type="text" id="coursesEnrolled" required onkeyup="validateForm()" />
 
           <label for="enrollmentDate">Enrollment Date:</label>
-          <input
-            type="date"
-            id="enrollmentDate"
-            required
-            onchange="validateForm()"
-          />
+          <input type="date" id="enrollmentDate" required onchange="validateForm()" />
 
           <button type="button" disabled onclick="addStudent()">Submit</button>
         </form>
@@ -154,70 +143,71 @@
     </div>
 
     <script>
-      var allStudents=JSON.parse(localStorage.getItem("allStudents")) || []
+      var allStudents = JSON.parse(localStorage.getItem("allStudents")) || []
 
-      function  displayStudents(){
-      let tableBody=document.getElementById("studentTableBody");
-        tableBody.innerHTML="";
-      allStudents.forEach((std,index)=>{
-        let row=tableBody.insertRow()
-        Object.values(std).forEach((val)=>{
-          let cell=row.insertCell()
-          cell.textContent=val
+      function displayStudents() {
+        let tableBody = document.getElementById("studentTableBody");
+        tableBody.innerHTML = "";
+        allStudents.forEach((std, index) => {
+          let row = tableBody.insertRow()
+          Object.values(std).forEach((val) => {
+            let cell = row.insertCell()
+            cell.textContent = val
+          })
+          let actionCell = row.insertCell()
+          actionCell.innerHTML = `<button onclick="editStudent(${index})">EDIT </button> <button onclick="deleteStudent(${index})">DELETE</button>`
         })
-        let actionCell =row.insertCell()
-        actionCell.innerHTML=`<button onclick="editStudent(${index})">EDIT </button> <button onclick="deleteStudent(${index})">DELETE</button>`
-      })
 
       }
-      
 
 
-        function validateForm(){
-            var fields=["id","name","age","gender","coursesEnrolled","enrollmentDate"]
 
-            var isValed=fields.every(
-                (field)=>document.getElementById(field).value.trim() !==""
-            );
-            document.querySelector("button").disabled=!isValed
-        }
+      function validateForm() {
+        var fields = ["id", "name", "age", "gender", "coursesEnrolled", "enrollmentDate"]
 
-        function addStudent(){
-          let student={
-            id:document.getElementById("id").value,
-            name:document.getElementById("name").value,
-            age:document.getElementById("age").value,
-            gender:document.getElementById("gender").value,
-            course:document.getElementById("coursesEnrolled").value,
-            date:document.getElementById("enrollmentDate").value,
-          };
-          allStudents.push(student);
-          localStorage.setItem("allStudents",JSON.stringify(allStudents))
-          displayStudents();
-          document.getElementById("enrollmentForm").reset();
-          document.querySelector("button").disabled=true
-        }
+        var isValed = fields.every(
+          (field) => document.getElementById(field).value.trim() !== ""
+        );
+        document.querySelector("button").disabled = !isValed
+      }
 
-        function editStudent(index){
-          let student=allStudents[index];
-          id:document.getElementById("id").value=student.id;
-            name:document.getElementById("name").value=student.name;
-            age:document.getElementById("age").value=student.age;
-            gender:document.getElementById("gender").value=student.gender;
-            course:document.getElementById("coursesEnrolled").value=student.course;
-            date:document.getElementById("enrollmentDate").value=student.date;
+      function addStudent() {
+        let student = {
+          id: document.getElementById("id").value,
+          name: document.getElementById("name").value,
+          age: document.getElementById("age").value,
+          gender: document.getElementById("gender").value,
+          course: document.getElementById("coursesEnrolled").value,
+          date: document.getElementById("enrollmentDate").value,
+        };
+        allStudents.push(student);
+        localStorage.setItem("allStudents", JSON.stringify(allStudents))
+        displayStudents();
+        document.getElementById("enrollmentForm").reset();
+        document.querySelector("button").disabled = true
+      }
 
-            allStudents.splice(index,1);
-            localStorage.setItem("allStudents",JSON.stringify(allStudents))
-            displayStudents();
-        }
+      function editStudent(index) {
+        let student = allStudents[index];
+        id: document.getElementById("id").value = student.id;
+        name: document.getElementById("name").value = student.name;
+        age: document.getElementById("age").value = student.age;
+        gender: document.getElementById("gender").value = student.gender;
+        course: document.getElementById("coursesEnrolled").value = student.course;
+        date: document.getElementById("enrollmentDate").value = student.date;
 
-        function deleteStudent(index){
-          allStudents.splice(index,1)
-          localStorage.setItem("allStudents",JSON.stringify(allStudents))
-          displayStudents()
-        }
-         displayStudents()
+        allStudents.splice(index, 1);
+        localStorage.setItem("allStudents", JSON.stringify(allStudents))
+        displayStudents();
+      }
+
+      function deleteStudent(index) {
+        allStudents.splice(index, 1)
+        localStorage.setItem("allStudents", JSON.stringify(allStudents))
+        displayStudents()
+      }
+      displayStudents()
     </script>
-</body>
+  </body>
+
 </html>
