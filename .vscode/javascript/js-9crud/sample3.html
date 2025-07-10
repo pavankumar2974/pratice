@@ -81,11 +81,11 @@
                 data += "<td>" + mytodo_list[i] + "</td>";
                 data += "<td><button class='btn btn-primary' onclick='updateTask(" + i + ")'>update</button></td>";
                 data += "<td><button class='btn btn-danger' onclick='deleteTask(" + i + ")'>delete</button></td>";
-                
-            document.getElementById("mytodo-task").innerHTML = data;
 
+                document.getElementById("mytodo-task").innerHTML = data;
+
+            }
         }
-    }
         ReadAllTask();
 
         function updateTask(item) {
