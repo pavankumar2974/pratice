@@ -1,83 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+
 <body>
-    <h2>User Management</h2>
-    <form id ="userForm">
-        <input type="hidden" id="userId"/>
-        <input type="text" id="name" placeholder="Name" required/>
-        <input type="number" id="age" placeholder="Age" required/>
-        <button type="submit">save</button>
+  <h2>User Management</h2>
+  <form id="userForm">
+    <input type="hidden" id="userId" />
+    <input type="text" id="name" placeholder="Name" required />
+    <input type="number" id="age" placeholder="Age" required />
+    <button type="submit">save</button>
 
-    </form>
-    <script>
-let user=[];
-let editingUserId =null;
+  </form>
+  <script>
+    let user = [];
+    let editingUserId = null;
 
-        const userForm = document.getElementById("userForm");
-        const nameInput = document.getElementById("name");
-        const ageInput = document.getElementById("age");
-        const userIdInput = document.getElementById("userId");
-        const userlist = document.getElementById("userlist");
+    const userForm = document.getElementById("userForm");
+    const nameInput = document.getElementById("name");
+    const ageInput = document.getElementById("age");
+    const userIdInput = document.getElementById("userId");
+    const userlist = document.getElementById("userlist");
 
-        userForm.addEventListener("submit",function(Event){
-            event.preventDefault();
-            const name= nameInput.trim();
-            const age = parseInt(ageInput.value.trim(),10);
-            if (!name || !age) return;
+    userForm.addEventListener("submit", function (Event) {
+      event.preventDefault();
+      const name = nameInput.trim();
+      const age = parseInt(ageInput.value.trim(), 10);
+      if (!name || !age) return;
 
-  if (editingUserId) {
-    // UPDATE
-    users = users.map(user =>
-      user.id === editingUserId ? { ...user, name, age } : user
-    );
-    editingUserId = null;
-  } else {
-    // CREATE
-    const newUser = { id: Date.now(), name, age };
-    users.push(newUser);
-  }
+      if (editingUserId) {
+        // UPDATE
+        users = users.map(user =>
+          user.id === editingUserId ? { ...user, name, age } : user
+        );
+        editingUserId = null;
+      } else {
+        // CREATE
+        const newUser = { id: Date.now(), name, age };
+        users.push(newUser);
+      }
 
-  userForm.reset();
-  renderUsers();
-});
+      userForm.reset();
+      renderUsers();
+    });
 
-// READ
-function renderUsers() {
-  userList.innerHTML = "";
-  users.forEach(user => {
-    const li = document.createElement("li");
-    li.innerHTML = `
+    // READ
+    function renderUsers() {
+      userList.innerHTML = "";
+      users.forEach(user => {
+        const li = document.createElement("li");
+        li.innerHTML = `
       ${user.name} (${user.age} years)
       <button onclick="editUser(${user.id})">Edit</button>
       <button onclick="deleteUser(${user.id})">Delete</button>
     `;
-    userList.appendChild(li);
-  });
-}
+        userList.appendChild(li);
+      });
+    }
 
-// EDIT (Pre-fill form)
-function editUser(id) {
-  const user = users.find(u => u.id === id);
-  if (user) {
-    nameInput.value = user.name;
-    ageInput.value = user.age;
-    editingUserId = user.id;
-  }
-}
+    // EDIT (Pre-fill form)
+    function editUser(id) {
+      const user = users.find(u => u.id === id);
+      if (user) {
+        nameInput.value = user.name;
+        ageInput.value = user.age;
+        editingUserId = user.id;
+      }
+    }
 
-// DELETE
-function deleteUser(id) {
-  users = users.filter(user => user.id !== id);
-  renderUsers();
-}
+    // DELETE
+    function deleteUser(id) {
+      users = users.filter(user => user.id !== id);
+      renderUsers();
+    }
 
-// Initial render
-renderUsers();
-    </script>
+    // Initial render
+    renderUsers();
+  </script>
 </body>
+
 </html>
