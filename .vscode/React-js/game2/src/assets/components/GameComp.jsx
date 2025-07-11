@@ -1,8 +1,4 @@
 import { Component } from "react";
-
-
-
-
 class GameComp extends Component{
     render(){
         return(
