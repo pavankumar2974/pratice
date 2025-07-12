@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Literalway Of Creating An Object
+        //   var person1 = {
+        //     fname: "Leela",
+        //     lName: "KM",
+        //     email: "leelakm@gmail.com",
+        //     company: "TCS",
+        //     city: "Bangalore",
+        //     state: "Karnataka",
+        //     zip: "560066",
+        //   };
+        //   var person2 = {
+        //     fname: "Pavan",
+        //     lName: "Kumar",
+        //     email: "pavan@gmail.com",
+        //     company: "TCS",
+        //     city: "Bangalore",
+        //     state: "Karnataka",
+        //     zip: "560066",
+        //   };
+        //   var person3 = {
+        //     fname: "Murali",
+        //     lName: "V",
+        //     email: "murali@gmail.com",
+        //     company: "TCS",
+        //     city: "Bangalore",
+        //     state: "Karnataka",
+        //     zip: "560066",
+        //   };
+        // var person4 = {
+        //   fname: "Krishna",
+        //   lName: "Kishore",
+        //   email: "krishna@gmail.com",
+        //   company: "TCS",
+        //   city: "Bangalore",
+        //   state: "Karnataka",
+        //   zip: "560066",
+        // };
+
+        class commonEmpProperties {
+            constructor(company, city, state, zip) {
+                this.company = "TCS";
+                this.city = "Bangalore";
+                this.state = "Karnataka";
+                this.zip = "560066";
+            }
+        }
+
+        class Person extends commonEmpProperties {
+            constructor(fname, lName, email) {
+                super();
+                this.fname = fname;
+                this.lName = lName;
+                this.email = email;
+            }
+        }
+
+        var person1 = new Person("Leela", "KM", "leelakm@gmail.com"); //This is an instance
+        var person2 = new Person("Pavan", "Kumar", "Pavan@gmail.com");
+        var person3 = new Person("Krishna", "Kumar", "krishna@gmail.com");
+        var person4 = new Person("Murali", "V", "murali@gmail.com");
+
+        console.log(person1, person2, person3, person4);
+    </script>
+</body>
+
+</html>
