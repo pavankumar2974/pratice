@@ -40,28 +40,3 @@
 .read-the-docs {
   color: #888;
 }
-h1{
-  font-size: 2.5rem;
-  margin: 0;
-  text-align: left;
-  color: #333;
-  background-color: aqua;
-}
-table{
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  border: 2px solid #333;
-}
-th{
-  background-color: #50e9d4;
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  border: 2px solid #333;
-}
-td{
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  border: 2px solid #333;
-}

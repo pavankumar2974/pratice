@@ -1,16 +1,10 @@
 import { Component } from "react";
-class GameComp extends Component{
+ class studentComp extends Component{
     render(){
-        return(
-            <div>
-          <h1>Game  character</h1>      
-          <ul>
-            <li>Character 1:- Deva from Salaar</li>
-            <li>Character 2:-Mahendra Bhaubali from Bhaubali</li>
-            <li>Character 3:- Bhairava from Kaliki</li>
-            <li>Character 4:- Praba from darling</li>
-          </ul>
-          <h1>Student Details</h1>
+return(
+    <>
+    <div>
+        <h1>Student Details</h1>
         <table>
             <thead>
                 <tr>
@@ -38,8 +32,8 @@ class GameComp extends Component{
 
             </tbody>
         </table>
-            </div>
-        )
+        </div>
+    </>
+)
     }
-}
-export default GameComp;
+ }
