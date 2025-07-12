@@ -1,10 +1,10 @@
 import { Component } from "react";
- class studentComp extends Component{
+class StudentComp extends Component{
     render(){
-return(
-    <>
-    <div>
-        <h1>Student Details</h1>
+        return(
+            <div>
+         
+          <h1>Student Details</h1>
         <table>
             <thead>
                 <tr>
@@ -32,8 +32,8 @@ return(
 
             </tbody>
         </table>
-        </div>
-    </>
-)
+            </div>
+        )
     }
- }
+}
+export default StudentComp;
