@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var student1 ={
+            fname: "pavan",
+            Lname:"kumar",
+            email:"pavan@gmail.com",
+            id:"22BCA143",
+            course:"BCA",
+            city:"Chittoor",
+            state:"Andhra Pradesh",
+        };
+        var student2={
+            fname:"Asharff",
+            Lname:"Ali",
+            email:"asharff@gmail.com",
+            id:"22BCA144",
+            course:"BCA",
+            city:"Chittoor",
+            state:"Andhra Pradesh",
+        };
+        var student3={
+            fname:"John",
+            Lname:"Doe",
+            email:"john@gmail.com",
+            id:"22BCA145",
+            course:"BCA",
+            city:"Chittoor",
+            state:"Andhra Pradesh",
+        };
+
+        class commonEmpProperties {
+            constructor(course, city, state) {
+                this.course = course;
+                this.city = city;
+                this.state = state;
+            }
+        }
+        
+        class Person extends commonEmpProperties {
+            constructor(fname, lName, email) {
+                super(course, city, state);
+                this.fname = fname;
+                this.lName = lName;
+                this.email = email;
+            }
+        }
+console.log(student1,student2,student3);
+    </script>
+</body>
+</html>
