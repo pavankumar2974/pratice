@@ -7,34 +7,34 @@
 </head>
 <body>
     <script>
-        var student1 ={
-            fname: "pavan",
-            Lname:"kumar",
-            email:"pavan@gmail.com",
-            id:"22BCA143",
-            course:"BCA",
-            city:"Chittoor",
-            state:"Andhra Pradesh",
-        };
-        var student2={
-            fname:"Asharff",
-            Lname:"Ali",
-            email:"asharff@gmail.com",
-            id:"22BCA144",
-            course:"BCA",
-            city:"Chittoor",
-            state:"Andhra Pradesh",
-        };
-        var student3={
-            fname:"John",
-            Lname:"Doe",
-            email:"john@gmail.com",
-            id:"22BCA145",
-            course:"BCA",
-            city:"Chittoor",
-            state:"Andhra Pradesh",
-        };
-
+        // var student1 ={
+        //     fname: "pavan",
+        //     Lname:"kumar",
+        //     email:"pavan@gmail.com",
+        //     id:"22BCA143",
+        //     course:"BCA",
+        //     city:"Chittoor",
+        //     state:"Andhra Pradesh",
+        // };
+        // var student2={
+        //     fname:"Asharff",
+        //     Lname:"Ali",
+        //     email:"asharff@gmail.com",
+        //     id:"22BCA144",
+        //     course:"BCA",
+        //     city:"Chittoor",
+        //     state:"Andhra Pradesh",
+        // };
+        // var student3={
+        //     fname:"John",
+        //     Lname:"Doe",
+        //     email:"john@gmail.com",
+        //     id:"22BCA145",
+        //     course:"BCA",
+        //     city:"Chittoor",
+        //     state:"Andhra Pradesh",
+        // };
+ 
         class commonEmpProperties {
             constructor(course, city, state) {
                 this.course = course;
@@ -45,12 +45,15 @@
         
         class Person extends commonEmpProperties {
             constructor(fname, lName, email) {
-                super(course, city, state);
+                super("BCA", "Chittoor", "Andhra Pradesh");
                 this.fname = fname;
                 this.lName = lName;
                 this.email = email;
             }
         }
+        var student1 = new Person("pavan", "kumar", "Pavan@gmail.com");
+        var student2 = new Person("Asharff","ali","asharff@gmail.com");
+        var student3 = new Person("John", "Doe", "john@gmail.com");
 console.log(student1,student2,student3);
     </script>
 </body>
