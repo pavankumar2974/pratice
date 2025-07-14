@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <br>
+    <center>
+        <h1>Student Registration form</h1>
+    </center>
+    <form action="#">
+        <label for="name">Enter Name</label>
+        <input type="text" id="name" placeholder="Enter your name=">
+        <br>
+        <label for="DOB">Enter DOB</label>
+        <input type="date" id="DOB" placeholder="Enter Your DOB">
+        <br>
+        <label for="email">Enter Email Address</label>
+        <input type="email" id="email" placeholder="Enter Your Email">
+        <br>
+        <label for="Phone">Enter Phone Number</label>
+        <input type="number" id="phone" placeholder="Enter Your phone number">
+        <br>
+
+        <label for="terms">Accept Terms and Conditions</label>
+        <input type="checkbox" id="Terms">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <style>
+        form {
+            width: 400px;
+            height: auto;
+            background-color: lightblue;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+
+        button {
+            width: 100px;
+            height: 30px;
+            background-color: blue;
+            color: white;
+            border-radius: 5px;
+            align-items: center;
+
+        }
+
+        label {
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+            background-color: rgb(154, 201, 223);
+        }
+
+        @media screen and (min-width: 600px) and (max-width: 800px) {
+            body {
+                background-color: lightgreen;
+            }
+
+        }
+    </style>
+    <br>
+    <hr>
+  
+</body>
+</html>
