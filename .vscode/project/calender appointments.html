@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-<script>
-    var calender={
-        appointments:["meeting","doctor's appoinment","lunch with friends"],
-        id:"123abc",
-       eventname:"Annual meet",
-       date:"2025-05-22",
-       time:"10:00 AM",
-       location:"office conference Room",
-         description:"Annual meet with all employees",
-         participants:"office staff",
-         upcomingevents:[
-            {eventname:"Annual meet", date:"2025-05-22", time:"10:00 AM", location:"office conference Room"},
-            {eventname:"Project deadline", date:"2025-05-25", time:"5:00 PM"},
-         ],
-         missedevents:"nothing",
-         Eventcategory:"meeting",
-         holidays:"2025-05-22&2025-05-25",
 
-         addAppoinment(){
-         },
-         updateAppoinment(){
-         },
-            deleteAppoinment(){
+<body>
+    <script>
+        var calender = {
+            appointments: ["meeting", "doctor's appoinment", "lunch with friends"],
+            id: "123abc",
+            eventname: "Annual meet",
+            date: "2025-05-22",
+            time: "10:00 AM",
+            location: "office conference Room",
+            description: "Annual meet with all employees",
+            participants: "office staff",
+            upcomingevents: [
+                { eventname: "Annual meet", date: "2025-05-22", time: "10:00 AM", location: "office conference Room" },
+                { eventname: "Project deadline", date: "2025-05-25", time: "5:00 PM" },
+            ],
+            missedevents: "nothing",
+            Eventcategory: "meeting",
+            holidays: "2025-05-22&2025-05-25",
+
+            addAppoinment() {
+            },
+            updateAppoinment() {
+            },
+            deleteAppoinment() {
             }
-            
-    };
-    calender.addAppoinment("meeting");
-    calender.updateAppoinment("doctor's appointment");
-    calender.deleteAppoinment("lunch with friends");
-    console.log(calender);
-</script>
+
+        };
+        calender.addAppoinment("meeting");
+        calender.updateAppoinment("doctor's appointment");
+        calender.deleteAppoinment("lunch with friends");
+        console.log(calender);
+    </script>
 </body>
+
 </html>
