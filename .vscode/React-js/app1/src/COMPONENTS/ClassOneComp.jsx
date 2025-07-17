@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 class ClassOneComp extends Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
             message: "Welcome to ReactJs State",
         };
     }
-    render(){
+    render() {
         return (
             <div>
                 <h2>{this.state.message}</h2>
