@@ -1,53 +1,71 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <style>
-.container{
-    display: grid;
-    grid-template-areas: 
-    "header header"
-    "menu content"
-    "footer footer";
-    grid-template-columns: 1fr 3fr;
-    gap: 5px;
-    background-color: aqua;
-    padding: 5px;
-    border: 5px solid black;
-}
-.container>div.header{
-    grid-area: header;
-    text-align:center;
-}
-div.header h2{
-    border: 2px solid black;
-}
-.container>div.menu{
-    grid-area: menu;
-    border: 2px solid black;
 
-}
-.container>div.content{
-    grid-area: content;
-    border: 2px solid black;
-}
-.container>div.footer{
-    grid-area: footer;
-    text-align:center;
-    border: 2px solid black;
-}
-        </style>
-    </head>
-    <body>
-        <h1>CSS Grid layout</h1>
+<head>
+    <style>
+        .container {
+            display: grid;
+            grid-template-areas:
+                "header header"
+                "menu content"
+                "footer footer";
+            grid-template-columns: 1fr 3fr;
+            gap: 5px;
+            background-color: aqua;
+            padding: 5px;
+            border: 5px solid black;
+        }
 
-        <p>The Grid layout Module offers a grid-based layout system,with rows and columns.</p>
-        <p>The grid layout module makes it easy to design complex and respnsive web pages without using floats and positioning: </p>
-        <div class="container">
-            <div class="header"><h2>My header</h2></div>
-            <div class="menu"><a href="#">Link1</a><br><a href="#">Link2</a><br><a href="#">Link3</a><br></div>
-            <div class="content"><h3><p>The Grid layout Module offers a grid-based layout system,with rows and columns.The grid layout module makes it easy to design complex and respnsive web pages without using floats and  positioning.  </p></h3></div>
-        <div class="footer"><h4>Footer</h4></div>
+        .container>div.header {
+            grid-area: header;
+            text-align: center;
+        }
+
+        div.header h2 {
+            border: 2px solid black;
+        }
+
+        .container>div.menu {
+            grid-area: menu;
+            border: 2px solid black;
+
+        }
+
+        .container>div.content {
+            grid-area: content;
+            border: 2px solid black;
+        }
+
+        .container>div.footer {
+            grid-area: footer;
+            text-align: center;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>CSS Grid layout</h1>
+
+    <p>The Grid layout Module offers a grid-based layout system,with rows and columns.</p>
+    <p>The grid layout module makes it easy to design complex and respnsive web pages without using floats and
+        positioning: </p>
+    <div class="container">
+        <div class="header">
+            <h2>My header</h2>
+        </div>
+        <div class="menu"><a href="#">Link1</a><br><a href="#">Link2</a><br><a href="#">Link3</a><br></div>
+        <div class="content">
+            <h3>
+                <p>The Grid layout Module offers a grid-based layout system,with rows and columns.The grid layout module
+                    makes it easy to design complex and respnsive web pages without using floats and positioning. </p>
+            </h3>
+        </div>
+        <div class="footer">
+            <h4>Footer</h4>
         </div>
     </div>
-    </body>
+    </div>
+</body>
+
 </html>
