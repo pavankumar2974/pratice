@@ -4,13 +4,17 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import ClassBaseComp from './COMPONENTS/ClassBaseComp'
 import ClassOneComp from './COMPONENTS/ClassOneComp'
+import { pavanComp,kumarComp,vmrComp } from './COMPONENTS/PavanComp'
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <ClassBaseComp />
-      <ClassOneComp />
+      <pavanComp />
+      <kumarComp />
+      <vmrComp />
+      {/* <ClassBaseComp />
+      <ClassOneComp /> */}
     </>
   )
 }
