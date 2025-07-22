@@ -1,43 +1,53 @@
-
-*{
+* {
     box-sizing: border-box;
 }
-body{
+
+body {
     margin: 0;
 }
-header{
+
+header {
     background-color: aliceblue;
-    text-align:center;
+    text-align: center;
     padding: 25px;
 }
-.navbar{
+
+.navbar {
     background-color: #180303;
     height: 50px;
 }
-aside{
+
+aside {
     width: 20%;
     float: left;
     padding: 10px;
 }
-section{
+
+section {
     width: 40%;
     float: left;
     padding: 10px;
 }
-article{
+
+article {
     width: 20%;
     float: left;
     padding: 10px;
 }
-footer{
+
+footer {
     background-color: aliceblue;
-    text-align:center;
+    text-align: center;
     padding: 25px;
     clear: both;
-    display:block;
+    display: block;
 }
+
 @media screen and (max-width: 600px) {
-    aside, section, article {
+
+    aside,
+    section,
+    article {
         width: 100%;
     }
 }
