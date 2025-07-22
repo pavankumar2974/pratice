@@ -2,7 +2,16 @@ h1{
     background-color: black;
     color:aliceblue
 }
-img{
-    width: 25px;
-    height: 25px;
+
+nav {
+  width: 900px;
+  float: right;
+  margin: 60px;
+}
+nav ul li {
+  display: inline;
+  font-size: 25px;
+  margin-right: 100px;
+  background-color: black;
+  color: white;
 }
