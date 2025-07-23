@@ -2,20 +2,25 @@ h1{
     background-color: black;
     color:aliceblue
 }
-
 nav {
-  width: 900px;
+  width: 1225px;
   float: right;
-  margin: 60px;
+  /* margin: 60px; */
+  background-color: black;
 }
 nav ul li {
   display: inline;
   font-size: 25px;
-  margin-right: 100px;
+  margin-right: 40px;
   background-color: black;
   color: white;
+  margin-top: 0px;
 }
 nav ul li:hover{
     background-color: red;
     color: azure;
+}
+#container{
+  width: 1250px;
+  background-color: black;
 }
