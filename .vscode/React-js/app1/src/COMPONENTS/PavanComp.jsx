@@ -1,36 +1,44 @@
 import { Component } from "react";
 
-export class PavanComp extends Component {
-    render(){
-        return (
-            <div>
-<h2>Welcome to PavanComp.jsx</h2>
-            </div>
-        );
-    }
+export class PavanComp extends Component{
+  render(){
+    return <div>
+      <h2>Welcome to pavan Comp</h2>
+    </div>
+  }
 }
 
-export class KumarComp extends Component{
-    render(){
-        return(
-            <div>
-                <h1>Welcome to kumarComp.jsx</h1>
-            </div>
-        );
-    }
+export class LeelaClassComp extends Component {
+  render() {
+    return (
+      <div>
+        <h2>Iam From LeelaClass Component</h2>
+      </div>
+    );
+  }
 }
 
-export class VmrComp extends Component{
-  constructor(){
+export class KumarClassComp extends Component {
+  render() {
+    return (
+      <div>
+        <h2>Iam From KumarClass Component</h2>
+      </div>
+    );
+  }
+}
+
+export class VMRClassComp extends Component {
+  constructor() {
     super();
-    this.state ={
-      message:"Welcome to VmrComp.jsx",
+    this.state = {
+      message: "Welcome to VMRClass Component",
     };
   }
-  render(){
-    return(
+  render() {
+    return (
       <div>
-        <h1>{this.state.message}</h1>
+        <h3>{this.state.message}</h3>
       </div>
     );
   }
