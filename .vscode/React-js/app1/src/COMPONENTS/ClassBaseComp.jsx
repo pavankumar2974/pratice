@@ -1,12 +1,17 @@
+// This Is JAvascript Narmal Class
+// class classBaseComp{}
+
 import React, { Component } from "react";
-class classBaseComp extends Component {
-    render() {
-        return (
-            <div>
-                <h2>Welcome to class-based component</h2>
-            </div>
-        )
-    }
+
+// How to Convert Narmal JS Class to Reactjs Component
+class ClassBaseComp extends Component {
+  render() {
+    return (
+      <div>
+        <h2>Welcome to ReactJs ClassBaseComp</h2>
+      </div>
+    );
+  }
 }
 
-export default classBaseComp;
+export default ClassBaseComp;

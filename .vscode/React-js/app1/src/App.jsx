@@ -1,22 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import ClassBaseComp from './COMPONENTS/ClassBaseComp'
-import ClassOneComp from './COMPONENTS/ClassOneComp'
-import { pavanComp,kumarComp,vmrComp } from './COMPONENTS/PavanComp'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import ClassBaseComp from "./COMPONENTS/ClassBaseComp";
+import Employee from "./COMPONENTS/Employee";
+import { KumarClassComp, LeelaClassComp, PavanComp, VMRClassComp } from "./COMPONENTS/PavanComp";
+
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-      <pavanComp />
-      <kumarComp />
-      <vmrComp />
-      {/* <ClassBaseComp />
-      <ClassOneComp /> */}
+      <div>
+        {/* <ClassBaseComp />
+        }
+        {/* <LeelaClassComp />
+        <KumarClassComp />
+        <VMRClassComp /> */}
+        {/* <Employee /> */}
+        <PavanComp/>
+        <LeelaClassComp/>
+        <KumarClassComp/>
+        <VMRClassComp/>
+      </div>
     </>
-  )
+  );
 }
 
 export default App;
