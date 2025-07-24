@@ -19,15 +19,15 @@ function App() {
          <LeelaClassComp />
         <KumarClassComp />
         <VMRClassComp /> 
-        <Employee /> 
+        <Employee />
         <PavanComp/>
         <LeelaClassComp/>
         <KumarClassComp/>
-        <VMRClassComp/>
+         <VMRClassComp/> 
         <User/>
        </div> 
     </>
   );
 }
 
-export default User;
+export default App;
