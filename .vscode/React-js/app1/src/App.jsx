@@ -5,6 +5,7 @@ import "./App.css";
 import ClassBaseComp from "./COMPONENTS/ClassBaseComp";
 import Employee from "./COMPONENTS/Employee";
 import { KumarClassComp, LeelaClassComp, PavanComp, VMRClassComp } from "./COMPONENTS/PavanComp";
+import User from "./COMPONENTS/User";
 
 
 function App() {
@@ -13,19 +14,20 @@ function App() {
   return (
     <>
       <div>
-        {/* <ClassBaseComp />
-        }
-        {/* <LeelaClassComp />
+         <ClassBaseComp />
+        
+         <LeelaClassComp />
         <KumarClassComp />
-        <VMRClassComp /> */}
-        {/* <Employee /> */}
+        <VMRClassComp /> 
+        <Employee /> 
         <PavanComp/>
         <LeelaClassComp/>
         <KumarClassComp/>
         <VMRClassComp/>
-      </div>
+        <User/>
+       </div> 
     </>
   );
 }
 
-export default App;
+export default User;
