@@ -20,10 +20,10 @@ class AppComp extends Component {
         return (
             <div>
                 <ul>
-                    {Object.values(this.state.Bikes).map((val,i)=>{
-                        return<li key={i}>{val}</li>;
+                    {Object.values(this.state.Bikes).map((val, i) => {
+                        return <li key={i}>{val}</li>;
                     })
-                }
+                    }
                 </ul>
             </div>
         );
