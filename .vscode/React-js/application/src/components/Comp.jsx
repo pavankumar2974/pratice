@@ -1,10 +1,10 @@
 import { Component } from "react";
 
-class Comp extends Component{
-    constructor(){
+class Comp extends Component {
+    constructor() {
         super();
-        this.state={
-            Car:[
+        this.state = {
+            Car: [
                 "INNOVA",
                 "ERTIGA",
                 "SCARPIO",
@@ -12,17 +12,17 @@ class Comp extends Component{
                 "BMW",
                 "AUDI",
 
-],
+            ],
         };
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <ul>
-                 {Object.values(this.state.Car).map((val,i)=>{
-                    return<li key={i}>{val}</li>;
-                 })}   
+                    {Object.values(this.state.Car).map((val, i) => {
+                        return <li key={i}>{val}</li>;
+                    })}
                 </ul>
             </div>
         );
