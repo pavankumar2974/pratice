@@ -1,10 +1,11 @@
 import { Component } from "react";
 
-export class PavanComp extends Component{
+  export class PavanComp extends Component{
   render(){
-    return <div>
+    return( <div>
       <h2>Welcome to pavan Comp</h2>
     </div>
+    );
   }
 }
 
