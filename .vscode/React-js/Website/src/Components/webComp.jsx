@@ -1,9 +1,9 @@
 import { Component } from "react";
-class GameComp extends Component{
-    render(){
-        return(
+class GameComp extends Component {
+    render() {
+        return (
             <div>
-        <h1>Website</h1>
+                <h1>Website</h1>
             </div>
         )
     }
