@@ -17,16 +17,16 @@ function App() {
 
   return (
     <><div>
-{/* <AppComp/>
+      {/* <AppComp/>
 <Comp/>
 <Compo/>
 <ClassCar/> */}
-<ClassBike/>
-<SampleClass/>
-<Bike/>
-<Cars/>
-<Example/>
-    </div>  
+      <ClassBike />
+      <SampleClass />
+      <Bike />
+      <Cars />
+      <Example />
+    </div>
     </>
   )
 }
