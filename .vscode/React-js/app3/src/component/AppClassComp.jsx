@@ -1,21 +1,65 @@
-import { Component } from "react";
-class AppClassComp extends Component{
-    render(){
-return<div>
-    <div id="head">
-        <h1>Movie Collection</h1>
+// import { Component } from "react";
+// class AppClassComp extends Component{
+//     render(){
+// return<div>
+//     <div id="head">
+//         <h1>Movie Collection</h1>
 
-        <nav>
+// import { Component } from "react";
+
+//         <nav>
+//             <ul>
+//                 <li>Home</li>
+//                 <li>Movie</li>
+//                 <li>Telugu</li>
+//                 <li>Tamil</li>
+//                 <li>Hindi</li>
+//             </ul>
+//         </nav>
+//     </div>
+// </div>
+//     }
+// }
+// export default AppClassComp;
+
+
+
+//    export  class AppClassComp extends Component{
+//    state={
+//     message:"Welcome to AppClassComponent"
+//    } 
+//    render(){
+//     return(<div>
+//         <h1>{this.state.message}</h1>
+//     </div>
+
+//     )
+//    }
+//  };
+// export default AppClassComp;
+
+import { Component } from "react";
+    class AppClassComp extends Component{
+    state={
+        bike:{ 
+            bprice:"200000",
+            bmilage:"45",
+            bspeed:"180",
+
+        }
+    }
+
+    render(){
+        return(<div>
             <ul>
-                <li>Home</li>
-                <li>Movie</li>
-                <li>Telugu</li>
-                <li>Tamil</li>
-                <li>Hindi</li>
+             <li>{this.state.bike.bmilage}</li>
+             <li>{this.state.bike.bprice}</li>
+             <li>{this.state.bike.bspeed}</li>   
             </ul>
-        </nav>
-    </div>
-</div>
+        </div>
+
+        )
     }
 }
+
 export default AppClassComp;
