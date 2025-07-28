@@ -72,7 +72,14 @@ class AppClassComp extends Component{
         super();
         this.state={
             Bike:[
-                "FZ-X","Crux","RX-100",
+                "FZ-X","Crux","RX-100","Kawasaki Ninja H2R",
+"Ducati Superleggera V4", 
+"Ducati Panigale V4 R",
+"BMW M 1000 RR",
+"Kawasaki Ninja H2",
+"Suzuki GSX-R1000R",
+"Honda CBR1000RR-R SP",
+"Aprilia RSV4 Factory"
             ]
         }
     }
