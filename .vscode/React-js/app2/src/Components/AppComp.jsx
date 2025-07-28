@@ -17,7 +17,6 @@ export class PavanComponent extends Component{
         </div>
     }
 }
-
 export class ComponetPavan extends Component{
     constructor(){
         super();
