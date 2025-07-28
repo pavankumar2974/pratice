@@ -5,6 +5,8 @@
 //     <div id="head">
 //         <h1>Movie Collection</h1>
 
+import { Component } from "react";
+
 // import { Component } from "react";
 
 //         <nav>
@@ -38,28 +40,47 @@
 //  };
 // export default AppClassComp;
 
-import { Component } from "react";
-    class AppClassComp extends Component{
-    state={
-        bike:{ 
-            bprice:"200000",
-            bmilage:"45",
-            bspeed:"180",
+// import { Component } from "react";
+//     class AppClassComp extends Component{
+//     state={
+//         bike:{ 
+//             bprice:"200000",
+//             bmilage:"45",
+//             bspeed:"180",
 
+//         }
+//     }
+
+//     render(){
+//         return(<div>
+//             <ul>
+//              <li>{this.state.bike.bmilage}</li>
+//              <li>{this.state.bike.bprice}</li>
+//              <li>{this.state.bike.bspeed}</li>   
+//             </ul>
+//         </div>
+
+//         )
+//     }
+// }
+
+// export default AppClassComp;
+
+
+class AppClassComp extends Component{
+    constructor(){
+        super();
+        this.state={
+            Bike:[
+                "FZ-X","Crux","RX-100",
+            ]
         }
     }
-
-    render(){
+    render (){
         return(<div>
-            <ul>
-             <li>{this.state.bike.bmilage}</li>
-             <li>{this.state.bike.bprice}</li>
-             <li>{this.state.bike.bspeed}</li>   
-            </ul>
-        </div>
-
-        )
+            <ul>{Object.values(this.state.Bike).map((val,i)=>{return<li key={i}>{val}</li>})}</ul>
+        </div>)
     }
-}
 
-export default AppClassComp;
+}
+export  default AppClassComp;

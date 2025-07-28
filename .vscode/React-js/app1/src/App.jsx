@@ -6,6 +6,7 @@ import ClassBaseComp from "./COMPONENTS/ClassBaseComp";
 import Employee from "./COMPONENTS/Employee";
 import { KumarClassComp, LeelaClassComp, PavanComp, VMRClassComp } from "./COMPONENTS/PavanComp";
 import User from "./COMPONENTS/User";
+import Car from "./COMPONENTS/Car";
 
 
 function App() {
