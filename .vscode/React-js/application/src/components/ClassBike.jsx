@@ -1,8 +1,6 @@
 import { Component } from "react";
 
 
-
-
 class ClassBike extends Component {
     render() {
         return <div>
