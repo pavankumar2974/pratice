@@ -5,7 +5,7 @@
 //     <div id="head">
 //         <h1>Movie Collection</h1>
 
-import { Component } from "react";
+// import { Component } from "react";
 
 // import { Component } from "react";
 
@@ -67,6 +67,8 @@ import { Component } from "react";
 // export default AppClassComp;
 
 
+
+import { Component } from "react";
 class AppClassComp extends Component {
     constructor() {
         super();
