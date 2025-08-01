@@ -22,6 +22,7 @@ class Compo extends Component {
 
         };
     }
+    
     render() {
         return (
             <div>

@@ -33,8 +33,6 @@ export class Example extends Component {
     }
 }
 
-
-
 // export default SampleClass;
 
 
