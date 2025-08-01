@@ -67,27 +67,27 @@ import { Component } from "react";
 // export default AppClassComp;
 
 
-class AppClassComp extends Component{
-    constructor(){
+class AppClassComp extends Component {
+    constructor() {
         super();
-        this.state={
-            Bike:[
-                "FZ-X","Crux","RX-100","Kawasaki Ninja H2R",
-"Ducati Superleggera V4", 
-"Ducati Panigale V4 R",
-"BMW M 1000 RR",
-"Kawasaki Ninja H2",
-"Suzuki GSX-R1000R",
-"Honda CBR1000RR-R SP",
-"Aprilia RSV4 Factory"
+        this.state = {
+            Bike: [
+                "FZ-X", "Crux", "RX-100", "Kawasaki Ninja H2R",
+                "Ducati Superleggera V4",
+                "Ducati Panigale V4 R",
+                "BMW M 1000 RR",
+                "Kawasaki Ninja H2",
+                "Suzuki GSX-R1000R",
+                "Honda CBR1000RR-R SP",
+                "Aprilia RSV4 Factory"
             ]
         }
     }
-    render (){
-        return(<div>
-            <ul>{Object.values(this.state.Bike).map((val,i)=>{return<li key={i}>{val}</li>})}</ul>
+    render() {
+        return (<div>
+            <ul>{Object.values(this.state.Bike).map((val, i) => { return <li key={i}>{val}</li> })}</ul>
         </div>)
     }
 
 }
-export  default AppClassComp;
+export default AppClassComp;
