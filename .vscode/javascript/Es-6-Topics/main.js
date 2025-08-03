@@ -1,6 +1,6 @@
 //logical operator
-function disName(name){
-    return name;
+function disName(name) {
+  return name;
 }
 let a = true;
 let b = false;
