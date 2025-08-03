@@ -1,4 +1,4 @@
-function dispName(name){
+function dispName(name) {
     return name;
 }
 
@@ -7,4 +7,4 @@ let b = false;
 
 
 console.log(a && dispName("pavan"));
-console.log(a ||  dispName("pavan kumar"));
+console.log(a || dispName("pavan kumar"));
