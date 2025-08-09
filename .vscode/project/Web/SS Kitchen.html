@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodie Burger</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="logo">Foodie<span>.</span></div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Shop</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact Us</a>
+        </nav>
+        <a href="#" class="order-btn">Order Now</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <p class="tagline">Eat Sleep And</p>
+            <h1>Supper delicious <br> <span>Burger</span> in town!</h1>
+            <p class="description">Food is any substance consumed to provide nutritional support for an organism.</p>
+            <a href="#" class="cta">Order Now</a>
+        </div>
+        <div class="hero-img">
+            <img src="burger.jpg" alt="Delicious Burger">
+        </div>
+    </section>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(90deg, #b11226 0%, #e13037 100%);
+    color: white;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+}
+.logo span {
+    color: orange;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+}
+nav a:hover {
+    color: orange;
+}
+
+.order-btn {
+    background: orange;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px;
+}
+
+.hero-text {
+    max-width: 50%;
+}
+
+.tagline {
+    font-size: 20px;
+    color: #ffb84d;
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    margin: 15px 0;
+}
+
+.hero-text h1 span {
+    color: orange;
+}
+
+.description {
+    font-size: 16px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.cta {
+    background: orange;
+    padding: 12px 25px;
+    text-decoration: none;
+    color: white;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.hero-img img {
+    width: 400px;
+    border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-text {
+        max-width: 100%;
+    }
+    .hero-img img {
+        width: 80%;
+        margin-top: 20px;
+    }
+    header {
+        flex-direction: column;
+    }
+    nav {
+        margin: 10px 0;
+    }
+}
+
+</style>
+</body>
+</html>
