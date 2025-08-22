@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <style>
-        table{
+        table {
             background-color: rgb(70, 69, 70);
             border: 2px solid #ccc;
         }
-        table tr{
+
+        table tr {
             border: 2px solid #ccc;
         }
-        input{
+
+        input {
             background-color: rgb(110, 173, 168);
             color: rgb(4, 12, 19);
         }
     </style>
     <h1>Contact Management</h1>
-    <form >
+    <form>
         <input type="text" id="Name" placeholder="Name" required>
         <br><br>
         <input type="text" id="Email" placeholder="Email" required>
@@ -44,94 +48,95 @@
         <tbody>
         </tbody>
     </table>
-<script>
-    var allcontacts =[];
+    <script>
+        var allcontacts = [];
 
-    function registerContact(){
-        var Name=document.getElementById("Name").value;
-        var Email=document.getElementById("Email").value;
-        var Phone=document.getElementById("Phone").value;
+        function registerContact() {
+            var Name = document.getElementById("Name").value;
+            var Email = document.getElementById("Email").value;
+            var Phone = document.getElementById("Phone").value;
 
-        var Contacts={
-            Name,
-            Email,
-            Phone
-        };
+            var Contacts = {
+                Name,
+                Email,
+                Phone
+            };
 
-        allcontacts.push(Contacts);
-        document.getElementById("Name").value ="";
-        document.getElementById("Email").value="";
-        document.getElementById("Phone").value="";
-        console.log(Name,Email,Phone);
+            allcontacts.push(Contacts);
+            document.getElementById("Name").value = "";
+            document.getElementById("Email").value = "";
+            document.getElementById("Phone").value = "";
+            console.log(Name, Email, Phone);
+            displayContactsInTable();
+        }
+
+        function displayContactsInTable() {
+            document.querySelector("tbody").innerHTML = "";
+            allcontacts.forEach(function (contact, index) {
+                var myTr = document.createElement("tr");
+                for (a in contact) {
+                    var myTd = document.createElement("td");
+                    myTd.innerHTML = contact[a];
+                    myTr.appendChild(myTd);
+                }
+                var editTd = document.createElement("td");
+                var editBtn = document.createElement("button");
+                editBtn.innerHTML = "Edit";
+                editBtn.setAttribute("onclick", "editContact(" + index + ")");
+                editTd.appendChild(editBtn);
+                myTr.appendChild(editTd);
+                document.querySelector("tbody").appendChild(myTr);
+
+                var delTd = document.createElement("td");
+                var delBtn = document.createElement("button");
+                delBtn.innerHTML = "Delete";
+                delBtn.setAttribute("class", "del-contacts");
+                delBtn.setAttribute("onclick", "deleteContact(" + index + ")");
+                delTd.appendChild(delBtn);
+                myTr.appendChild(delTd);
+
+                document.querySelector("tbody").appendChild(myTr);
+            });
+
+        }
         displayContactsInTable();
-    }
 
-    function displayContactsInTable(){
-        document.querySelector("tbody").innerHTML="";
-        allcontacts.forEach(function(contact,index){
-            var myTr=document.createElement("tr");
-            for (a in contact){
-                var myTd=document.createElement("td");
-                myTd.innerHTML=contact[a];
-                myTr.appendChild(myTd);
-            }
-            var editTd=document.createElement("td");
-            var editBtn=document.createElement("button");
-            editBtn.innerHTML="Edit";
-            editBtn.setAttribute("onclick", "editContact(" + index + ")");
-            editTd.appendChild(editBtn);
-            myTr.appendChild(editTd);
-            document.querySelector("tbody").appendChild(myTr);
+        function deleteContact(i) {
+            allcontacts.splice(i, 1);
+            displayContactsInTable();
+        }
 
-            var delTd = document.createElement("td");
-            var delBtn =document.createElement("button");
-            delBtn.innerHTML ="Delete";
-            delBtn.setAttribute("class","del-contacts");
-            delBtn.setAttribute("onclick","deleteContact("+index+")");
-            delTd.appendChild(delBtn);
-            myTr.appendChild(delTd);
+        function editContact(i) {
+            gIndex = i;
+            document.getElementById("Name").value = allcontacts[i].Name;
+            document.getElementById("Email").value = allcontacts[i].Email;
+            document.getElementById("Phone").value = allcontacts[i].Phone;
 
-            document.querySelector("tbody").appendChild(myTr);
-        });
-    
-    }
-    displayContactsInTable();
+            document.getElementById("updateBtn").style.display = "block";
+            document.getElementById("registercontact").style.display = "none";
 
-    function deleteContact(i){
-        allcontacts.splice(i,1);
-        displayContactsInTable();
-    }
+        }
+        function updateContact() {
+            var Name = document.getElementById("Name").value;
+            var Email = document.getElementById("Email").value;
+            var Phone = document.getElementById("Phone").value;
 
-    function editContact(i){
-        gIndex=i;
-        document.getElementById("Name").value=allcontacts[i].Name;
-        document.getElementById("Email").value=allcontacts[i].Email;
-        document.getElementById("Phone").value=allcontacts[i].Phone;
+            var Contacts = {
+                Name,
+                Email,
+                Phone
+            };
+            allcontacts[gIndex] = Contacts;
+            displayContactsInTable();
+            document.getElementById("Name").value = "";
+            document.getElementById("Email").value = "";
+            document.getElementById("Phone").value = "";
 
-        document.getElementById("updateBtn").style.display="block";
-        document.getElementById("registercontact").style.display="none";
+            document.getElementById("updateBtn").style.display = "none";
+            document.getElementById("registercontact").style.display = "block";
 
-    }
-    function updateContact(){
-        var Name=document.getElementById("Name").value;
-        var Email=document.getElementById("Email").value;
-        var Phone=document.getElementById("Phone").value;
-
-        var Contacts={
-            Name,
-            Email,
-            Phone
-        };
-        allcontacts[gIndex]=Contacts;
-        displayContactsInTable();
-        document.getElementById("Name").value="";
-        document.getElementById("Email").value="";
-        document.getElementById("Phone").value="";
-
-        document.getElementById("updateBtn").style.display="none";
-        document.getElementById("registercontact").style.display="block";
-
-    }
-</script>
+        }
+    </script>
 </body>
+
 </html>
