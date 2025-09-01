@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <style>
-        table{
+        table {
             background-color: rgb(71, 214, 227);
             border: 2px solid #ccc;
         }
-        table tr{
+
+        table tr {
             border: 2px solid #ccc;
         }
-        input{
+
+        input {
             background-color: rgb(110, 173, 168);
             color: rgb(4, 12, 19);
         }
     </style>
     <h1>Recipe Collection</h1>
-    <form >
+    <form>
         <input type="text" id="Name" placeholder="Name" required>
         <br><br>
         <textarea id="Ingridients" placeholder="Ingridients" required></textarea>
@@ -48,94 +52,95 @@
 
         </tbody>
     </table>
-<script>
-    var allrecipes =[];
+    <script>
+        var allrecipes = [];
 
-    function registerRecipe(){
-        var Name=document.getElementById("Name").value;
-        var Ingridients=document.getElementById("Ingridients").value;
-        var Recipe=document.getElementById("Recipe").value;
+        function registerRecipe() {
+            var Name = document.getElementById("Name").value;
+            var Ingridients = document.getElementById("Ingridients").value;
+            var Recipe = document.getElementById("Recipe").value;
 
-        var Recipes={
-            Name,
-            Ingridients,
-            Recipe
-        };
+            var Recipes = {
+                Name,
+                Ingridients,
+                Recipe
+            };
 
-        allrecipes.push(Recipes);
-        document.getElementById("Name").value ="";
-        document.getElementById("Ingridients").value="";
-        document.getElementById("Recipe").value="";
-        console.log(Name,Ingridients,Recipe);
+            allrecipes.push(Recipes);
+            document.getElementById("Name").value = "";
+            document.getElementById("Ingridients").value = "";
+            document.getElementById("Recipe").value = "";
+            console.log(Name, Ingridients, Recipe);
+            displayRecipesInTable();
+        }
+
+        function displayRecipesInTable() {
+            document.querySelector("tbody").innerHTML = "";
+            allrecipes.forEach(function (recipe, index) {
+                var myTr = document.createElement("tr");
+                for (a in recipe) {
+                    var myTd = document.createElement("td");
+                    myTd.innerHTML = recipe[a];
+                    myTr.appendChild(myTd);
+                }
+                var editTd = document.createElement("td");
+                var editBtn = document.createElement("button");
+                editBtn.innerHTML = "Edit";
+                editBtn.setAttribute("onclick", "editRecipe(" + index + ")");
+                editTd.appendChild(editBtn);
+                myTr.appendChild(editTd);
+                document.querySelector("tbody").appendChild(myTr);
+
+                var delTd = document.createElement("td");
+                var delBtn = document.createElement("button");
+                delBtn.innerHTML = "Delete";
+                delBtn.setAttribute("class", "del-Recipes");
+                delBtn.setAttribute("onclick", "deleteRecipe(" + index + ")");
+                delTd.appendChild(delBtn);
+                myTr.appendChild(delTd);
+
+                document.querySelector("tbody").appendChild(myTr);
+            });
+
+        }
         displayRecipesInTable();
-    }
 
-    function displayRecipesInTable(){
-        document.querySelector("tbody").innerHTML="";
-        allrecipes.forEach(function(recipe,index){
-            var myTr=document.createElement("tr");
-            for (a in recipe){
-                var myTd=document.createElement("td");
-                myTd.innerHTML=recipe[a];
-                myTr.appendChild(myTd);
-            }
-            var editTd=document.createElement("td");
-            var editBtn=document.createElement("button");
-            editBtn.innerHTML="Edit";
-            editBtn.setAttribute("onclick", "editRecipe(" + index + ")");
-            editTd.appendChild(editBtn);
-            myTr.appendChild(editTd);
-            document.querySelector("tbody").appendChild(myTr);
+        function deleteRecipe(i) {
+            allrecipes.splice(i, 1);
+            displayRecipesInTable();
+        }
 
-            var delTd = document.createElement("td");
-            var delBtn =document.createElement("button");
-            delBtn.innerHTML ="Delete";
-            delBtn.setAttribute("class","del-Recipes");
-            delBtn.setAttribute("onclick","deleteRecipe("+index+")");
-            delTd.appendChild(delBtn);
-            myTr.appendChild(delTd);
+        function editRecipe(i) {
+            gIndex = i;
+            document.getElementById("Name").value = allrecipes[i].Name;
+            document.getElementById("Ingridients").value = allrecipes[i].Ingridients;
+            document.getElementById("Recipe").value = allrecipes[i].Recipe;
 
-            document.querySelector("tbody").appendChild(myTr);
-        });
-    
-    }
-    displayRecipesInTable();
+            document.getElementById("updateBtn").style.display = "block";
+            document.getElementById("registerrecipe").style.display = "none";
 
-    function deleteRecipe(i){
-        allrecipes.splice(i,1);
-        displayRecipesInTable();
-    }
+        }
+        function updateRecipe() {
+            var Name = document.getElementById("Name").value;
+            var Ingridients = document.getElementById("Ingridients").value;
+            var Recipe = document.getElementById("Recipe").value;
 
-    function editRecipe(i){
-        gIndex=i;
-        document.getElementById("Name").value=allrecipes[i].Name;
-        document.getElementById("Ingridients").value=allrecipes[i].Ingridients;
-        document.getElementById("Recipe").value=allrecipes[i].Recipe;
+            var Recipes = {
+                Name,
+                Ingridients,
+                Recipe
+            };
+            allrecipes[gIndex] = Recipes;
+            displayRecipesInTable();
+            document.getElementById("Name").value = "";
+            document.getElementById("Ingridients").value = "";
+            document.getElementById("Recipe").value = "";
 
-        document.getElementById("updateBtn").style.display="block";
-        document.getElementById("registerrecipe").style.display="none";
+            document.getElementById("updateBtn").style.display = "none";
+            document.getElementById("registerrecipe").style.display = "block";
 
-    }
-    function updateRecipe(){
-        var Name=document.getElementById("Name").value;
-        var Ingridients=document.getElementById("Ingridients").value;
-        var Recipe=document.getElementById("Recipe").value;
-
-        var Recipes={
-            Name,
-            Ingridients,
-            Recipe
-        };
-        allrecipes[gIndex]=Recipes;
-        displayRecipesInTable();
-        document.getElementById("Name").value="";
-        document.getElementById("Ingridients").value="";
-        document.getElementById("Recipe").value="";
-
-        document.getElementById("updateBtn").style.display="none";
-        document.getElementById("registerrecipe").style.display="block";
-
-    }
-</script>
+        }
+    </script>
 </body>
+
 </html>
