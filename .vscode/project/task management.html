@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <style>
-        table{
+        table {
             background-color: rgb(71, 214, 227);
             border: 2px solid #ccc;
         }
-        table tr{
+
+        table tr {
             border: 2px solid #ccc;
         }
-        input{
+
+        input {
             background-color: rgb(222, 225, 225);
             color: rgb(4, 12, 19);
         }
     </style>
     <h1>Task Management</h1>
-    <form >
+    <form>
         <input type="text" id="Title" placeholder="Title" required>
         <br><br>
         <textarea id="description" placeholder="Description" required></textarea>
         <br><br>
         <input type="date" id="dueDate" placeholder="Due Date" required>
         <br><br>
-       <button onclick="registerTask()" type="button" id="RegisterTask">register</button>
-<button id="updateBtn" type="button" onclick="updateTask()">update</button>
+        <button onclick="registerTask()" type="button" id="RegisterTask">register</button>
+        <button id="updateBtn" type="button" onclick="updateTask()">update</button>
 
 
     </form>
@@ -50,95 +54,96 @@
 
         </tbody>
     </table>
-<script>
-    var allTASKS =[];
+    <script>
+        var allTASKS = [];
 
-    function registerTask(){
-        var Title=document.getElementById("Title").value;
-        var description=document.getElementById("description").value;
-        var dueDate=document.getElementById("dueDate").value;
+        function registerTask() {
+            var Title = document.getElementById("Title").value;
+            var description = document.getElementById("description").value;
+            var dueDate = document.getElementById("dueDate").value;
 
-        var Task={
-            Title,
-            description,
-            dueDate
-        };
+            var Task = {
+                Title,
+                description,
+                dueDate
+            };
 
-        allTASKS.push(Task);
-        document.getElementById("Title").value ="";
-        document.getElementById("description").value="";
-        document.getElementById("dueDate").value="";
-        console.log(Title,description,dueDate);
+            allTASKS.push(Task);
+            document.getElementById("Title").value = "";
+            document.getElementById("description").value = "";
+            document.getElementById("dueDate").value = "";
+            console.log(Title, description, dueDate);
+            displayTasksInTable();
+        }
+
+        function displayTasksInTable() {
+            document.querySelector("tbody").innerHTML = "";
+            allTASKS.forEach(function (task, index) {
+                var myTr = document.createElement("tr");
+                for (a in task) {
+                    var myTd = document.createElement("td");
+                    myTd.innerHTML = task[a];
+                    myTr.appendChild(myTd);
+                }
+                var editTd = document.createElement("td");
+                var editBtn = document.createElement("button");
+                editBtn.innerHTML = "Edit";
+                editBtn.setAttribute("onclick", "editTask(" + index + ")");
+                editTd.appendChild(editBtn);
+                myTr.appendChild(editTd);
+                document.querySelector("tbody").appendChild(myTr);
+
+                var delTd = document.createElement("td");
+                var delBtn = document.createElement("button");
+                delBtn.innerHTML = "Delete";
+                delBtn.setAttribute("class", "del-Tasks");
+                delBtn.setAttribute("onclick", "deleteTask(" + index + ")");
+                delTd.appendChild(delBtn);
+                myTr.appendChild(delTd);
+
+                document.querySelector("tbody").appendChild(myTr);
+            });
+
+        }
         displayTasksInTable();
-    }
 
-    function displayTasksInTable(){
-        document.querySelector("tbody").innerHTML="";
-        allTASKS.forEach(function(task,index){
-            var myTr=document.createElement("tr");
-            for (a in task) {
-                var myTd=document.createElement("td");
-                myTd.innerHTML=task[a];
-                myTr.appendChild(myTd);
-            }
-            var editTd=document.createElement("td");
-            var editBtn=document.createElement("button");
-            editBtn.innerHTML="Edit";
-            editBtn.setAttribute("onclick", "editTask(" + index + ")");
-            editTd.appendChild(editBtn);
-            myTr.appendChild(editTd);
-            document.querySelector("tbody").appendChild(myTr);
+        function deleteTask(i) {
+            allTASKS.splice(i, 1);
+            displayTasksInTable();
+        }
 
-            var delTd = document.createElement("td");
-            var delBtn =document.createElement("button");
-            delBtn.innerHTML ="Delete";
-            delBtn.setAttribute("class","del-Tasks");
-            delBtn.setAttribute("onclick","deleteTask("+index+")");
-            delTd.appendChild(delBtn);
-            myTr.appendChild(delTd);
+        function editTask(i) {
+            gIndex = i;
+            document.getElementById("Title").value = allTASKS[i].Title;
+            document.getElementById("description").value = allTASKS[i].description;
+            document.getElementById("dueDate").value = allTASKS[i].dueDate;
 
-            document.querySelector("tbody").appendChild(myTr);
-        });
-    
-    }
-    displayTasksInTable();
+            document.getElementById("updateBtn").style.display = "block";
+            document.getElementById("RegisterTask").style.display = "none";
 
-    function deleteTask(i){
-        allTASKS.splice(i,1);
-        displayTasksInTable();
-    }
+        }
+        function updateTask(i) {
+            gIndex = i;
+            var Title = document.getElementById("Title").value;
+            var description = document.getElementById("description").value;
+            var dueDate = document.getElementById("dueDate").value;
 
-    function editTask(i){
-        gIndex=i;
-        document.getElementById("Title").value=allTASKS[i].Title;
-        document.getElementById("description").value=allTASKS[i].description;
-        document.getElementById("dueDate").value=allTASKS[i].dueDate;
+            var Task = {
+                Title,
+                description,
+                dueDate
+            };
+            allTASKS[gIndex] = Task;
+            displayTasksInTable();
+            document.getElementById("Title").value = "";
+            document.getElementById("description").value = "";
+            document.getElementById("dueDate").value = "";
 
-        document.getElementById("updateBtn").style.display="block";
-        document.getElementById("RegisterTask").style.display="none";
+            document.getElementById("updateBtn").style.display = "none";
+            document.getElementById("RegisterTask").style.display = "block";
 
-    }
-    function updateTask(i){
-         gIndex=i;
-        var Title=document.getElementById("Title").value;
-        var description=document.getElementById("description").value;
-        var dueDate=document.getElementById("dueDate").value;
-
-        var Task={
-            Title,
-            description,
-            dueDate
-        };
-        allTASKS[gIndex]=Task;
-        displayTasksInTable();
-        document.getElementById("Title").value="";
-        document.getElementById("description").value="";
-        document.getElementById("dueDate").value="";
-
-        document.getElementById("updateBtn").style.display="none";
-        document.getElementById("RegisterTask").style.display="block";
-
-    }
-</script>
+        }
+    </script>
 </body>
+
 </html>
