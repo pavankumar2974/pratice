@@ -66,19 +66,19 @@ function update() {
         context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
     }
 
-    if (snakeX < 0 
-        || snakeX > total_col * blockSize 
-        || snakeY < 0 
-        || snakeY > total_row * blockSize) { 
-        
+    if (snakeX < 0
+        || snakeX > total_col * blockSize
+        || snakeY < 0
+        || snakeY > total_row * blockSize) {
+
         // Out of bound condition
         gameOver = true;
         alert("Game Over");
     }
 
     for (let i = 0; i < snakeBody.length; i++) {
-        if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) { 
-            
+        if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
+
             // Snake eats own body
             gameOver = true;
             alert("Game Over");
@@ -88,7 +88,7 @@ function update() {
 
 // Movement of the Snake - We are using addEventListener
 function changeDirection(e) {
-    if (e.code == "ArrowUp" && speedY != 1) { 
+    if (e.code == "ArrowUp" && speedY != 1) {
         // If up arrow key pressed with this condition...
         // snake will not move in the opposite direction
         speedX = 0;
@@ -104,7 +104,7 @@ function changeDirection(e) {
         speedX = -1;
         speedY = 0;
     }
-    else if (e.code == "ArrowRight" && speedX != -1) { 
+    else if (e.code == "ArrowRight" && speedX != -1) {
         //If Right arrow key pressed
         speedX = 1;
         speedY = 0;
@@ -115,8 +115,8 @@ function changeDirection(e) {
 function placeFood() {
 
     // in x coordinates.
-    foodX = Math.floor(Math.random() * total_col) * blockSize; 
-    
+    foodX = Math.floor(Math.random() * total_col) * blockSize;
+
     //in y coordinates.
-    foodY = Math.floor(Math.random() * total_row) * blockSize; 
+    foodY = Math.floor(Math.random() * total_row) * blockSize;
 }
