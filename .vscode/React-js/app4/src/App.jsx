@@ -11,10 +11,10 @@ function App() {
   return (
     <>
       <div>
-        <ClickCounter/>
-        <hr/>
-        <HoverCounter/>
-        </div>
+        <ClickCounter />
+        <hr />
+        <HoverCounter />
+      </div>
     </>
   )
 }
