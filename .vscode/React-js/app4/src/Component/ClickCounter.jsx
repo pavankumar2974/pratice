@@ -5,8 +5,8 @@ class ClickCounter extends Component {
     render() {
         console.log(this.props);
         console.log("From ClickCounter");
-        
-        
+
+
         const { count, incrementCount, decrementCount, resetCount } = this.props;
 
         return (
